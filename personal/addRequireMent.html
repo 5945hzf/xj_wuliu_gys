@@ -1,0 +1,316 @@
+<!--发布需求-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" CONTENT="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="format-detection" content="telephone=no" />
+    <title adct="2">新疆物流服务平台</title>
+    <link rel="stylesheet" type="text/css" href="../css/swiper.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/commin.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/addRequireMent.css"/>
+    <style>
+        </style>
+
+
+
+</head>
+<body>
+<div class="container">
+    <div class="container1">
+        <div class="containerTitle">
+            <div class="Lf"><img src="../img/addRequireTitle.png" alt=""><span>货物信息</span></div>
+            <div class="Rt addLiShi">发布历史需求</div>
+        </div>
+        <div class="clearFloat">
+            <div class="container1Left Lf">
+                <div class="goodsName">
+                    <span class="cf_leftTitle">货物名称 </span>
+                    <input type="text">
+                </div>
+                <div class="goodsWeight"><span class="cf_leftTitle">重&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;量</span>
+                    <input type="text" style="width: 109px;">
+                    <div class="select" data-selectedindex="1" style="margin-top: 0;width: 98px;float: right;">
+                        <span>千克</span>
+                        <img src="../img/prl-select.jpg" alt="">
+                        <ul>
+                            <li data-index="1">千克</li>
+                            <li data-index="2">吨</li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="che">
+                    <span class="cf_leftTitle">车辆要求 </span>
+                    <input type="text" placeholder="长" style="width: 66px;">
+                    <input type="text" placeholder="宽" style="width: 65px;">
+                    <input type="text" placeholder="高" style="width: 66px;">
+                </div>
+                <div class="FHtime">
+                    <span class="cf_leftTitle">发货时间 </span>
+                    <input type="text">
+                </div>
+                <div class="FHtime">
+                    <span class="cf_leftTitle" >距&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;离 </span>
+                    <input type="text" style="width: 178px;"><span style="font-size: 14px;color: #282828;margin-left: 5px;">千米</span>
+                </div>
+            </div>
+            <div class="container1Cen Lf">
+                <div class="BZtype">
+                    <span class="cf_leftTitle">包装类型 </span>
+                    <div class="select" data-selectedindex="-1">
+                        <span>请选择</span>
+                        <img src="../img/prl-select.jpg" alt="">
+                        <ul>
+                            <li data-index="1">大包</li>
+                            <li data-index="2">小包</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="danPrice">
+                    <span class="cf_leftTitle">期望单价 </span>
+                    <input style="width: 155px;" type="text"><span style="font-size: 14px;margin-left: 5px;">元</span>
+                </div>
+                <div class="KPtype">
+                    <span class="cf_leftTitle">开&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;票 </span>
+                    <div class="select" data-selectedindex="-1">
+                        <span>请选择</span>
+                        <img src="../img/prl-select.jpg" alt="">
+                        <ul>
+                            <li data-index="1">开票1</li>
+                            <li data-index="2">开票2</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ZFtype">
+                    <span class="cf_leftTitle">支付方式 </span>
+                    <div class="select" data-selectedindex="-1">
+                        <span>请选择</span>
+                        <img src="../img/prl-select.jpg" alt="">
+                        <ul>
+                            <li data-index="1">微信</li>
+                            <li data-index="2">支付宝</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="daohuo">
+                    <span class="cf_leftTitle">预计到货 </span>
+                    <input type="text" style="width: 177px;">
+                </div>
+            </div>
+            <div class="container1Right Lf">
+                <div class="Chetype">
+                    <span class="cf_leftTitle">车辆类型 </span>
+                    <div class="select" data-selectedindex="-1">
+                        <span>请选择</span>
+                        <img src="../img/prl-select.jpg" alt="">
+                        <ul>
+                            <li data-index="1">大车</li>
+                            <li data-index="2">小车</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="JStype">
+                    <span class="cf_leftTitle">结算方式 </span>
+                    <div class="select" data-selectedindex="-1">
+                        <span>请选择</span>
+                        <img src="../img/prl-select.jpg" alt="">
+                        <ul>
+                            <li data-index="1">微信</li>
+                            <li data-index="2">支付宝</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ordertype">
+                    <span class="cf_leftTitle">订单类型 </span>
+                    <div class="select" data-selectedindex="-1">
+                        <span>请选择</span>
+                        <img src="../img/prl-select.jpg" alt="">
+                        <ul>
+                            <li data-index="1">订单1</li>
+                            <li data-index="2">订单2</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="BH">
+            <span class="cf_leftTitle">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;货</span>
+            <input type="text">
+        </div>
+    </div>
+    <div class="container2 clearFloat">
+        <div class="containerTitle">
+            <div class="Lf"><img src="../img/addRequireTitle.png" alt=""><span>需求信息</span></div>
+        </div>
+        <div class="fadantype Lf" style="margin-left: 38px;">
+            <span class="cf_leftTitle">发单类型 </span>
+            <div class="select" data-selectedindex="1" style="margin-left: 5px;">
+                <span>普通发布</span>
+                <img src="../img/prl-select.jpg" alt="">
+                <ul>
+                    <li data-index="1">普通发布</li>
+                    <li data-index="2">特殊发布</li>
+                </ul>
+            </div>
+        </div>
+        <div class="youxiaoqi Lf" style="margin-left: 30px;">
+            <span class="cf_leftTitle">需求有效期 </span>
+            <input type="text" style="width: 177px;">
+        </div>
+    </div>
+    <div class="container3 clearFloat" style="margin-top: 30px;">
+        <div class="containerTitle">
+            <div class="Lf"><img src="../img/addRequireTitle.png" alt=""><span>发货信息</span></div>
+        </div>
+        <div class="Lf" style="margin-left: 38px;">
+            <div class="fahuo">
+                <span class="cf_leftTitle">发货企业 </span>
+                <input type="text" style="margin-left: 2px;width: 213px;">
+            </div>
+            <div class="linkMan" style="margin-top: 22px;">
+                <span class="cf_leftTitle">联&nbsp;&nbsp;系&nbsp; 人 </span>
+                <input type="text" style="width: 213px;">
+            </div>
+        </div>
+        <div class="Lf" style="margin-left: 44px;">
+            <div class="address">
+
+                <div class="Lf" style="margin-right: 5px;">
+                    <span class="cf_leftTitle " >收货地址 </span>
+                </div>
+                <div class="select" data-selectedindex="-1">
+                    <span>请选择</span>
+                    <img src="../img/prl-select.jpg" alt="">
+                    <ul>
+                        <li data-index="1">10</li>
+                        <li data-index="2">20</li>
+                        <li data-index="3">30</li>
+                    </ul>
+                </div>
+                <div class="select" data-selectedindex="-1">
+                    <span>请选择</span>
+                    <img src="../img/prl-select.jpg" alt="">
+                    <ul>
+                        <li data-index="1">10</li>
+                        <li data-index="2">20</li>
+                        <li data-index="3">30</li>
+                    </ul>
+                </div>
+                <div class="select" data-selectedindex="-1">
+                    <span>请选择</span>
+                    <img src="../img/prl-select.jpg" alt="">
+                    <ul>
+                        <li data-index="1">10</li>
+                        <li data-index="2">20</li>
+                        <li data-index="3">30</li>
+                    </ul>
+                </div>
+                <input type="text" placeholder="详细地址">
+            </div>
+            <div class="phone" style="margin-top: 22px;">
+                <span class="cf_leftTitle">联系电话 </span>
+                <input type="text" style="width: 179px;">
+            </div>
+        </div>
+
+    </div>
+    <div class="container4 clearFloat" style="margin-top: 30px;">
+        <div class="containerTitle">
+            <div class="Lf"><img src="../img/addRequireTitle.png" alt=""><span>收货信息</span></div>
+        </div>
+        <div class="Lf" style="margin-left: 38px;">
+            <div class="fahuo">
+                <span class="cf_leftTitle">发货企业 </span>
+                <input type="text" style="margin-left: 2px;width: 213px;">
+            </div>
+            <div class="linkMan" style="margin-top: 22px;">
+                <span class="cf_leftTitle">联&nbsp;&nbsp;系&nbsp; 人 </span>
+                <input type="text" style="width: 213px;">
+            </div>
+        </div>
+        <div class="Lf" style="margin-left: 44px;">
+            <div class="address">
+
+                <div class="Lf" style="margin-right: 5px;">
+                    <span class="cf_leftTitle " >收货地址 </span>
+                </div>
+                <div class="select" data-selectedindex="-1">
+                    <span>请选择</span>
+                    <img src="../img/prl-select.jpg" alt="">
+                    <ul>
+                        <li data-index="1">10</li>
+                        <li data-index="2">20</li>
+                        <li data-index="3">30</li>
+                    </ul>
+                </div>
+                <div class="select" data-selectedindex="-1">
+                    <span>请选择</span>
+                    <img src="../img/prl-select.jpg" alt="">
+                    <ul>
+                        <li data-index="1">10</li>
+                        <li data-index="2">20</li>
+                        <li data-index="3">30</li>
+                    </ul>
+                </div>
+                <div class="select" data-selectedindex="-1">
+                    <span>请选择</span>
+                    <img src="../img/prl-select.jpg" alt="">
+                    <ul>
+                        <li data-index="1">10</li>
+                        <li data-index="2">20</li>
+                        <li data-index="3">30</li>
+                    </ul>
+                </div>
+                <input type="text" placeholder="详细地址">
+            </div>
+            <div class="phone" style="margin-top: 22px;">
+                <span class="cf_leftTitle">联系电话 </span>
+                <input type="text" style="width: 179px;">
+            </div>
+        </div>
+    </div>
+
+    <div class="containerBot clearFloat">
+        <div style="">
+            <span class="cf_sel"></span>
+            <span style="font-size: 14px;color: #282828;">同意平台协议</span>
+        </div>
+        <div class="sub">提交需求</div>
+    </div>
+
+</div>
+
+
+
+<script src="../js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/pager.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+
+
+<script type="text/javascript" >
+    $('.objListBox>div:nth-child(5n)').css('margin-right','0');
+    Page({
+        num: 200,
+        elem: $('#page1'),
+        callback: function(n) {
+            console.log(n);
+        }
+    });
+$(".cf_sel").eq(0).click(function () {
+    $(this).toggleClass("on");
+})
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
