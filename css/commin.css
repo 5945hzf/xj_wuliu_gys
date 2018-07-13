@@ -58,6 +58,9 @@ body {
 input,textarea,button{
 	font-family: "Microsoft YaHei",Arial;
 }
+input[type="text"]{
+	text-indent: 10px;
+}
 
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   
 	/* WebKit browsers */   
@@ -941,3 +944,14 @@ footer .friendList a{
 	clear: both;
 }
 input{line-height: 100%;}
+.cf_select{
+	margin: 0 auto;
+	width: 13px;
+	height: 13px;
+	background: url("../img/cf_noselect.png") no-repeat;
+	background-size: 100% 100%;
+}
+.cf_select.on{
+	background: url("../img/cf_selct.png") no-repeat;
+	background-size: 100% 100%;
+}
