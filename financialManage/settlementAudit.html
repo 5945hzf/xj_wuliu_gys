@@ -92,22 +92,23 @@
 </head>
 <body>
     <div class="contbox" >
-        <div class="topTitle">结算审核<div class="fr"><img src="../img/prl-refresh.png" alt="" width="27" height="34">刷新</div></div>
+        <div class="topTitle">结算审核<div class="fr cfRefresh"><img src="../img/prl-refresh.png" alt="" width="27" height="34">刷新</div></div>
         <div class="inputBox">
             <label for="">输入搜索</label><input class="orderNo input" type="text" placeholder="网店名称">
             <label for="" style="margin-left: 17px;">审批类型</label>
-            <div class="goodsType input select" data-selectedindex="0" style="width:212px;box-sizing:border-box;"><span>全部</span><img src="../img/prl-select.jpg" >
-                <ul style="width: 212px;">
+            <div class="goodsType input select" data-selectedindex="0" style="box-sizing:border-box;"><span>全部</span><img src="../img/prl-select.jpg" >
+                <ul style="">
                     <li data-index="1">待分配订单</li>
                     <li data-index="2">进行中订单</li>
                     <li data-index="3">完成待审核订单</li>
                     <li data-index="3">已完成订单</li>
                 </ul>
             </div>
-            <label for="" style="margin-left: 8px;">申请时间</label><input class="publishTime input" type="text" placeholder="请选择时间">
-            <input class="searchResultBtn btn input" type="button" value="查询结果" style="margin-left: 22px;">
+            <label for="" style="margin-left: 8px;">申请时间</label>
+            <input type="text" class="date-input laydate-icon publishTime input" placeholder="请选择日期" id="test1">
+            <input class="searchResultBtn btn input" type="button" value="查询结果" style="margin-left: 75px;">
         </div>
-        <div class="listBox" style="height: 416px;">
+        <div class="listBox" style="">
             <table>
                 <thead>
                     <tr>
@@ -185,8 +186,32 @@
     <script src="../js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/pager.js" type="text/javascript" charset="utf-8"></script>
+<script src="../laydate/laydate.js"></script> <!-- 改成你的路径 -->
     
     <script type="text/javascript">
+        $(function () {
+            window.parent.$("#Iframe").css("height","923");
+        })
+        var startTime = '';
+        var endTime = '';
+        laydate({
+            elem: '#test1',
+            format: 'YYYY-MM-DD',
+            istime: true,
+            choose: function(dates){ //选择好日期的回调
+                startTime = dates;
+            }
+        });
+        laydate({
+            elem: '#test2',
+            format: 'YYYY-MM-DD',
+            istime: true,
+            choose: function(dates){ //选择好日期的回调
+                endTime = dates;
+            }
+        });
+        laydate.skin('yahui');  //加载皮肤，参数lib为皮肤名
+
         $('.objListBox>div:nth-child(5n)').css('margin-right','0');
         Page({
             num: 200,

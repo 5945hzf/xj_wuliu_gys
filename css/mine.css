@@ -33,10 +33,10 @@ body{background-color: #ffffff;}
 .MsgList .num{color: #FF6709;font-size: 21px;}
 .MsgList img{float: left;width: 53px;height: 53px;margin-right: 11px;}
 
-.need{width: 706px;height: 73px;margin-top: 10px; padding-top: 20px;border:1px solid #ebe9ea; color: #7A7A7A;font-size: 12px;}
+.need{width: 706px;height: 73px;margin-top: 10px; padding-top: 20px;border:1px solid #ebe9ea; color: #1C93DB;font-size: 12px;}
 .need>div{float: left;text-align: center;width: 82px;overflow: hidden;}
 .need>.line1{width: 0;height: 48px;border-right: 1px solid #ebe9ea;margin: 0 20px;}
-.need .num{color:#999999;font-size: 29px; }
+.need .num{color:#999999;font-size: 27px; }
 
 .GNList{width: 706px;font-size: 16px;}
 .GNList::after{content: "";display: block; clear: both;}

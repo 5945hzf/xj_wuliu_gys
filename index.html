@@ -11,6 +11,11 @@
     <link rel="stylesheet" href="./css/swiper-3.4.2.min.css">
     <link rel="stylesheet" type="text/css" href="css/commin.css"/>
     <link rel="stylesheet" href="./css/index.css">
+    <style>
+        .caseCont .left ul li:hover .time div{color: #3894e4;}
+        .caseCont .left ul li:hover .newsItem div{color: #3894e4;}
+        .caseCont .left ul li:hover .newsItem p{color: #3894e4;}
+    </style>
 </head>
 <body>
     <header>
@@ -51,10 +56,10 @@
                 <div class="logo Lf" style="width: 243px;height: 63px;margin: 0;margin-right: 129px;margin-left: 30px;"></div>
                 <div class="navList Lf">
                     <div class="cfnav cfnav1 on"><a href="./index.html">首页</a></div>
-                    <div class="cfnav cfnav2"><a href="##">明星货主</a></div>
+                    <div class="cfnav cfnav2"><a href="./starVector.html">明星货主</a></div>
                     <div class="cfnav cfnav3"><a href="./starCarrier.html">明星货运</a></div>
                     <div class="cfnav cfnav4"><a href="##">金融服务</a></div>
-                    <div class="cfnav cfnav5"><a href="./OAplatform.html">案例平台</a></div>
+                    <!--<div class="cfnav cfnav5"><a href="./OAplatform.html">案例平台</a></div>-->
                     <div class="cfnav cfnav6"><a href="./dangerousGoods_search.html">危化品查询</a></div>
                     <div class="cfnav cfnav7"><a href="##">交易平台</a></div>
                 </div>
@@ -114,8 +119,8 @@
     </div>
     <!-- 我们优势 -->
     <div class="advantage">
-        <h4>我们的优势</h4>
-        <h4 style="color:#EEF5FF;font-weight: 100;font-size:28px;margin-bottom:100px;">OUR ADVANTAGES</h4>
+        <h4 style="line-height: 45px;">我们的优势</h4>
+        <h4 style="color:#EEF5FF;font-weight: 100;font-size:28px;margin-bottom:100px;line-height: 45px;">OUR ADVANTAGES</h4>
         <ul>
             <li>
                 <img src="./img/in-advantagezuiyou.png" alt="" >
@@ -141,9 +146,9 @@
     </div>
     <!-- 平台流程 -->
     <div class="platFlow">
-        <h4>平台流程</h4>
-        <h4 style="color:#164597;font-weight: 100;font-size:28px;margin-bottom:25px;">PLATFORM PROCESS</h4>
-        <ul>
+        <h4  style="line-height: 45px;">平台流程</h4>
+        <h4 style="color:#164597;font-weight: 100;font-size:28px;margin-bottom:55px;line-height: 45px;">PLATFORM PROCESS</h4>
+        <ul class="clearFloat">
             <li class="listItem">
                 <img class="numImg" src="./img/in-plat01.png" alt="">
                 <div class="imgBox">
@@ -191,8 +196,8 @@
     </div>
     <!-- 我们的产品 -->
     <div class="ourProduct">
-        <h4>我们的产品</h4>
-        <h4 style="color:#FFF;font-weight: 100;font-size:28px;margin-bottom:100px;">OUR PRODUCTS</h4>
+        <h4  style="line-height: 45px;">我们的产品</h4>
+        <h4 style="color:#FFF;font-weight: 100;font-size:28px;margin-bottom:100px;line-height: 45px;">OUR PRODUCTS</h4>
         <ul>
             <li>
                 <div class="back itemcont">
@@ -208,7 +213,7 @@
                 </div>
                 <div class="front itemcont">
                     <div>
-                        <div class="imgBox" style="background: url(./img/in-product1.jpg) no-repeat center center/88px 71px;"></div>
+                        <div class="imgBox" style="background: url(./img/in-product1.png) no-repeat center center;border: none;"></div>
                         <p class="front-title">明星产品</p>
                         <p>STAR PRODUCT</p>
                     </div>
@@ -228,7 +233,7 @@
                 </div>
                 <div class="front itemcont">
                     <div>
-                        <div class="imgBox" style="background: url(./img/in-product2.jpg) no-repeat center center/85px 74px;"></div>
+                        <div class="imgBox" style="background: url(./img/in-product2.png) no-repeat center center;border: none;"></div>
                         <p class="front-title">明星车源</p>
                         <p>VEHICLE SOURCE</p>
                     </div>
@@ -248,7 +253,8 @@
                 </div>
                 <div class="front itemcont">
                     <div>
-                        <div class="imgBox" style="background: url(./img/in-product3.png) no-repeat center center/87px 74px;"></div>
+                        <!--<div class="imgBox" style="background: url(./img/in-product3.1.png) no-repeat center center /87px 74px;"></div>-->
+                        <div class="imgBox" style="background: url(img/in-product3.png) no-repeat center center; border: none;" ></div>
                         <p class="front-title">OA管理</p>
                         <p>OA MANAGEMENT</p>
                     </div>
@@ -271,7 +277,7 @@
         <div class="caseCont">
             <div class="left">
                 <ul>
-                    <li>
+                    <li onclick="goTitleDetail('id')">
                         <div class="time">
                             <div class="date">09</div>
                             <div class="dateYear">2015-09</div>
@@ -515,6 +521,11 @@
         sessionStorage.setItem("cfsrc","./requuire/publishRequireList.html");
         sessionStorage.setItem("isAdd","1");
         window.location.href="./account.html";
+    }
+
+    //文章详情
+    function goTitleDetail(id) {
+        window.location.href="./consultationDetail.html";
     }
 </script>
 </body>

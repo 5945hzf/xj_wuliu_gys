@@ -83,15 +83,15 @@
         .orange{
             color: #ff434e;
         }
-        .listBox{height: 1116px;}
+        /*.listBox{height: 1116px;}*/
     </style>
     
     
 </head>
 <body>
     <div class="contbox">
-        <div class="topTitle">取消订单<div class="fr"><img src="../img/prl-refresh.png" alt="" width="27" height="34">刷新</div></div>
-        <div class="inputBox">
+        <div class="topTitle">取消订单<div class="fr cfRefresh"><img src="../img/prl-refresh.png" alt="" width="27" height="34">刷新</div></div>
+        <div class="inputBox clearFloat">
             <label for="">输入搜索</label><input class="orderNo input" type="text" placeholder="订单编号">
             <label for="">货物类型</label>
             <div class="goodsType input select" data-selectedindex="0"><span>全部</span><img src="../img/prl-select.jpg" >
@@ -102,9 +102,10 @@
                     <li data-index="3">已完成订单</li>
                 </ul>
             </div>
-            <label for="">取消时间</label><input class="publishTime input" type="text" placeholder="请选择时间">
-            <input class="searchResultBtn btn input" type="button" value="查询结果">
-            <input class="advancedRetrievalBtn btn input" type="button" value="高级检索">
+            <label for="">取消时间</label>
+            <input type="text" class="date-input laydate-icon publishTime input" placeholder="请选择日期" id="test1">
+            <input class="searchResultBtn btn input" type="button" value="查询结果" style="margin-left: 115px;">
+            <!--<input class="advancedRetrievalBtn btn input" type="button" value="高级检索">-->
         </div>
         <div class="opciationBox">
             <div class="select displayNum" data-selectedindex="0"><span>显示条数</span><img src="../img/prl-select.jpg" alt="">
@@ -144,7 +145,7 @@
                         <td>化动力企业</td>
                         <td>100吨</td>
                         <td>12</td>
-                        <td class="orange">待分配</td>
+                        <td class="">待分配</td>
                         <td><span class="btn">查看订单</span></td>
                     </tr>
                     <tr>
@@ -170,7 +171,7 @@
                         <td>化动力企业</td>
                         <td>100吨</td>
                         <td>12</td>
-                        <td class="orange">待分配</td>
+                        <td class="">待分配</td>
                         <td><span class="btn">查看订单</span></td>
                     </tr>
                     <tr>
@@ -215,8 +216,31 @@
     <script src="../js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/pager.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
-    
+    <script src="../laydate/laydate.js"></script> <!-- 改成你的路径 -->
     <script type="text/javascript">
+        $(function () {
+            window.parent.$("#Iframe").css("height","977");
+        })
+        var startTime = '';
+        var endTime = '';
+        laydate({
+            elem: '#test1',
+            format: 'YYYY-MM-DD',
+            istime: true,
+            choose: function(dates){ //选择好日期的回调
+                startTime = dates;
+            }
+        });
+        laydate({
+            elem: '#test2',
+            format: 'YYYY-MM-DD',
+            istime: true,
+            choose: function(dates){ //选择好日期的回调
+                endTime = dates;
+            }
+        });
+        laydate.skin('yahui');  //加载皮肤，参数lib为皮肤名
+
         $('.objListBox>div:nth-child(5n)').css('margin-right','0');
         Page({
             num: 200,

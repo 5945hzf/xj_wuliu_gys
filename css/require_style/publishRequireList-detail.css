@@ -84,7 +84,7 @@ body{
 }
 /* requireInfo */
 .requireInfo .contBox{
-    min-height: 244px;
+    /*min-height: 244px;*/
 }
 .contlist{
     overflow: hidden;

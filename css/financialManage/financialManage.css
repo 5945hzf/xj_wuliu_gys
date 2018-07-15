@@ -166,7 +166,7 @@ body{
     border: 1px solid #ebe9ea;
 }
 .timeBox>input{
-    width: 150px;
+    width: 140px;
     height: 38px;
     box-sizing: border-box;
     border: 1px solid #ebe9ea;
@@ -219,7 +219,7 @@ body{
 }
 
 .listBox{
-    margin-bottom: 45px;
+    /*margin-bottom: 45px;*/
 }
 table{
     width: 100%;
@@ -232,7 +232,7 @@ thead>tr{
     line-height: 34px;
     background-color: #fdfdfd;
 }
-tbody>tr{
+.listBox tbody>tr{
     height: 61px;
     line-height: 60px;
     box-sizing: border-box;
