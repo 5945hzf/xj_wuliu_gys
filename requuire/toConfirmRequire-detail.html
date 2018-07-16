@@ -49,7 +49,7 @@
             <span>当前需求状态：待确认需求详情</span>
             <div class="fr baojiaBtn">确认报价</div>
             <div class="fr closeBtn"><img src="../img/prl-close.png" alt="" width="11" height="11">关&nbsp;&nbsp;闭</div>
-            <div class="fr freshBtn"><img src="../img/prl-refresh.png" alt="" width="27" height="34">刷&nbsp;&nbsp;新</div>
+            <div class="fr freshBtn cfRefresh"><img src="../img/prl-refresh.png" alt="" width="27" height="34">刷&nbsp;&nbsp;新</div>
         </div>
 
         <div class="requireInfo infoBox">
@@ -111,12 +111,12 @@
                 <ul>
                     <li class="left ll">公司名称：<span>化动力有限公司</span></li>
                     <li class="left mm">报&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价：<span>120元/吨</span></li>
-                    <li class="left rr"><span class="select btn blue">选&nbsp;&nbsp;择</span><span class="del btn">删&nbsp;&nbsp;除</span></li>
+                    <li class="left rr"><span class=" btn blue">选&nbsp;&nbsp;择</span><span class="del btn" style="margin-left: 20px;">删&nbsp;&nbsp;除</span></li>
                 </ul>
                 <ul>
                     <li class="left ll">公司名称：<span>化动力有限公司</span></li>
                     <li class="left mm">报&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价：<span>120元/吨</span></li>
-                    <li class="left rr"><span class="select btn blue">选&nbsp;&nbsp;择</span><span class="del btn">删&nbsp;&nbsp;除</span></li>
+                    <li class="left rr"><span class=" btn blue">选&nbsp;&nbsp;择</span><span class="del btn" style="margin-left: 20px;">删&nbsp;&nbsp;除</span></li>
                 </ul>
             </div>
         </div>
@@ -143,5 +143,11 @@
     </div>
     <script src="../js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        //Iframe 的高度
+        $(function () {
+            window.parent.$("#Iframe").css("height","960");
+        })
+    </script>
 </body>
 </html>

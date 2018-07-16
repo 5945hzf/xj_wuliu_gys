@@ -57,7 +57,7 @@ body{
     overflow: hidden;
     border: 1px solid #dedede;
     width: 968px;;
-    min-height: 1102px;
+    /*min-height: 1102px;*/
     margin-bottom: 5px;
 }
 
@@ -173,9 +173,9 @@ body{
     position: relative;
 }
 .messages div>div img{
-	position: absolute;
-	top: 8px;
-	right: 7px;
+	/*position: absolute;*/
+	/*top: 8px;*/
+	/*right: 7px;*/
 }
 .messages div>div label{
 	margin-left: 11px;

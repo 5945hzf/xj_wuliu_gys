@@ -57,7 +57,7 @@ body{
     overflow: hidden;
     border: 1px solid #dedede;
     width: 968px;;
-    min-height: 1102px;
+    /*min-height: 1102px;*/
     margin-bottom: 5px;
 }
 

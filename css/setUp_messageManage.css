@@ -57,7 +57,7 @@ body{
     overflow: hidden;
     border: 1px solid #dedede;
     width: 968px;;
-    min-height: 1086px;
+    /*min-height: 1086px;*/
     margin-bottom: 5px;
 }
 
@@ -139,7 +139,7 @@ body{
 }
 .messages div{
 	float: left;
-	width: 33%;
+	/*width: 33%;*/
 	text-align: center;
 	
 }
@@ -168,9 +168,9 @@ body{
     position: relative;
 }
 .messages div>div img{
-	position: absolute;
-	top: 8px;
-	right: 7px;
+	/*position: absolute;*/
+	/*top: 8px;*/
+	/*right: 7px;*/
 }
 .messages div>div label{
 	margin-left: 11px;
@@ -186,12 +186,12 @@ body{
 .mesgfirst input::-webkit-input-placeholder {
     color: #282828;
     font-size: 14px;
-    padding-left: 11px;
+    /*padding-left: 11px;*/
 }
 .mesglast input::-webkit-input-placeholder {
     color: #999999;
     font-size: 14px;
-    padding-left: 11px;
+    /*padding-left: 11px;*/
 }
 .record{
 	width: 100%;

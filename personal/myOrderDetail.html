@@ -166,13 +166,17 @@
 			</div>
 	    </div>
 	</div>
-	<div class="line"></div>
+	<!--<div class="line"></div>-->
 	
 	<script src="../js/jquery-3.2.1.min.js"></script>
     <script src="../js/common.js"></script>
 
 	<script src="../js/jquery.step.js"></script>
 	<script>
+        //Iframe 的高度
+        $(function () {
+            window.parent.$("#Iframe").css("height","813");
+        })
 		var step= $("#myStep").step({
             animate:true,
             initStep:1,
