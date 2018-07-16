@@ -100,12 +100,11 @@
                         <td>货物名称</td>
                         <td>始发地</td>
                         <td>目的地</td>
-                        <td>保证金</td>
                         <td>操作</td>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
+                <tbody class="my_tbody">
+                    <!-- <tr>
                         <td>3001804091631062137</td>
                         <td>2017-07-19 14:48</td>
                         <td>危化-罐装</td>
@@ -137,7 +136,7 @@
                         <td>北京-朝阳区</td>
                         <td>1000.00</td>
                         <td><span class="seeDetail ll">查看详情</span><span class="del">选择公司</span></td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
         </div>
@@ -193,6 +192,51 @@
             }
         });
         laydate.skin('yahui');  //加载皮肤，参数lib为皮肤名
+        
+        //列表  by hzf
+        var demandNo = $(".orderNo").val();
+        var startDate = $(".publishTime").val();
+        var endDate = "";
+        var pageSize = 10;
+        var pageIdx = 1;
+        $.ajax({
+            type:"POST",
+            headers: {
+                Accept: "application/json; charset=utf-8",
+                token: token
+            },
+            url: pubIP+"wlLogisticsDemand/queryPageForConfirmedBySupplier",//v1.0
+            cache:false,
+            data:{
+                demandNo: demandNo,
+                startDate: startDate,
+                endDate: endDate,
+                pageSize: pageSize,
+                pageIdx: pageIdx,
+            },
+            dataType: "json",
+            success: function(data){
+                console.log(data);
+                var str ="";
+                var data = data.data.data;
+                str+="<tr>"
+                    +"<td>"+data.demandNo+"</td>"
+                    +"<td>"+data.createDate+"</td>"
+                    +"<td>"+data.var9+"</td>"
+                    +"<td>"+data.goodsType+"</td>"
+                    +"<td>"+data.goodsName+"</td>"
+                    +"<td>"+data.sendProvince+"-"+data.sendCity+"</td>"
+                    +"<td>"+data.receiveProvince+"-"+data.receiveCity+"</td>"
+                    +"<td><span class=\"seeDetail ll\">查看详情</span><span class=\"del\">选择公司</span></td>"
+                    +"</tr>"
+
+
+                $(".my_tbody").append(str);
+            },
+            error:function(xhr,statues,error){
+                console.log(error);
+            }
+        })
 
         $('.objListBox>div:nth-child(5n)').css('margin-right','0');
         Page({
