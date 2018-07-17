@@ -192,6 +192,27 @@
             }
         });
         laydate.skin('yahui');  //加载皮肤，参数lib为皮肤名
+        //列表  by hzf
+        $.ajax({
+            type:"post",
+            headers: {
+                Accept: "application/json; charset=utf-8",
+                token: token
+            },
+            url: pubIP+"",//v1.0
+            cache:false,
+            data:{
+            },
+            dataType: "json",
+            success: function(data){
+                
+            },
+            error:function(xhr,statues,error){
+                console.log(error);
+            }
+        })
+
+
 
         $('.objListBox>div:nth-child(5n)').css('margin-right','0');
         Page({
