@@ -41,7 +41,7 @@ document.writeln("<header>\n" +
     "                    <div class=\"cfnav cfnav1 on\"><a href=\"./index.html\">首页</a></div>\n" +
     "                    <div class=\"cfnav cfnav2\"><a href=\"./starVector.html\">明星货主</a></div>\n" +
     "                    <div class=\"cfnav cfnav3\"><a href=\"./starCarrier.html\">明星货运</a></div>\n" +
-    "                    <div class=\"cfnav cfnav4\"><a href=\"##\">金融服务</a></div>\n" +
+    "                    <div class=\"cfnav cfnav4\"><a href=\"javascript:;\">金融服务</a></div>\n" +
     "                    <!--<div class=\"cfnav cfnav5\"><a href=\"./OAplatform.html\">案例平台</a></div>-->\n" +
     "                    <div class=\"cfnav cfnav6\"><a href=\"./dangerousGoods_search.html\">危化品查询</a></div>\n" +
     "                    <div class=\"cfnav cfnav7\"><a href=\"##\">交易平台</a></div>\n" +
