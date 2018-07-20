@@ -7,13 +7,13 @@ document.writeln("<header>\n" +
     "                <div class=\"headerTopLeft Lf\">\n" +
     "                    <div>收藏本站</div>\n" +
     "                    <div>您好,游客</div>\n" +
-    "                    <div><a href=\"##\">登&nbsp;&nbsp;录</a><i style=\"margin: 0 20px;\">|</i><a href=\"##\">注&nbsp;&nbsp;册</a></div>\n" +
+    "                    <div><a href=\"login.html\">登&nbsp;&nbsp;录</a><i style=\"margin: 0 20px;\">|</i><a href=\"registert.html\">注&nbsp;&nbsp;册</a></div>\n" +
     "                </div>\n" +
     "                <div class=\"headerTopRight Rt\">\n" +
     "                    <ul>\n" +
     "                        <li>\n" +
     "                            <div class=\"headerTopRightImg1 headerTopRightImg\"></div>\n" +
-    "                            <div  class=\"Lf\"><a href=\"./account.html\" class=\"goUser\">用户中心</a></div>\n" +
+    "                            <div  class=\"Lf\"><a href=\"account.html\" class=\"goUser\">用户中心</a></div>\n" +
     "                        </li>\n" +
     "                        <li class=\"liline\"></li>\n" +
     "                        <!--<li>-->\n" +
