@@ -118,7 +118,7 @@
                 <thead>
                     <tr>
                         <td>订单编号</td>
-                        <td>结算公司</td>
+                        <td>接货时间</td>
                         <td>货物类型</td>
                         <td>货物名称</td>
                         <td>始发地</td>
@@ -129,8 +129,8 @@
                         <td>操作</td>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
+                <tbody id="orderListInfo">
+                    <!-- <tr>
                         <td>3001804091631062137</td>
                         <td>2017-07-19 14:48</td>
                         <td>危化-罐装</td>
@@ -177,7 +177,7 @@
                         <td>4000吨</td>
                         <td>12</td>
                         <td><span class="see ll">查看订单</span><span class="btn ll">发起调令</span><span class="btn">取消订单</span></td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
         </div>
@@ -208,6 +208,24 @@
     <script src="../js/pager.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
     <script src="../laydate/laydate.js"></script> <!-- 改成你的路径 -->
+    <script src="../js/template.js"></script>
+    <script type="text/html" id="orderListTpl">
+        <%for(i in list) {%>
+        <tr>
+            <td><%=list[i].tloId%></td>
+            <td><%=list[i].createTime%></td>
+            <td>危化-罐装</td>
+            <td>氢氧化钠</td>
+            <td>新疆-乌鲁木齐</td>
+            <td>北京-朝阳区</td>
+            <td>化动力企业</td>
+            <td>4000吨</td>
+            <td>12</td>
+            <td><span class="see seeDetail ll">查看订单</span><span class="btn ll">发起调令</span><span class="btn">取消订单</span></td>
+        </tr>
+        <%}%>
+    </script>
+
     <script type="text/javascript">
         $(function () {
             window.parent.$("#Iframe").css("height","917");
@@ -241,6 +259,42 @@
                 console.log(n);
             }
         });
+
+        //待分配订单列表
+        $.ajax({
+            url: ip + 'order/getAllocatedList',
+            type: 'post',
+            headers: {
+                Accept: "application/json; charset=utf-8",
+                token: token
+            },
+            data: {
+                companyId: companyId,
+                page: 1,
+                size: 1,
+                status: 0
+            },
+            cache: false,
+            dataType: 'json',
+            success: function (json) {
+                console.log(json);
+
+                for (var i = 0; i < json.data.length; i++) {
+                    
+                    json.data[i].createTime = new Date(json.data[i].createTime).Format("yyyy-MM-dd hh:mm");
+                }
+                
+
+                var result = template('orderListTpl', {list: json.data});
+                $('#orderListInfo').html(result);
+
+            },
+            error: function (err) {
+                console.log(err);
+            }
+
+        })
+
         //查看详情
         $(".seeDetail").click(function () {
             window.location.href="./notDistributeOrder-detail.html";

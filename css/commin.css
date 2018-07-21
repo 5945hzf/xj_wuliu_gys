@@ -969,3 +969,63 @@ thead td,thead th{
 .contbox .inputBox .orderNo,.contbox .inputBox .select,.contbox .inputBox .select ul,.contbox .opciationBox .select,.contbox .opciationBox .select ul{width: 160px;}
 input[type="button"]{outline: none;}
 .rightContBox .messages input[type="text"],.rightContBox .messages .select,.rightContBox .messages .select ul{width: 160px;}
+
+
+
+.selectPub{
+    position: relative;
+    float: right;
+    margin-right: 4px;
+    width: 132px;
+    height: 37px;
+    line-height: 37px;
+    border: 1px solid #ebe9ea;
+    box-sizing: border-box;
+    padding-left: 10px;
+    color: #999;
+    cursor: pointer;
+}
+.selectPub>img{
+    float: right;
+    width: 13px;
+    height: 7px;
+    margin-top: 15px;
+    margin-right: 9px;
+}
+.selectPub>ul{
+    display: none;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ebe9ea;
+    position: absolute;
+    top: 36px;
+    left: -1px;
+    background: #fff;
+    border-top: none;
+    z-index: 20;
+    max-height: 250px;
+    overflow: auto;
+}
+.selectPub>ul>li{
+    padding-left: 10px;
+    cursor: pointer;
+}
+.selectPub>ul>li.hovered{
+    background: #ebe9ea !important;
+    color: #fff !important;
+}
+
+input{
+    line-height: 100%;
+}
+/* 谷歌 */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+/* 火狐 */
+input{
+    -moz-appearance:textfield;
+}
