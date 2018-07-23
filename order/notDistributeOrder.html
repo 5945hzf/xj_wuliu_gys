@@ -80,6 +80,15 @@
             box-sizing: border-box;
         }
         /*.listBox{height: 1116px;}*/
+
+        .cfRefresh {
+            display: block; 
+        }
+        
+        .pageJump input[type="text"] {
+            text-align: center;
+            text-indent: 0px;
+        }
     </style>
     
     
@@ -93,9 +102,9 @@
             <div class="goodsType input select" data-selectedindex="0"><span>全部</span><img src="../img/prl-select.jpg" >
                 <ul>
                     <li data-index="1">全部</li>
-                    <li data-index="2">普化</li>
-                    <li data-index="3">危化</li>
-                    <li data-index="4">特殊</li>
+                    <li data-index="2">普化品</li>
+                    <li data-index="3">危化品</li>
+                    <li data-index="4">特殊品</li>
                 </ul>
             </div>
             <label for="">确认时间</label>
@@ -223,7 +232,7 @@
             <td><%=list[i].companyName%></td>
             <td><%=list[i].goodsNum%><%=list[i].goodsUnit%></td>
             <td><%=list[i].unitPrice%></td>
-            <td><span class="see seeDetail ll" data-tloId="<%=list[i].tloId%>" data-orderNo="<%=list[i].orderNo%>"><a href="##">查看订单</a></span><span class="btn ll diaoling">发起调令</span><span class="btn">取消订单</span></td>
+            <td><span class="see seeDetail ll" data-tloId="<%=list[i].tloId%>" data-orderNo="<%=list[i].orderNo%>" data-companyId="<%=list[i].companyId%>"><a href="##">查看订单</a></span><span class="btn ll diaoling">发起调令</span><span class="btn cancel_order" data-tloId="<%=list[i].tloId%>">取消订单</span></td>
         </tr>
         <%}%>
     </script>
@@ -268,7 +277,7 @@
 
         // 点击进入订单详情
         $(document).on('click', '.seeDetail', function() {
-
+            window.localStorage.setItem('data-companyId', $(this).attr('data-companyId'));
             window.localStorage.setItem('data-tloId', $(this).attr('data-tloId'));
             window.localStorage.setItem('data-orderNo', $(this).attr('data-orderNo'));
             window.location.href = "notDistributeOrder-detail.html";
@@ -284,7 +293,7 @@
 
 
         //显示条数
-        $('.select ul li').click(function(){
+        $('.displayNum ul li').click(function(){
             isSearch=1;
             order_list(1 , '', '', '', $('.displayNum span').text());
         });
@@ -301,7 +310,7 @@
                 goodsType = '';
             }
             
-
+            isSearch=1;
             order_list(1, orderNo, goodsType, publishTime, 10);
 
         });
@@ -312,6 +321,7 @@
 
         //待分配订单列表
         function order_list(num, orderNo, goodsType, publishTime, size) {
+            $('#orderListInfo').html('');
             $.ajax({
                 url: ip + 'order/getAllocatedList',
                 type: 'post',
@@ -334,18 +344,39 @@
                     console.log(json);
 
                     if (json.code == 1) {
-                        for (var i = 0; i < json.data.length; i++) {
-                        
-                            json.data[i].tloCreateTime = new Date(json.data[i].tloCreateTime).Format("yyyy-MM-dd hh:mm");
-                        }
-                        
+                        if (json.data.length != 0) {
+                            for (var i = 0; i < json.data.length; i++) {
+                            
+                                json.data[i].tloCreateTime = new Date(json.data[i].tloCreateTime).Format("yyyy-MM-dd hh:mm");
+                            }
+                            
 
-                        var result = template('orderListTpl', {list: json.data});
-                        $('#orderListInfo').html(result);
+                            var result = template('orderListTpl', {list: json.data});
+                            $('#orderListInfo').html(result);
 
-                       
-                        if (isSearch == 1) {
-                            // if (isFirst) {
+                           
+                            if (isSearch == 1) {
+                                // if (isFirst) {
+                                    Page({
+                                        num: json.totalPage,
+                                        elem: $('#page1'),
+                                        callback: function(n) {
+                                            order_list(n, orderNo, goodsType, publishTime, size);
+                                        }
+                                    });
+                                    
+                                    $('.total').text(json.totalPage);
+                                    isFirst = false;
+
+                                // }
+
+                                $('.allPageN').text(num+1+'/'+json.totalPage);
+                            }
+
+                            isSearch = 0;
+
+                            if (isFirst) {
+
                                 Page({
                                     num: json.totalPage,
                                     elem: $('#page1'),
@@ -355,31 +386,14 @@
                                 });
                                 
                                 $('.total').text(json.totalPage);
+
                                 isFirst = false;
+                            }
 
-                            // }
-
-                            $('.allPageN').text(num+1+'/'+json.totalPage);
+                            $('.allPageN').text(num+'/'+json.totalPage);
+                        } else {
+                            $('.pageJump').css('display', 'none');    
                         }
-
-                        isSearch = 0;
-
-                        if (isFirst) {
-
-                            Page({
-                                num: json.totalPage,
-                                elem: $('#page1'),
-                                callback: function(n) {
-                                    order_list(n, orderNo, goodsType, publishTime, size);
-                                }
-                            });
-                            
-                            $('.total').text(json.totalPage);
-
-                            isFirst = false;
-                        }
-
-                        $('.allPageN').text(num+'/'+json.totalPage);
                     } else {
                         $('.pageJump').css('display', 'none');
                     }
@@ -392,6 +406,44 @@
             });
         }
 
+
+        // 取消订单
+        $(document).on('click', '.cancel_order', function() {
+
+            var tloId = $(this).attr('data-tloId');
+
+            $.ajax({
+                url: ip + 'order/upCancelOrder',
+                type: 'post',
+                headers: {
+                    Accept: "application/json; charset=utf-8",
+                    token: token
+                },
+                data: {
+                    id: tloId
+                },
+                cache: false,
+                dataType: 'json',
+                success: function (json) {
+                    console.log(json);
+
+                    if (json.code == 1) {
+                        $(window.parent.document).find('.modelBox12 p').html('<span>订单取消成功!</span>');
+                        window.parent.showModelBox('.modelBox12');
+                    }
+
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+
+        });
+
+        $(window.parent.document).on('click', '.modelBox12 .ook4', function() {
+            
+            window.location.reload();
+        });
         
         // 模拟单选按钮
         $('.bottomOperiat .squre').click(function(){

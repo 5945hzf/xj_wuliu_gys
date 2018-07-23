@@ -80,6 +80,14 @@
             box-sizing: border-box;
         }
         /*.listBox{height: 1116px;}*/
+        .cfRefresh {
+            display: block; 
+        }
+
+        .pageJump input[type="text"] {
+            text-align: center;
+            text-indent: 0px;
+        }
     </style>
     
     
@@ -94,9 +102,9 @@
             <div class="goodsType input select" data-selectedindex="0"><span>全部</span><img src="../img/prl-select.jpg" >
                 <ul>
                     <li data-index="1">全部</li>
-                    <li data-index="2">普化</li>
-                    <li data-index="3">危化</li>
-                    <li data-index="4">特殊</li>
+                    <li data-index="2">普化品</li>
+                    <li data-index="3">危化品</li>
+                    <li data-index="4">特殊品</li>
                 </ul>
             </div>
             <label for="">提交时间</label>
@@ -212,12 +220,11 @@
             <td><%=list[i].tloUpdateTime%></td>
             <td><%=list[i].goodsType%></td>
             <td><%=list[i].goodsName%></td>
+            <td><%=list[i].goodsNum%><%=list[i].goodsUnit%></td>
             <td><%=list[i].sendAddress%></td>
             <td><%=list[i].receiveAddress%></td>
-            <td><%=list[i].companyName%></td>
-            <td><%=list[i].goodsNum%><%=list[i].goodsUnit%></td>
-            <td><%=list[i].unitPrice%></td>
-            <td><span class="see seeDetail ll" data-tloId="<%=list[i].tloId%>" data-orderNo="<%=list[i].orderNo%>"><a href="##">查看订单</a></span></td>
+            <td><%=list[i].carType%></td>
+            <td><span class="see seeDetail ll" data-tloId="<%=list[i].tloId%>" data-orderNo="<%=list[i].orderNo%>" data-companyId="<%=list[i].companyId%>"><a href="##">查看详情</a></span></td>
         </tr>
         <%}%>
     </script>
@@ -262,7 +269,7 @@
 
         // 点击进入订单详情
         $(document).on('click', '.seeDetail', function() {
-
+            window.localStorage.setItem('data-companyId', $(this).attr('data-companyId'));
             window.localStorage.setItem('data-tloId', $(this).attr('data-tloId'));
             window.localStorage.setItem('data-orderNo', $(this).attr('data-orderNo'));
             window.location.href = "onGoingOrder-detail.html";
@@ -271,7 +278,7 @@
 
         //点击查询
         //显示条数
-        $('.select ul li').click(function(){
+        $('.displayNum ul li').click(function(){
             isSearch=1;
             order_list(1 , '', '', '', $('.displayNum span').text());
         });
@@ -284,11 +291,11 @@
             var goodsType = $('.goodsType span').text();
             var publishTime = $('.publishTime').val();
             if (goodsType == '全部' ) {
-                console.log(goodsType);
+            
                 goodsType = '';
             }
             
-
+            isSearch=1;
             order_list(1, orderNo, goodsType, publishTime, 10);
 
         });
@@ -298,6 +305,7 @@
 
         //订单进行中列表
         function order_list(num, orderNo, goodsType, publishTime, size) {
+            $('#orderListInfo').html('');
             $.ajax({
                 url: ip + 'order/getHaveInhandList',
                 type: 'post',
@@ -320,18 +328,38 @@
                     console.log(json);
 
                     if (json.code == 1) {
-                        for (var i = 0; i < json.data.length; i++) {
-                        
-                            json.data[i].tloCreateTime = new Date(json.data[i].tloCreateTime).Format("yyyy-MM-dd hh:mm");
-                        }
-                        
+                        if (json.data.length != 0) {
+                            for (var i = 0; i < json.data.length; i++) {
+                                json.data[i].tloUpdateTime = new Date(json.data[i].tloUpdateTime).Format("yyyy-MM-dd hh:mm");
+                            }
+                            
 
-                        var result = template('orderListTpl', {list: json.data});
-                        $('#orderListInfo').html(result);
+                            var result = template('orderListTpl', {list: json.data});
+                            $('#orderListInfo').html(result);
 
-                       
-                        if (isSearch == 1) {
-                            // if (isFirst) {
+                           
+                            if (isSearch == 1) {
+                                // if (isFirst) {
+                                    Page({
+                                        num: json.totalPage,
+                                        elem: $('#page1'),
+                                        callback: function(n) {
+                                            order_list(n, orderNo, goodsType, publishTime, size);
+                                        }
+                                    });
+                                    
+                                    $('.total').text(json.totalPage);
+                                    isFirst = false;
+
+                                // }
+
+                                $('.allPageN').text(num+1+'/'+json.totalPage);
+                            }
+
+                            isSearch = 0;
+
+                            if (isFirst) {
+
                                 Page({
                                     num: json.totalPage,
                                     elem: $('#page1'),
@@ -341,31 +369,14 @@
                                 });
                                 
                                 $('.total').text(json.totalPage);
+
                                 isFirst = false;
+                            }
 
-                            // }
-
-                            $('.allPageN').text(num+1+'/'+json.totalPage);
+                            $('.allPageN').text(num+'/'+json.totalPage);
+                        } else {
+                            $('.pageJump').css('display', 'none');
                         }
-
-                        isSearch = 0;
-
-                        if (isFirst) {
-
-                            Page({
-                                num: json.totalPage,
-                                elem: $('#page1'),
-                                callback: function(n) {
-                                    order_list(n, orderNo, goodsType, publishTime, size);
-                                }
-                            });
-                            
-                            $('.total').text(json.totalPage);
-
-                            isFirst = false;
-                        }
-
-                        $('.allPageN').text(num+'/'+json.totalPage);
                     } else {
                         $('.pageJump').css('display', 'none');
                     }

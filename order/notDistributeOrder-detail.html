@@ -53,6 +53,26 @@
             background-repeat: no-repeat;
             background-position: right center;
         }
+
+        /*.contbox-prld {
+            height: 1224px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }*/
+
+        #carInfo {
+            height: 85px;
+            overflow: hidden;
+            overflow-y: auto;
+        }
+
+        /*.contlisttwo .ll, .contlistone .ll, .operator .ll, .baojiaCompany .ll, .dangerIntroduce .ll {
+            width: 305px;
+        }
+
+        .companyInfo .ll {
+            width: 303px;
+        }*/
     </style>
 </head>
 <body>
@@ -136,7 +156,7 @@
             </div>
         </div>
         <div class="operator infoBox">
-            <div class="title"><img src="../img/prl-titlelogo.png" width="29" height="28" alt="">合同信息<div class="seehetong">查&nbsp;&nbsp;看</div></div>
+            <div class="title"><img src="../img/prl-titlelogo.png" width="29" height="28" alt="">合同信息<div class="seehetong"><a href="##" download="">查&nbsp;&nbsp;看</a></div></div>
             <div class="contBox">
                 <div class="left ll">
                     <div>合同公司：<span class="hetong_company">化动力有限公司</span></div>
@@ -164,15 +184,15 @@
             <div class="title"><img src="../img/prl-titlelogo.png" width="29" height="28" alt="">发票信息</div>
             <div class="contBox">
                 <div class="left ll">
-                    <div>纳税识别号：<span>100000.00</span></div>
-                    <div>企业银行账户：<span>100000.00</span></div>
+                    <div>纳税识别号：<span class="nashui">100000.00</span></div>
+                    <div>企业银行账户：<span class="qiye_bank">100000.00</span></div>
                 </div>
                 <div class="left mm">
-                    <div>企业电话：<span>1201509081220</span></div>
-                    <div>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：<span>1201509081220</span></div>
+                    <div>企业电话：<span class="qiye_phone">1201509081220</span></div>
+                    <div>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：<span class="address">1201509081220</span></div>
                 </div>
                 <div class="left rr">
-                    <div>企业开户银行：<span>2015-09-08 12：20</span></div>
+                    <div>企业开户银行：<span class="qiye_kaihu_bank">2015-09-08 12：20</span></div>
                 </div>
             </div>
         </div>
@@ -215,7 +235,7 @@
                 <span>需要</span>
                 <%}%>    
                 </div> -->
-                <div>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：<span>备注信息</span></div>
+                <div>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：<span><%=goodsRemark%></span></div>
             </div>
         </div>
     </script>
@@ -237,6 +257,10 @@
         //Iframe 的高度
         $(function () {
             window.parent.$("#Iframe").css("height","1224");
+
+            if ($('.contbox-prld').height() > 1224) {
+                $('.contbox-prld').css('width', '988px');
+            }
         })
 
 
@@ -248,7 +272,7 @@
 
         $(document).on('click', '.look_more_info', function() {
 
-            window.location.href = 'weihuapin_detail.html';
+            window.parent.location.href = '../dangerousGoods_detail.html';
 
         });
 
@@ -257,6 +281,9 @@
 
         //订单编号
         var orderNo = window.localStorage.getItem('data-orderNo');
+
+        //危化品id
+        var dataCompanyId = window.localStorage.getItem('data-companyId');
 
         // 详情信息
         $.ajax({
@@ -292,7 +319,7 @@
 
                     $('.fadan_person').text(json.data.createBy);
 
-                    // $('.jiedan_person').text(json.data.);
+                    $('.jiedan_person').text(json.data.tloCreateBy);
 
                 }
 
@@ -327,6 +354,40 @@
                     $('.hetong_company').text(json.data.receiveCompanyname);
                     $('.qianding_time').text(json.data.signDate);
                     $('.upload_time').text(json.data.createTime);
+
+                    $('.seehetong a').attr('download', json.data2.url);
+                }
+
+            },
+            error: function(err) {
+                console.log(err);
+            }
+
+        });
+
+        // 发票信息
+        $.ajax({
+            url: ip + 'order/queryInvoiceInfo',
+            type: 'get',
+            headers: {
+                Accept: "application/json; charset=utf-8",
+                token: token
+            },
+            data: {
+                companyId: dataCompanyId
+            },
+            cache: false,
+            dataType: 'json',
+            success: function (json) {
+                console.log(json);
+
+                if (json.code == 1) {
+
+                    $('.nashui').text(json.data.taxNumber);
+                    $('.qiye_phone').text(json.data.taxId);
+                    $('.qiye_kaihu_bank').text(json.data.accountBank);
+                    $('.qiye_bank').text(json.data.accountId);
+                    $('.address').text(json.data.companyAddress);
                 }
 
             },

@@ -14,7 +14,7 @@
 
 
     <style>
-        .modelBox11 p, .modelBox1 p {
+        .modelBox11 p, .modelBox1 p, .modelBox12 p {
             text-align: center;
         }
 
@@ -1307,11 +1307,11 @@
             <div class="modelcontent clearFloat" style="width: 100%;height: 407px;font-size: 14px;padding-top: 43px; ">
                 <div>
                     <span style="display: inline-block; width: 135px;text-align: right;">合同结算金额：</span>
-                    <span style="color: #666666;">¥100000 .00</span>
+                    <span style="color: #666666;" class="hetong_jiesuan_money">¥100000 .00</span>
                 </div>
                 <div style="margin-top: 25px;">
                     <span style="display: inline-block; width: 135px;text-align: right;"> 实际结算金额：</span>
-                    <input type="text" placeholder="33333"  style="height: 36px;width: 205px;border: 1px solid #dbdbdc;">
+                    <input type="text" placeholder="实际结算金额" class="shiji_jiesuan_money" style="height: 36px;width: 205px;border: 1px solid #dbdbdc;">
                 </div>
                 <div class="clearFloat" style="margin-top: 25px;">
                     <span style="display: block; width: 135px;text-align: right;float: left;">备注：</span>
@@ -1319,7 +1319,7 @@
                 </div>
                 <div class="clearFloat" style="margin-top: 32px;">
                     <span class=" cf_btn cancel cfClose" style="display: inline-block;margin-left: 135px;" >取消</span>
-                    <span class=" cf_btn" style="display: inline-block; width: 190px;height: 41px;line-height: 41px; ">确定收货</span>
+                    <span class=" cf_btn ok_shouhuo" style="display: inline-block; width: 190px;height: 41px;line-height: 41px; ">确定收货</span>
                 </div>
             </div>
         </div>
@@ -2045,6 +2045,8 @@ $(".cfClose").click(function () {
 function showModelBox(cls) {
     $(cls).css("display","block");
 }
+
+
 
 
 // 危险化学品认证提交成功
