@@ -1,7 +1,13 @@
 //var pubIP = 'http://172.17.210.187:7777/service/';
 var pubIP = 'http://192.168.1.80:7777/service/';
+var ip = 'http://192.168.1.199:7777/service/';
 //var token = 'ceshi123456';
 var token=localStorage.getItem("token");
+
+// 上传图片路径
+var uplodImgPath = 'http://192.168.1.80:8680/bfile/fileUpload.htm';
+// var uplodImgPath = 'http://172.17.210.188:8081/bfile/fileUpload.htm';
+
 var pageSize=1;//分页的每页个数
 
 var companyId = null, userId = null ;
@@ -93,11 +99,107 @@ if(token) {
 
         }
     });
+
+    //isOld token
+    //2 ok 已认证
+    //0 超时
+    //1 未登录
+    //-1 未认证
+    //-2 审核中
+    $.ajax({ 
+          type:"post",
+          url:pubIP+"user/getUserInfoByToken",//v1.0
+          cache:false,
+          dataType: "json",
+          async:false,
+          headers: {
+            token: token
+          },
+          success: function(json){
+            console.log(json.data);
+            //是否超时
+            if(json.code == 401){
+                    localStorage.setItem('isOld','0');
+                if(location.href.indexOf('login') == -1){
+                      
+                     if(!(location.href.indexOf('index') != -1 || location.href.indexOf('aboutUs') != -1)){
+                    //if(location.href.indexOf('index') == -1){
+                        if(location.href.indexOf('account') != -1 || location.href.indexOf('shopManage') != -1){
+                            $("#effect" , parent.document).show();
+                        }else{
+                            missedLogin() ;
+                        }
+                    }
+                }
+            }else{
+                //是否认证
+                $.ajax({ 
+                      type:"post",
+                      url:pubIP+"companyCertification/getCompanyWriteStateByUserToken",//v1.0
+                      cache:false,
+                      dataType: "json",
+                      headers: {
+                        token: token
+                      },
+                      success: function(json){
+                        console.log(json.code);
+                        var rzType = null;
+                        switch(json.data.type){
+                            case 1:
+                              //未认证
+                              rzType = '-1';
+                              break;
+                            case 2:
+                              //审核
+                              rzType = '-2';
+                              break;
+                            case 3:
+                              //已认证
+                              rzType = '2';
+                              break;
+                            case 4:
+                              rzType = '-1';
+                              break;
+                            case 5:
+                              rzType = '-2';
+                              break;
+                            case 6:
+                              rzType = '-2';
+                              break;
+                            default:
+                              rzType = '-1';
+                        }
+                        localStorage.setItem('isOld',rzType);
+
+                        
+
+                      },
+                      error:function(xhr,statues,error){
+                          
+                      }
+                });
+                //localStorage.setItem('isOld','2');
+            }
+            companyId = json.data.companyId;
+            userId = json.data.id;
+            
+          },
+          error:function(xhr,statues,error){
+              
+          }
+    });
+}else{
+    localStorage.setItem('isOld','1');
 }
+
+
+
+
 
 
 // 模拟下拉框
 $('.select').click(function(event){
+    if($(this).attr("disabled")=="disabled"){return;}//不可选
     if($(this).children('img').attr('src') == '../img/prl-selected.jpg'){
         $(this).children('img').attr('src', '../img/prl-select.jpg')
     } else {
@@ -142,6 +244,119 @@ $(function () {
         window.location.href="./account.html";
     })
 })
+
+
+// 模拟下拉框
+
+// var adct1 = document.getElementsByTagName('title')[0].getAttribute('adct1');
+// $('.selectPub').click(function(event){
+//     console.log($(this).attr("disabled"))
+//     if($(this).attr("disabled")=="disabled"){return;}//不可选
+//     if(adct1==1){
+//         if($(this).children('img').attr('src') == '../img/prl-selected.jpg'){
+//             $(this).children('img').attr('src', '../img/prl-select.jpg')
+//         } else {
+//             $(this).children('img').attr('src', '../img/prl-selected.jpg')
+//         }
+
+//         event.stopPropagation();
+
+//         $(this).children('ul').toggle();
+//         var that = $(this);
+//         that.find('li').each(function(){
+//             $(this).mouseover(function(){
+//                 $(this).addClass('hovered')
+//             });
+//             $(this).mouseleave(function(){
+//                 $(this).removeClass('hovered')
+//             });
+//             if($(this).attr('data-index') == that.attr('data-selectedindex')){
+//                 $(this).css({'background': '#6ea3ff','color': '#fff'});
+//                 $(this).siblings('li').css({'background': '#fff','color': '#999'});
+//             }
+//         });
+//     }else if(adct1==2){
+//         if($(this).children('img').attr('src') == '../../img/prl-selected.jpg'){
+//             $(this).children('img').attr('src', '../../img/prl-select.jpg')
+//         } else {
+//             $(this).children('img').attr('src', '../../img/prl-selected.jpg')
+//         }
+
+//         event.stopPropagation();
+
+//         $(this).children('ul').toggle();
+//         var that = $(this);
+//         that.find('li').each(function(){
+//             $(this).mouseover(function(){
+//                 $(this).addClass('hovered')
+//             });
+//             $(this).mouseleave(function(){
+//                 $(this).removeClass('hovered')
+//             });
+//             if($(this).attr('data-index') == that.attr('data-selectedindex')){
+//                 $(this).css({'background': '#6ea3ff','color': '#fff'});
+//                 $(this).siblings('li').css({'background': '#fff','color': '#999'});
+//             }
+//         });
+//     }else if(adct1==0){
+//         if($(this).children('img').attr('src') == './img/prl-selected.jpg'){
+//             $(this).children('img').attr('src', './img/prl-select.jpg')
+//         } else {
+//             $(this).children('img').attr('src', './img/prl-selected.jpg')
+//         }
+
+//         event.stopPropagation();
+
+//         $(this).children('ul').toggle();
+//         var that = $(this);
+//         that.find('li').each(function(){
+//             $(this).mouseover(function(){
+//                 $(this).addClass('hovered')
+//             });
+//             $(this).mouseleave(function(){
+//                 $(this).removeClass('hovered')
+//             });
+//             if($(this).attr('data-index') == that.attr('data-selectedindex')){
+//                 $(this).css({'background': '#6ea3ff','color': '#fff'});
+//                 $(this).siblings('li').css({'background': '#fff','color': '#999'});
+//             }
+//         });
+//     }
+
+
+// }).mouseleave(function (event) {
+//     if(adct1==0){
+//         $(this).children('img').attr('src', './img/prl-select.jpg');
+//     }else if(adct1==1){
+//         $(this).children('img').attr('src', '../img/prl-select.jpg');
+//     }else if(adct1==2){
+//         $(this).children('img').attr('src', '../../img/prl-select.jpg');
+//     }
+//     $(this).children('ul').hide();
+// });
+
+// $('.selectPub ul li').click(function(){
+//     event.stopPropagation();
+//     $(this).parent().parent().attr('data-selectedindex', $(this).attr('data-index'));
+//     $(this).parent().parent().find('span').text($(this).text());
+//     if(adct1==0){
+//         $(this).parent().parent().children('img').attr('src', './img/prl-select.jpg')
+//     }else if(adct1==1){
+//         $(this).parent().parent().children('img').attr('src', '../img/prl-select.jpg')
+//     }else if(adct1==2){
+//         $(this).parent().parent().children('img').attr('src', '../../img/prl-select.jpg')
+//     }
+
+//     $(this).parent().css('display','none');
+// });
+
+
+
+
+
+
+
+
 //刷新按钮
 $(".cfRefresh").click(function () {
     location.reload();
