@@ -23,12 +23,12 @@ document.writeln("<header>\n" +
     "                        <!--<li class=\"liline\"></li>-->\n" +
     "                        <li>\n" +
     "                            <div class=\"headerTopRightImg3 headerTopRightImg\"></div>\n" +
-    "                            <div  class=\"Lf\"><a href=\"##\">网址导航</a></div>\n" +
+    "                            <div  class=\"Lf\"><a href=\"javascript:;\">网址导航</a></div>\n" +
     "                        </li>\n" +
     "                        <li class=\"liline\"></li>\n" +
     "                        <li>\n" +
     "                            <div class=\"headerTopRightImg4 headerTopRightImg\"></div>\n" +
-    "                            <div class=\"Lf\"><a href=\"##\">供应商入驻</a></div>\n" +
+    "                            <div class=\"Lf\"><a href=\"javascript:;\">供应商入驻</a></div>\n" +
     "                        </li>\n" +
     "                    </ul>\n" +
     "                </div>\n" +
@@ -38,13 +38,13 @@ document.writeln("<header>\n" +
     "            <div class=\"mianCont\">\n" +
     "                <div class=\"logo Lf\" style=\"width: 243px;height: 63px;margin: 0;margin-right: 129px;margin-left: 30px;\"></div>\n" +
     "                <div class=\"navList Lf\">\n" +
-    "                    <div class=\"cfnav cfnav1 on\"><a href=\"./index.html\">首页</a></div>\n" +
-    "                    <div class=\"cfnav cfnav2\"><a href=\"./starVector.html\">明星货主</a></div>\n" +
-    "                    <div class=\"cfnav cfnav3\"><a href=\"./starCarrier.html\">明星货运</a></div>\n" +
+    "                    <div class=\"cfnav cfnav1 on\"><a href=\"index.html\">首页</a></div>\n" +
+    "                    <div class=\"cfnav cfnav2\"><a href=\"starVector.html\">明星货主</a></div>\n" +
+    "                    <div class=\"cfnav cfnav3\"><a href=\"starCarrier.html\">明星货运</a></div>\n" +
     "                    <div class=\"cfnav cfnav4\"><a href=\"javascript:;\">金融服务</a></div>\n" +
     "                    <!--<div class=\"cfnav cfnav5\"><a href=\"./OAplatform.html\">案例平台</a></div>-->\n" +
-    "                    <div class=\"cfnav cfnav6\"><a href=\"./dangerousGoods_search.html\">危化品查询</a></div>\n" +
-    "                    <div class=\"cfnav cfnav7\"><a href=\"##\">交易平台</a></div>\n" +
+    "                    <div class=\"cfnav cfnav6\"><a href=\"dangerousGoods_search.html\">危化品查询</a></div>\n" +
+    "                    <div class=\"cfnav cfnav7\"><a href=\"javascript:;\">交易平台</a></div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
