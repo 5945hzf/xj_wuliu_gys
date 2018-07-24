@@ -1,8 +1,9 @@
 // 公共头
 var adct = document.getElementsByTagName('title')[0].getAttribute('adct');
 //公共IP
-var headerip = 'https://xj.wl.api.hg.jergavin.com/';
 // var headerip = 'http://192.168.1.199:7777/service/';
+var headerip = 'https://xj.wl.api.hg.jergavin.com/service/';
+
 document.writeln("<header>\n" +
     "    <div class=\"headerTop\">\n" +
     "        <div class=\"mianCont\">\n" +

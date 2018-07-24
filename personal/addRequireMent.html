@@ -28,17 +28,17 @@
         <div class="clearFloat">
             <div class="container1Left Lf">
                 <div class="goodsName">
-                    <span class="cf_leftTitle">货物名称 </span>
-                    <input type="text">
+                    <span class="cf_leftTitle">货物名称</span>
+                    <input type="text" id="goodsName">
                 </div>
-                <div class="goodsWeight"><span class="cf_leftTitle">重&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;量</span>
-                    <input type="text" style="width: 109px;">
+                <div class="goodsWeight"><span class="cf_leftTitle">货物单位</span>
+                    <input type="text" id="goodsNum" style="width: 109px;">
                     <div class="select" data-selectedindex="1" style="margin-top: 0;width: 98px;float: right;">
-                        <span>千克</span>
+                        <span>重量/吨</span>
                         <img src="../img/prl-select.jpg" alt="">
                         <ul>
-                            <li data-index="1">千克</li>
-                            <li data-index="2">吨</li>
+                            <li data-index="1">重量/吨</li>
+                            <li data-index="2">体积/m³</li>
                         </ul>
                     </div>
 
@@ -55,7 +55,7 @@
                 </div>
                 <div class="FHtime">
                     <span class="cf_leftTitle" >距&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;离 </span>
-                    <input type="text" style="width: 178px;"><span style="font-size: 14px;color: #282828;margin-left: 5px;">千米</span>
+                    <input type="text" id="distance" style="width: 178px;"><span style="font-size: 14px;color: #282828;margin-left: 5px;">千米</span>
                 </div>
             </div>
             <div class="container1Cen Lf">
@@ -72,30 +72,20 @@
                 </div>
                 <div class="danPrice">
                     <span class="cf_leftTitle">期望单价 </span>
-                    <input style="width: 155px;" type="text"><span style="font-size: 14px;margin-left: 5px;">元</span>
+                    <input style="width: 155px;" id="wishUnitPrice" type="text"><span style="font-size: 14px;margin-left: 5px;">元</span>
                 </div>
                 <div class="KPtype">
                     <span class="cf_leftTitle">开&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;票 </span>
-                    <div class="select" data-selectedindex="-1">
-                        <span>请选择</span>
+                    <div class="select" id="invoiceType" data-selectedindex="1">
+                        <span>普通发票</span>
                         <img src="../img/prl-select.jpg" alt="">
                         <ul>
-                            <li data-index="1">开票1</li>
-                            <li data-index="2">开票2</li>
+                            <li data-index="1">普通发票</li>
+                            <li data-index="2">增值发票</li>
                         </ul>
                     </div>
                 </div>
-                <div class="ZFtype">
-                    <span class="cf_leftTitle">支付方式 </span>
-                    <div class="select" data-selectedindex="-1">
-                        <span>请选择</span>
-                        <img src="../img/prl-select.jpg" alt="">
-                        <ul>
-                            <li data-index="1">微信</li>
-                            <li data-index="2">支付宝</li>
-                        </ul>
-                    </div>
-                </div>
+
                 <div class="daohuo">
                     <span class="cf_leftTitle">预计到货 </span>
                     <input type="text" style="width: 177px;">
@@ -103,8 +93,8 @@
             </div>
             <div class="container1Right Lf">
                 <div class="Chetype">
-                    <span class="cf_leftTitle">车辆类型 </span>
-                    <div class="select" data-selectedindex="-1">
+                    <span  class="cf_leftTitle">车辆类型 </span>
+                    <div id="carType" class="select" data-selectedindex="-1">
                         <span>请选择</span>
                         <img src="../img/prl-select.jpg" alt="">
                         <ul>
@@ -113,25 +103,37 @@
                         </ul>
                     </div>
                 </div>
-                <div class="JStype">
-                    <span class="cf_leftTitle">结算方式 </span>
-                    <div class="select" data-selectedindex="-1">
-                        <span>请选择</span>
+                <div class="ZFtype">
+                    <span class="cf_leftTitle">支付方式 </span>
+                    <div class="select" data-selectedindex="1">
+                        <span>现汇</span>
                         <img src="../img/prl-select.jpg" alt="">
                         <ul>
-                            <li data-index="1">微信</li>
-                            <li data-index="2">支付宝</li>
+                            <li data-index="1">现汇</li>
+                            <li data-index="2">承兑</li>
+                            <li data-index="3">现汇+承兑</li>
                         </ul>
                     </div>
                 </div>
+                <!--<div class="JStype">-->
+                    <!--<span class="cf_leftTitle">结算方式 </span>-->
+                    <!--<div class="select" id="paymentMode" data-selectedindex="1">-->
+                        <!--<span>到付</span>-->
+                        <!--<img src="../img/prl-select.jpg" alt="">-->
+                        <!--<ul>-->
+                            <!--<li data-index="1">到付</li>-->
+                            <!--<li data-index="2">预付</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                <!--</div>-->
                 <div class="ordertype">
                     <span class="cf_leftTitle">订单类型 </span>
-                    <div class="select" data-selectedindex="-1">
-                        <span>请选择</span>
+                    <div class="select" id="orderType" data-selectedindex="1">
+                        <span>单次运输订单</span>
                         <img src="../img/prl-select.jpg" alt="">
                         <ul>
-                            <li data-index="1">订单1</li>
-                            <li data-index="2">订单2</li>
+                            <li data-index="1">单次运输订单</li>
+                            <li data-index="2">多次运输订单</li>
                         </ul>
                     </div>
                 </div>
@@ -148,7 +150,7 @@
         </div>
         <div class="fadantype Lf" style="margin-left: 38px;">
             <span class="cf_leftTitle">发单类型 </span>
-            <div class="select" data-selectedindex="1" style="margin-left: 5px;">
+            <div id="demandType" class="select" data-selectedindex="1" style="margin-left: 5px;">
                 <span>普通发布</span>
                 <img src="../img/prl-select.jpg" alt="">
                 <ul>
@@ -159,7 +161,7 @@
         </div>
         <div class="youxiaoqi Lf" style="margin-left: 30px;">
             <span class="cf_leftTitle">需求有效期 </span>
-            <input type="text" style="width: 177px;">
+            <input id="demandEndTime" type="text" style="width: 177px;">
         </div>
     </div>
     <div class="container3 clearFloat" style="margin-top: 30px;">
@@ -180,9 +182,9 @@
             <div class="address">
 
                 <div class="Lf" style="margin-right: 5px;">
-                    <span class="cf_leftTitle " >收货地址 </span>
+                    <span class="cf_leftTitle " >出发地址 </span>
                 </div>
-                <div class="select" data-selectedindex="-1">
+                <div id="province" class="select" data-selectedindex="-1">
                     <span>请选择</span>
                     <img src="../img/prl-select.jpg" alt="">
                     <ul>
@@ -191,7 +193,7 @@
                         <li data-index="3">30</li>
                     </ul>
                 </div>
-                <div class="select" data-selectedindex="-1">
+                <div id="city" class="select" data-selectedindex="-1">
                     <span>请选择</span>
                     <img src="../img/prl-select.jpg" alt="">
                     <ul>
@@ -200,7 +202,7 @@
                         <li data-index="3">30</li>
                     </ul>
                 </div>
-                <div class="select" data-selectedindex="-1">
+                <div id="area" class="select" data-selectedindex="-1">
                     <span>请选择</span>
                     <img src="../img/prl-select.jpg" alt="">
                     <ul>
@@ -224,7 +226,7 @@
         </div>
         <div class="Lf" style="margin-left: 38px;">
             <div class="fahuo">
-                <span class="cf_leftTitle">发货企业 </span>
+                <span class="cf_leftTitle">收货企业 </span>
                 <input type="text" style="margin-left: 2px;width: 213px;">
             </div>
             <div class="linkMan" style="margin-top: 22px;">
@@ -238,7 +240,7 @@
                 <div class="Lf" style="margin-right: 5px;">
                     <span class="cf_leftTitle " >收货地址 </span>
                 </div>
-                <div class="select" data-selectedindex="-1">
+                <div id="province1"  class="select" data-selectedindex="-1">
                     <span>请选择</span>
                     <img src="../img/prl-select.jpg" alt="">
                     <ul>
@@ -247,7 +249,7 @@
                         <li data-index="3">30</li>
                     </ul>
                 </div>
-                <div class="select" data-selectedindex="-1">
+                <div id="city1" class="select" data-selectedindex="-1">
                     <span>请选择</span>
                     <img src="../img/prl-select.jpg" alt="">
                     <ul>
@@ -256,7 +258,7 @@
                         <li data-index="3">30</li>
                     </ul>
                 </div>
-                <div class="select" data-selectedindex="-1">
+                <div id="area1"  class="select" data-selectedindex="-1">
                     <span>请选择</span>
                     <img src="../img/prl-select.jpg" alt="">
                     <ul>
@@ -309,6 +311,487 @@
 $(".cf_sel").eq(0).click(function () {
     $(this).toggleClass("on");
 })
+
+    getProvence(0,true);//获取发货省市县
+    getProvence(1,true);//获取收货省市县
+    getCarType();//获取车辆类型
+
+
+    //提交  先做前台验证
+    function sub(){
+        if($("#load").val()==""){
+            $(".error").text("载重/体积不能为空");
+            return;
+        }else{
+            $(".error").text("");
+        }
+
+        if($("#price").val()==""){
+            $(".error").text("单价不能为空");
+            return;
+        }else{
+            $(".error").text("");
+        }
+
+        if($("#longs").val()==""){
+            $(".error").text("车辆长度不能为空");
+            return;
+        }else{
+            $(".error").text("");
+        }
+
+        if($("#wide").val()==""){
+            $(".error").text("车辆宽度不能为空");
+            return;
+        }else{
+            $(".error").text("");
+        }
+        if($("#heights").val()==""){
+            $(".error").text("车辆高度不能为空");
+            return;
+        }else{
+            $(".error").text("");
+        }
+
+
+
+
+        if($("#cargotype").val()==""){
+            $(".error").text("载货类型不能为空");
+            return;
+        }else{
+            $(".error").text("");
+        }
+
+        if($("#send_address").val()==""){
+            $(".error").text("发货详细地址不能为空");
+            return;
+        }else{
+            $(".error").text("");
+        }
+
+        if($("#aging").val()==""){
+            $(".error").text("需求时效不能为空");
+            return;
+        }else{
+            $(".error").text("");
+        }
+
+        if($("#receive_address").val()==""){
+            $(".error").text("收货详细地址不能为空");
+            return;
+        }else{
+            $(".error").text("");
+        }
+
+        if($("#username").val()==""){
+            $(".error").text("联系人不能为空");
+            return;
+        }else{
+            $(".error").text("");
+        }
+
+        if($("#phone").val()==""){
+            $(".error").text("联系人电话不能为空");
+            return;
+        }else if(!$("#phone").val().match(/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/)){
+            $(".error").text("联系人电话格式不正确");
+            return;
+        }else{
+            $(".error").text("");
+        }
+
+        if(!$(".cf_sel").hasClass("on")){
+            $(".error").text("请同意平台协议");
+            return;
+        }else{
+            $(".error").text("");
+        }
+
+        //发布空车
+        insertLogisticsVehicleEmpty();
+    }
+    //获取车辆类型
+    function getCarType() {
+        $.ajax({
+            url: pubIP + 'tLogisticsVehicle/selectCarTypeList', /*v1.0*/
+            type: 'post',
+            headers: {
+                Accept: "application/json; charset=utf-8",
+                token: token
+            },
+            cache: false,
+            ansyc: false,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                var str = '';
+                for (var i = 0; i < data.data.length; i++) {
+                    str += '<li  data-index="'+i+'" value="'+i+'" data-id="'+data.data[i].id+'">'+data.data[i].typeName+'</li>';
+                }
+                $('#carType ul').html(str);
+
+                $('#carType ul li').click(function(){
+                    event.stopPropagation();
+                    $(this).parent().parent().attr('data-selectedindex', $(this).attr('data-index'));
+                    $(this).parent().parent().attr('data-id', $(this).attr('data-id'));
+                    $(this).parent().parent().find('span').text($(this).text());
+                    $(this).parent().parent().children('img').attr('src', '../../img/prl-select.jpg');
+                    $(this).parent().css('display','none');
+                });
+                //默认选中
+                $("#carType").attr('data-selectedindex', 0);
+                $("#carType").attr('data-id', data.data[0].id);
+                $("#carType").find('span').text(data.data[0].typeName);
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+
+    }
+    //发布空车
+    function insertLogisticsVehicleEmpty() {
+        $.ajax({
+            url: pubIP + 'wlLogisticsDemand/insert', /*v1.0*/
+            type: 'post',
+            headers: {
+                Accept: "application/json; charset=utf-8",
+                //token: token
+            },
+            cache: false,
+            ansyc: true,
+            dataType: 'json',
+            data:{
+                companyId:companyId,
+//                           demandNo:  //	是	String(50)	需求编号   不存在
+                demandType:$("#demandType").find("span").text(),  //是	String(8)	发单类型：（1 普通发单）（2 转包订单）
+                demandEndTime: $("#demandEndTime").val(), //	是	datetime	需求有效期
+                companyid:companyId,  //	是	String(50)	发需求公司Id - 可能为空
+//                companyname:  //	是	String(100)	发需求公司名称
+                goodsName: $("#goodsName").val(), //	是	String(50)	货物名称
+//                goodsType:  //	是	String(50)	货物类型
+                packageType:$("#packageType").find("span").text(),  //	是	String(8)	包装类型
+                goodsUnit:$("#goodsUnit").find("span").text(),  //	是	String(50)	货物单位：(重量/吨）（体积/m³）
+                goodsNum:$("#goodsNum").val(),  //	是	String(50)	货物单位数值
+                wishUnitPrice:$("#wishUnitPrice").val(),  //	是	String(50)	【数字】 - 期望单价（元/吨/km）
+//                unitPrice:  //	是	String(50)	元/吨/k【数字】 - 单价（m）
+                distance:$("#distance").val(),  //	是	String(50)	距离
+//                amount:  //	是	String(50)	金额：自动计算(货物单位数值单价距离)
+//                settlementAmount:  //	是	String(50)	结算金额：实际的结算金额
+                carType:  //	是	String(50)	车辆类型
+                carLength:  //	是	String(50)	车辆长度
+                carWeight:  //	是	String(50)	车辆宽度
+                carHeight:  //	是	String(50)	车辆高度
+                invoiceType:  //	是	String(8)	发票类型：（普通发票）（增值发票）
+                paymentMode:  //	是	String(8)	结算方式(付款方式)：（到付）（预付）
+                paymentType:  //	是	String(8)	支付方式：（现汇）（承兑）（现汇+承兑）
+                receipt:  //	是	String(8)	是否需要回执单：0 不需要；1 需要
+                planStartDate:  //	是	datetime	计划发货时间
+                planEndDate:  //	是	datetime	计划到货时间
+                startDate:  //	否	datetime	发货时间
+                endDate:  //	否	datetime	到货时间
+                orderType:  //	是	String(8)	订单类型：单次运输订单 多次运输订单
+                goodsRemark:  //	是	String(500)	货物备注
+                sendCompanyid:  //	否	String(50)	发货公司Id - 可能为空
+                sendCompanyname:  //	是	String(100)	发货公司名称
+                sendProvince:  //	是	String(50)	发货省份
+                sendProvinceid:  //	是	String(50)	发货省份Id
+                sendCity:  //	是	String(50)	发货城市
+                sendCityid:  //	是	String(50)	发货城市Id
+                sendArea:  //	是	String(50)	发货区镇
+                sendAreaid:  //	是	String(50)	发货区镇Id
+                sendAddress:  //	是	String(200)	发货详细地址
+                sendUser:  //	是	String(50)	发货联系人
+                sendPhone:  //	是	String(50)	发货联系人手机号
+                receiveCompanyid:  //	否	String(50)	收货公司Id - 可能为空
+                receiveCompanyname:  //	是	String(100)	收货公司名称
+                receiveProvince:  //	是	String(50)	收货省份
+                receiveProvinceid:  //	是	String(50)	收货省份Id
+                receiveCity:  //	是	String(50)	收货城市
+                receiveCityid:  //	是	String(50)	收货城市Id
+                receiveArea:  //	是	String(50)	收货区镇
+                receiveAreaid:  //	是	String(50)	收货区镇Id
+                receiveAddress:  //	是	String(200)	收货详细地址
+                receiveUser:  //	是	String(50)	收货联系人
+                receivePhone:  //	是	String(50)	收货联系人手机号
+                serviceChargePercent:  //	是	String(50)	服务费 - 比例（%）
+                serviceChargeQuota:  //	是	String(50)	服务费 - 定额（元）
+
+
+
+
+
+
+
+
+
+                type:$("#carType").attr("data-id"),
+                load:$("#load").val(),
+                units:$("#units span").text(),//单位&
+                price:$("#price").val(),       //单价&
+                cargotype: $("#cargotype").val(),           //载货类型&
+                longs:$("#longs").val(),                 //=长&
+                wide:$("#wide").val(),                       //=宽&
+                heights:$("#heights").val(),                     //=高&
+                taketype:$("#taketype span").text(),//=接单类型&
+                send_province:$("#province span").text(),//=发货省&
+                send_provinceid:$("#province").attr("data-proviceid"),//&
+                send_city:$("#city span").text(),//=发货市&
+                send_cityid:$("#city").attr("data-cityid"),//&
+                send_area:$("#area span").text(),//=发货区&
+                send_areaid:$("#area").attr("data-areaid"),//&
+                send_address:$("#send_address").val(),    //=详细地址&
+                receive_province:$("#province1 span").text(),//=收货省&
+                receive_provinceid:$("#province1").attr("data-proviceid"),//&
+                receive_city:$("#city1 span").text(),//=收货市&
+                receive_cityid:$("#city1").attr("data-cityid"),//&
+                receive_area:$("#area1 span").text(),//=收货区&
+                receive_areaid:$("#area1").attr("data-areaid"),//&
+                receive_address:$("#receive_address").val(),    //=收货详细地址&
+                aging:$("#aging").val(),    //=时效&
+                username:$("#username").val(),    //=联系人&
+                phone:$("#phone").val(),    //=联系电话`
+            },
+            success: function (res) {
+                if(res.code===1){
+                    alert("发布空车成功");
+                }else{
+                    alert(res.msg);
+                }
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    }
+    //查询省
+    function getProvence(type,isFirst) {
+        //type  0发货地  1收货地
+        /*查询所有省份*/
+        $.ajax({
+            url: pubIP + 'address/listProvince', /*v1.0*/
+            type: 'post',
+            headers: {
+                Accept: "application/json; charset=utf-8",
+                token: token
+            },
+            cache: false,
+            ansyc: false,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                var str = '';
+                for (var i = 0; i < data.data.length; i++) {
+                    str += '<li  data-index="'+i+'" value="'+i+'" data-proviceId="'+data.data[i].provinceid+'" data-province="'+data.data[i].province+'">'+data.data[i].province+'</li>';
+                }
+                if(type==0){
+                    $('#province ul').html(str);
+                    $('#province ul li').click(function(){
+                        event.stopPropagation();
+                        $(this).parent().parent().attr('data-selectedindex', $(this).attr('data-index'));
+                        $(this).parent().parent().attr('data-proviceid', $(this).attr('data-proviceid'));
+                        $(this).parent().parent().find('span').text($(this).text());
+                        $(this).parent().parent().children('img').attr('src', '../../img/prl-select.jpg')
+                        $(this).parent().css('display','none');
+                        var provinceID =$("#province").attr('data-proviceid');
+                        $('#city span').text('请选择市');
+                        $('#area span').html('请选择区');
+                        $('#area ul').html("");
+                        selectCity(type,provinceID);
+//                        $('#city').removeClass('id_id1');
+                    });
+
+                    //选中第一个
+                    $("#province").attr('data-selectedindex',0);
+                    $("#province").attr('data-proviceid', data.data[0].provinceid);
+                    $("#province").find('span').text(data.data[0].province);
+                    selectCity(type, data.data[0].provinceid);
+
+                }else if(type==1){
+                    $('#province1 ul').html(str);
+                    $('#province1 ul li').click(function(){
+                        event.stopPropagation();
+                        $(this).parent().parent().attr('data-selectedindex', $(this).attr('data-index'));
+                        $(this).parent().parent().attr('data-proviceid', $(this).attr('data-proviceid'));
+                        $(this).parent().parent().find('span').text($(this).text());
+                        $(this).parent().parent().children('img').attr('src', '../../img/prl-select.jpg')
+                        $(this).parent().css('display','none');
+                        var provinceID =$("#province1").attr('data-proviceid');
+                        $('#city1 span').text('请选择市');
+                        $('#area1 span').html('请选择区');
+                        $('#area1 ul').html("");
+                        selectCity(type,provinceID);
+//                        $('#city1').removeClass('id_id1');
+                    });
+
+                    //选中第一个
+                    $("#province1").attr('data-selectedindex',0);
+                    $("#province1").attr('data-proviceid', data.data[0].provinceid);
+                    $("#province1").find('span').text(data.data[0].province);
+                    selectCity(type, data.data[0].provinceid);
+
+                }
+
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+
+    }
+    /*查询所有城市*/
+    function selectCity(type,provinceID,$this) {
+        $.ajax({
+            url: pubIP + 'address/listCityByProvinceId', /*v1.0*/
+            type: 'post',
+            headers: {
+                Accept: "application/json; charset=utf-8",
+                token: token
+            },
+            cache: false,
+            ansyc: true,
+            data: {provinceID: provinceID},
+            dataType: 'json',
+            success: function (data) {
+                console.log(data.data);
+                var str = '';
+                for (var i = 0; i < data.data.length; i++) {
+                    str += '<li data-index="'+i+'"  value="'+i+'" data-cityId="'+data.data[i].cityid+'" data-city="'+data.data[i].city+'">'+data.data[i].city+'</li>';
+                }
+                if(type==0){
+                    $('#city ul').html(str);
+                    $('#city ul li').click(function() {
+                        event.stopPropagation();
+                        $(this).parent().parent().attr('data-selectedindex', $(this).attr('data-index'));
+                        $(this).parent().parent().attr('data-cityid', $(this).attr('data-cityid'));
+                        $(this).parent().parent().find('span').text($(this).text());
+                        $(this).parent().parent().children('img').attr('src', '../../img/prl-select.jpg');
+                        $(this).parent().css('display', 'none');
+                        var cityID = $("#city").attr('data-cityid');
+                        $('#area span').text('请选择区');
+                        selectArea(type,cityID);
+                    })
+
+                    //选中第一个
+                    $("#city").attr('data-selectedindex',0);
+                    $("#city").attr('data-cityid', data.data[0].cityid);
+                    $("#city").find('span').text(data.data[0].city);
+                    selectArea(type, data.data[0].cityid);
+                }else if(type==1) {
+                    $('#city1 ul').html(str);
+                    $('#city1 ul li').click(function () {
+                        event.stopPropagation();
+                        $(this).parent().parent().attr('data-selectedindex', $(this).attr('data-index'));
+                        $(this).parent().parent().attr('data-cityid', $(this).attr('data-cityid'));
+                        $(this).parent().parent().find('span').text($(this).text());
+                        $(this).parent().parent().children('img').attr('src', '../../img/prl-select.jpg')
+                        $(this).parent().css('display', 'none');
+                        var cityID = $("#city1").attr('data-cityid');
+                        $('#area1 span').text('请选择区');
+                        selectArea(type,cityID);
+                    })
+                    //选中第一个
+                    $("#city1").attr('data-selectedindex',0);
+                    $("#city1").attr('data-cityid', data.data[0].cityid);
+                    $("#city1").find('span').text(data.data[0].city);
+                    selectArea(type, data.data[0].cityid);
+                }
+
+//                // 编辑回显城市
+//                if ($('#city').hasClass('id_id1')) {
+//                    var data_province = $this.parent().parent().find('td')[2];
+//                    $('#city ul li').each(function (index, element) {
+//                        if ($(this).attr('data-city') == $(data_province).attr('data-city')) {
+//                            //$(this)[0].selected = true;
+//                            $(this).parent().parent().attr("data-cityid",$(this).attr("data-cityid"));
+//                            $(this).parent().parent().attr("data-selectedindex",$(this).attr("data-index"));
+//                            $(this).parent().parent().find("span").text($(this).text());
+//                        }
+//                    });
+//
+//                    var cityID = $("#city").attr('data-cityid');
+//                    $('#area').addClass('id_id2');
+//                    selectArea(cityID, $this);
+//                }
+//                $('#city').parent().next().html('');
+
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    }
+    //    查询县
+    function selectArea(type,cityID) {
+        $.ajax({
+            url: pubIP + 'address/listAreaByCityID', /*v1.0*/
+            type: 'post',
+            headers: {
+                Accept: "application/json; charset=utf-8",
+                token: token
+            },
+            cache: false,
+            data: {cityID: cityID},
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                var str = '';
+                for (var i = 0; i < data.data.length; i++) {
+                    str += '<li data-index="'+i+'" value="'+i+'" data-areaId="'+data.data[i].areaid+'" data-area="'+data.data[i].area+'">'+data.data[i].area+'</li>';
+                }
+
+                if(type==0){
+                    $('#area ul').html(str);
+                    $('#area ul li').click(function(){
+                        event.stopPropagation();
+                        $(this).parent().parent().attr('data-selectedindex', $(this).attr('data-index'));
+                        $(this).parent().parent().attr('data-areaId', $(this).attr('data-areaId'));
+                        $(this).parent().parent().find('span').text($(this).text());
+                        $(this).parent().parent().children('img').attr('src', '../../img/prl-select.jpg')
+                        $(this).parent().css('display','none');
+                        var areaID =$("#area").attr('data-areaId');
+                    });
+                    //选中第一个
+                    $("#area").attr('data-selectedindex',0);
+                    $("#area").attr('data-areaId', data.data[0].areaid);
+                    $("#area").find('span').text(data.data[0].area);
+                }else if(type==1){
+                    $('#area1 ul').html(str);
+                    $('#area1 ul li').click(function(){
+                        event.stopPropagation();
+                        $(this).parent().parent().attr('data-selectedindex', $(this).attr('data-index'));
+                        $(this).parent().parent().attr('data-cityid', $(this).attr('data-cityid'));
+                        $(this).parent().parent().find('span').text($(this).text());
+                        $(this).parent().parent().children('img').attr('src', '../../img/prl-select.jpg')
+                        $(this).parent().css('display','none');
+                        var areaID =$("#area1").attr('data-cityid');
+                    });
+
+                    //选中第一个
+                    $("#area1").attr('data-selectedindex',0);
+                    $("#area1").attr('data-areaId', data.data[0].areaid);
+                    $("#area1").find('span').text(data.data[0].area);
+                }
+
+//                //回显
+//                if ($('#area').hasClass('id_id2')) {
+//                    var data_province = $this.parent().parent().find('td')[2];
+//                    $('#area ul li').each(function (index, element) {
+//                        if ($(this).attr('data-area') == $(data_province).attr('data-area')) {
+//                            //  $(this)[0].selected = true;
+//                            $(this).parent().parent().attr("data-areaid",$(this).attr("data-areaid"));
+//                            $(this).parent().parent().attr("data-selectedindex",$(this).attr("data-index"));
+//                            $(this).parent().parent().find("span").text($(this).text())
+//                        }
+//                    });
+//                }
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    }
 </script>
 </body>
 </html>

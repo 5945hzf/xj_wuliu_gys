@@ -1,8 +1,9 @@
 //var pubIP = 'http://172.17.210.187:7777/service/';
-var pubIP = 'https://xj.wl.api.hg.jergavin.com/';
 // var pubIP = 'http://192.168.1.199:7777/service/';
-//var ip = 'http://192.168.1.199:7777/service/';
-var ip = 'https://xj.wl.api.hg.jergavin.com/';
+var pubIP = 'https://xj.wl.api.hg.jergavin.com/service/';
+
+var ip = 'http://192.168.1.199:7777/service/';
+// var ip = 'https://xj.wl.api.hg.jergavin.com/service/';
 //var token = 'ceshi123456';
 var token=localStorage.getItem("token");
 
@@ -82,25 +83,55 @@ function cf_popEffectClose1(that) {
 	$(that).parent().parent().parent().css("display","none");
 }
 
-if(token) {
-    //底部信息ajax
+//退出 按钮
+$(document).on('click', '.exit', function() {
     $.ajax({
-        type: "post",
-        url: pubIP + "platform/getPlatformInfo",//v1.0
+        type: "get",
+        url: pubIP + "userSupplier/logoutByToken",//v1.0
         cache: false,
         dataType: "json",
         headers: {
-            token: token
+            token: localStorage.getItem("token")
         },
-        success: function (json) {
-            //console.log(json.code);
-            $('.kfPhone').text(json.data.customerMobile);
-            $('.kfEm').text(json.data.customerEmail);
-        },
-        error: function (xhr, statues, error) {
+        success: function (data) {
+            console.log(data);
+            if (data.code == 1) {
+                window.localStorage.removeItem('token');
+                console.log(window.localStorage.getItem('isOld'));
+                // window.localStorage.setItem('data-logout', 'true');
+                $('.exit').hide();
+                $("#loginPub").show();
+                $('#userNamePub').html('你好，游客');
+                location.href = 'login.html';
+            }
 
+        },
+        error: function (err) {
+            console.log(err);
         }
     });
+})
+
+
+if(token) {
+    //底部信息ajax
+    // $.ajax({
+    //     type: "post",
+    //     url: pubIP + "platform/getPlatformInfo",//v1.0
+    //     cache: false,
+    //     dataType: "json",
+    //     headers: {
+    //         token: token
+    //     },
+    //     success: function (json) {
+    //         //console.log(json.code);
+    //         $('.kfPhone').text(json.data.customerMobile);
+    //         $('.kfEm').text(json.data.customerEmail);
+    //     },
+    //     error: function (xhr, statues, error) {
+    //
+    //     }
+    // });
 
     //isOld token
     //2 ok 已认证
@@ -110,7 +141,7 @@ if(token) {
     //-2 审核中
     $.ajax({ 
           type:"post",
-          url:pubIP+"user/getUserInfoByToken",//v1.0
+          url:pubIP+"userSupplier/getUserInfoByToken",//v1.0
           cache:false,
           dataType: "json",
           async:false,
