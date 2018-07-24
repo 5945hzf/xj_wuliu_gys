@@ -9,11 +9,10 @@
     <meta name="format-detection" content="telephone=no" />
     <title>新疆物流服务平台</title>
     <link rel="stylesheet" type="text/css" href="css/commin.css"/>
-    <link rel="stylesheet" href="./css/starCarrier.css">
+    <link rel="stylesheet" href="./css/starTrade.css">
     <style>
         #type span{
-            width: 164px;
-
+            width: 256px;
         }
         .carrierList li .middle{
             position: relative;
@@ -33,7 +32,7 @@
 <script src="js/header.js" type="text/javascript" charset="utf-8"></script>
 <div class="mianCont" style="margin-top: 10px;padding-bottom:16px;">
     <div class="leftTab">
-        <div class="tabHead">金牌货运</div>
+        <div class="tabHead">金牌货主</div>
         <ul id="tuijian">
             <li class="active">物流公司甲</li>
             <li>物流公司乙</li>
@@ -66,10 +65,10 @@
             <li style="border-bottom: 1px solid #dedede;">
                 <div class="left">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型：</div>
                 <div class="right" id="type">
-                    <span class="actived">全部</span>
-                    <span>综合服务</span>
-                    <span>广告宣传</span>
-                    <span>综合服务</span>
+                    <!--<span class="actived">全部</span>-->
+                    <span data-id="9001805260008040002">危险化学品经营许可证</span>
+                    <span data-id="9001805260008040003">危险化学品生产许可证</span>
+                    <span data-id="9001806251600150004">危险化学品使用许可证</span>
                 </div>
             </li>
             <!--<li>-->
@@ -137,43 +136,38 @@
                 <button type="button" class="button">GO</button>
             </div>
         </div>
-        <!--<div class="pagesBox">-->
-            <!--<span>GO</span>-->
-            <!--<input type="text">-->
-            <!--<ul>-->
-                <!--<li class="actived">1</li>-->
-                <!--<li>2</li>-->
-                <!--<li>3</li>-->
-                <!--<li>4</li>-->
-                <!--<li>5</li>-->
-                <!--<li>下一页</li>-->
-                <!--<li>末页</li>-->
-            <!--</ul>-->
-        <!--</div>-->
     </div>
 </div>
 
 <script src="js/footer.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+
 <script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 
 <script src="js/pager.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" >
-    //头部状态
+    //控制头部状态
     $(function () {
         $(".cfnav").removeClass("on");
-        $(".cfnav3").addClass("on");
+        $(".cfnav2").addClass("on");
     })
 
 
     var currentPage=1;
     //进入页面加载数据
-    getProvence();//获取省市县三级 ---》获取类型  ----》获取数据列表
+    getProvence();//获取省----》获取类型------》获取数据列表
     getTuijian();//获取推荐
 
     //获取数据
     function getData(currentPage) {
+        var ziZhitype="";
+        var first=1;
+        $("#type .actived").each(function (idx,item) {
+            if(first!=1){
+                ziZhitype+=',';
+            }
+            ziZhitype+=$(item).attr("data-id");
+        })
         $(".carrierList").html("");//////////////////////所有的查询前必须先把列表置空
         $.ajax({
             url: pubIP + 'wltCompanyUp/selectCompanyList', /*v1.0*/
@@ -188,9 +182,9 @@
             data:{
                 size:pageSize,
                 page:currentPage,
-                ty:4,//1:明星贸易 2:明星货运
+                ty:1,//1:明星贸易 2:明星货运
                 cityId:$("#cityList .actived").attr("data-proviceid"),
-                type:$("#type .actived").attr("data-type_id"),
+                type:ziZhitype,
                 companyName:$("#companyName").val(),
                 address:$("#address").val()
             },
@@ -241,10 +235,10 @@
             str+=' <div class="middle Lf">'
             str+='    <div class="companyName">'+item.companyName+'</div>'
             str+='<div class="dangerClass">'
-            if(item.chemicalVoList!=null){
-                if(item.chemicalVoList.length!=0){
-                    $.each(item.chemicalVoList,function (idx1,item1) {
-                            str+=item1.typeName1+item1.typeName2+'&nbsp;&nbsp;&nbsp;';
+            if(item.qualifications!=null){
+                if(item.qualifications.length!=0){
+                    $.each(item.qualifications,function (idx1,item1) {
+                        str+=item1.qualifiStr+' ';
                     })
                 }
             }
@@ -259,10 +253,16 @@
         //详情
         $(".carrierList li").click(function () {
             sessionStorage.setItem("detailId",$(this).attr("data-id"));
-            window.location.href="./freightDetails.html";
+            window.location.href="./starTradeDetail.html";
         })
     }
 
+    $("#type span").click(function () {
+        $(this).toggleClass("actived");
+//        $(this).addClass("actived");
+        currentPage=1;
+        getData(1);
+    })
     // 点击go刷新数据
     $('.pageCont').on('click', '.button',function(){
         var currentPage1 = $('.pageCont li.active>a').text();
@@ -302,7 +302,8 @@
                     currentPage=1;
                     getData(1);
                 })
-                getType();//获取类型
+                getData(1);//获取列表数据
+//                getType();//获取类型
             },
             error: function(err){
                 console.log(err);
@@ -310,7 +311,7 @@
         });
 
     }
-    //获取九大类
+    //获取九大类  这里不需要
     function getType() {
         $.ajax({
             url: pubIP + 'chemicalType/getChemicalType', /*v1.0*/
@@ -329,7 +330,9 @@
                     if(i==0){
                         str += '<span class="actived" data-type_id="">全部</span>';
                     }
-                    str += '<span  data-type_id="'+data.data[i].type_id+'">'+data.data[i].type_name+'</span>';
+                    str += '<span  data-type_id="'+data.data[i].type_id+'">'+data.data[i].type_name+data.data[i].type_title+'</span>';
+
+
                 }
                 $("#type").html(str);
                 $("#type span").click(function () {

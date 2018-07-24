@@ -171,6 +171,7 @@
     </style>
 </head>
 <body>
+<script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/header.js" type="text/javascript" charset="utf-8"></script>
 	<!--<div class="maxWidth headBox">-->
 		<!--<div class="mianCont">-->
@@ -385,7 +386,7 @@
 				}
 				$.ajax({ 
 		          type:"post",
-		          url: pubIP+"user/validMobileExist",//v1.0
+		          url: pubIP+"userSupplier/validMobileExist",//v1.0
 		          cache:false,
 		          data:{
 		          	'mobile':$('#phoneIpt').val(),
@@ -408,7 +409,7 @@
 				//校验短信验证码
 				$.ajax({ 
 		          type:"post",
-		          url: pubIP+"user/validMobileCode",//v1.0
+		          url: pubIP+"userSupplier/validMobileCode",//v1.0
 		          cache:false,
 		          data:{
 		          	'mobile':$('#onlySwPhone').text(),
@@ -463,7 +464,7 @@
 				//加参数  手机号 暂停
 				$.ajax({ 
 		          type:"post",
-		          url: pubIP+"user/updatePassword",//v1.0
+		          url: pubIP+"userSupplier/updatePassword",//v1.0
 		          cache:false,
 		          data:{
 		          	'newPassword':$('#passWord2').val(),
@@ -528,7 +529,7 @@
 			if(canSend){
 				$.ajax({ 
 		          type:"post",
-		          url: pubIP+"user/getMessageCode",//v1.0
+		          url: pubIP+"userSupplier/getMessageCode",//v1.0
 		          cache:false,
 		          data:{
 		          	'mobile':$('#onlySwPhone').text(),
@@ -565,7 +566,7 @@
         function getImageCode(){
             var timestamp = Date.parse(new Date());
             sessionStorage["imgCodeRedisKey"]=timestamp+""+Math.floor(Math.random()*10)+""+Math.floor(Math.random()*10)+""+Math.floor(Math.random()*10)+""+Math.floor(Math.random()*10)+""+Math.floor(Math.random()*10)+""+Math.floor(Math.random()*10);
-            $("#checkImg").attr("src",pubIP+"codeImage/ImageCodePic?imgCodeRedisKey="+sessionStorage["imgCodeRedisKey"]);
+            $("#checkImg").attr("src",pubIP+"codeImageSupplier/ImageCodePic?imgCodeRedisKey="+sessionStorage["imgCodeRedisKey"]);
         }
         
         var imgCode = false
@@ -574,7 +575,7 @@
             var that=$(this).eq(0);
             var text=$(this).eq(0).val();
             $.ajax({
-                url: pubIP + 'user/validImgCode', /*v1.0*/
+                url: pubIP + 'userSupplier/validImgCode', /*v1.0*/
                 type: 'post',
                 headers: {
                     Accept: "application/json; charset=utf-8",

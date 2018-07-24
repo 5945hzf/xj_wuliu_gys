@@ -1,6 +1,8 @@
 //var pubIP = 'http://172.17.210.187:7777/service/';
-var pubIP = 'http://192.168.1.80:7777/service/';
-var ip = 'http://192.168.1.199:7777/service/';
+var pubIP = 'https://xj.wl.api.hg.jergavin.com/';
+// var pubIP = 'http://192.168.1.199:7777/service/';
+//var ip = 'http://192.168.1.199:7777/service/';
+var ip = 'https://xj.wl.api.hg.jergavin.com/';
 //var token = 'ceshi123456';
 var token=localStorage.getItem("token");
 
