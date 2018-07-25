@@ -14,7 +14,7 @@
 
 
     <style>
-        .modelBox11 p, .modelBox1 p, .modelBox12 p {
+        .modelBox11 p, .modelBox1 p, .modelBox12 p, .modelBoxdiaoling p {
             text-align: center;
         }
 
@@ -509,6 +509,30 @@
             </div>
         </div>
     </div>
+
+
+    <!-- 调令成功 -->
+    <div class="modelBoxdiaoling">
+        <div class="modelCont">
+            <div class="modeltitle">
+                <span>消息提示</span>
+                <img class="close" style="float: right;cursor: pointer;" height="50" src="./img/gsxq_del.png" alt="">
+            </div>
+            <div class="modelcontent">
+                <div class="info">
+                    <div class="img_div"><img style="float: none;" src="./img/gsxq_success.gif" alt=""></div>
+                    <p>发起调令成功！</p>
+                </div>
+                <div class="modelBtnBox">
+                    <div style="background:#5690f6;" class="modelbtn confirm ook2">确&nbsp;&nbsp;&nbsp;&nbsp;定</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
 
     <!-- 企业认证基本信息是否审核 -->
     <div class="modelBox3">
@@ -1377,7 +1401,7 @@
                 </div>
                 <div class="clearFloat" style="margin-top: 25px;">
                     <span style="display: block; width: 135px;text-align: right;float: left;"><i style="color: red;">* </i>调价原因：</span>
-                    <textarea name="" id="" cols="30" rows="10" style="height: 185px;width: 483px;border: 1px solid #dbdbdc;"></textarea>
+                    <textarea name="" id="" class="tiaojia_yuanyin" cols="30" rows="10" style="height: 185px;width: 483px;border: 1px solid #dbdbdc;"></textarea>
                 </div>
                 <div class="clearFloat" style="margin-top: 32px;">
                     <span class=" cf_btn cancel cfClose" style="display: inline-block;margin-left: 135px;" >取消</span>
@@ -2129,7 +2153,6 @@ $(".cfClose").click(function () {
 function showModelBox(cls) {
     $(cls).css("display","block");
 }
-
 
 
 

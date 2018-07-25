@@ -232,7 +232,7 @@
             <td><%=list[i].companyName%></td>
             <td><%=list[i].goodsNum%><%=list[i].goodsUnit%></td>
             <td><%=list[i].unitPrice%></td>
-            <td><span class="see seeDetail ll" data-tloId="<%=list[i].tloId%>" data-orderNo="<%=list[i].orderNo%>" data-companyId="<%=list[i].companyId%>"><a href="##">查看订单</a></span><span class="btn ll diaoling" data-tloContractAmount="<%=list[i].tloContractAmount%>" data-orderId="<%=list[i].orderId%>">发起调令</span><span class="btn cancel_order" data-tloId="<%=list[i].tloId%>">取消订单</span></td>
+            <td><span class="see seeDetail ll" data-tloId="<%=list[i].tloId%>" data-orderNo="<%=list[i].orderNo%>" data-companyId="<%=list[i].companyId%>"><a href="##">查看订单</a></span><span class="btn ll diaoling" data-tloContractAmount="<%=list[i].tloContractAmount%>" data-orderId="<%=list[i].tloId%>" data-companyname="<%=list[i].companyName%>" data-quotesSatus="<%=list[i].goodsType%>">发起调令</span><span class="btn cancel_order" data-tloId="<%=list[i].tloId%>">取消订单</span></td>
         </tr>
         <%}%>
     </script>
@@ -289,6 +289,9 @@
 
             $(window.parent.document).find('.ok_shenqing').attr('data-orderid', $(this).attr('data-orderId'));
             $(window.parent.document).find('.hetongyuanjia').text($(this).attr('data-tloContractAmount'));
+            $(window.parent.document).find('.ok_shenqing').attr('data-companyname', $(this).attr('data-companyname'));
+            $(window.parent.document).find('.ok_shenqing').attr('data-quotesSatus', $(this).attr('data-quotesSatus'));
+
 
             window.parent.showModelBox('.modelBox37');
             
@@ -298,6 +301,13 @@
         $(window.parent.document).on('click', '.modelBox37 .ok_shenqing', function() {
 
             var orderid = $(this).attr('data-orderid');
+            var companyname = $(this).attr('data-companyname');
+
+            var quotesSatus = $(this).attr('data-quotesSatus');
+
+            var oldPrice = $(window.parent.document).find('.hetongyuanjia').text();
+            var quotedPrice = $(window.parent.document).find('.update_unit').val();
+            var remark = $(window.parent.document).find('.tiaojia_yuanyin').val();
 
             $.ajax({
                 url: ip + 'OrderPricesChanged/addPricesChanged',
@@ -309,19 +319,18 @@
                 data: {
                     orderid: orderid,
                     companyid: companyId,
-                    page: num,
-                    size: size,
-                    status: 0,
-                    orderNo: orderNo,
-                    time: publishTime,
-                    goodType: goodsType
+                    companyname: companyname,
+                    quotesSatus: quotesSatus,
+                    oldPrice: oldPrice,
+                    quotedPrice: quotedPrice,
+                    remark: remark
                 },
                 cache: false,
                 dataType: 'json',
                 success: function (json) {
                     console.log(json);
 
-
+                    $(window.parent.document).showModelBox('.modelBoxdiaoling');
 
                 },
                 error: function(err) {
