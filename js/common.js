@@ -1,6 +1,6 @@
 //var pubIP = 'http://172.17.210.187:7777/service/';
-// var pubIP = 'http://192.168.1.199:7777/service/';
-var pubIP = 'https://xj.wl.api.hg.jergavin.com/service/';
+var pubIP = 'http://192.168.1.199:7777/service/';
+// var pubIP = 'https://xj.wl.api.hg.jergavin.com/service/';
 
 var ip = 'http://192.168.1.199:7777/service/';
 // var ip = 'https://xj.wl.api.hg.jergavin.com/service/';
@@ -228,8 +228,20 @@ if(token) {
 
 
 
-
-
+//模拟点击 框
+$(".cf_select").click(function () {
+    $(this).toggleClass("on");
+})
+//全选
+$('.cf_selsectAll').click(function(){
+    if($(this).hasClass("on")){
+        $(this).parent().prev().find("table").find(".cf_select").addClass("on");
+    }else{
+        $(this).parent().prev().find(".cf_select").removeClass("on");
+    }
+});
+//查询按钮 统一设置样式
+$(".searchResultBtn.btn.input").css({"float":"right","margin-top":"11px","margin-left":"0","margin-right":"8px"});
 // 模拟下拉框
 $('.select').click(function(event){
     if($(this).attr("disabled")=="disabled"){return;}//不可选

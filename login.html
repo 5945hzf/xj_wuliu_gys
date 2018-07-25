@@ -54,6 +54,9 @@
 			    -moz-box-shadow: rgba(118,170,242, 0.5) 0px 0px 20px;
 			    -webkit-box-shadow: rgba(118,170,242, 0.5) 0px 0px 20px; 
 			}
+			.reg-box li.autoLogin.shadow{
+				border: none;
+			}
 			.menu {width: 760px;height: 100%;}
 			.menu .menuTop { background-color: #F10215; color: #fff; width: 140px; height: 40px; padding-left: 20px; line-height: 40px; cursor: pointer; }
 			.menu ul {padding-top: 7px;  background-color: #5892f3;position: relative;color: #fff;width: 245px;}
@@ -219,7 +222,10 @@
           })
 
           $(document).on('focus', '.reg-box>li', function () {
-          	$(this).addClass('shadow');
+              if(!$(this).hasClass("autoLogin")){
+                  $(this).addClass('shadow');
+			  }
+
           });
 
           $(document).on('blur', '.reg-box>li', function () {

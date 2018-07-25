@@ -13,7 +13,8 @@
     <link rel="stylesheet" type="text/css" href="../css/commin.css"/>
     <link rel="stylesheet" type="text/css" href="../css/addRequireMent.css"/>
     <style>
-        </style>
+        .containerBot{padding-top: 0;}
+     </style>
 
 
 
@@ -33,7 +34,7 @@
                 </div>
                 <div class="goodsWeight"><span class="cf_leftTitle">货物单位</span>
                     <input type="text" id="goodsNum" style="width: 109px;">
-                    <div class="select" data-selectedindex="1" style="margin-top: 0;width: 98px;float: right;">
+                    <div id="goodsUnit" class="select" data-selectedindex="1" style="margin-top: 0;width: 98px;float: right;">
                         <span>重量/吨</span>
                         <img src="../img/prl-select.jpg" alt="">
                         <ul>
@@ -45,24 +46,22 @@
                 </div>
                 <div class="che">
                     <span class="cf_leftTitle">车辆要求 </span>
-                    <input type="text" placeholder="长" style="width: 66px;">
-                    <input type="text" placeholder="宽" style="width: 65px;">
-                    <input type="text" placeholder="高" style="width: 66px;">
+                    <input id="carLength" type="text" placeholder="长" style="width: 66px;">
+                    <input id="carWeight" type="text" placeholder="宽" style="width: 65px;">
+                    <input id="carHeight" type="text" placeholder="高" style="width: 66px;">
                 </div>
                 <div class="FHtime">
                     <span class="cf_leftTitle">发货时间 </span>
-                    <input type="text">
+                    <!--<input type="text" id="startDate">-->
+                    <input type="text" class="date-input laydate-icon publishTime input startDate" placeholder="请选择日期" id="test1" style="width: 190px;height: 34px;">
                 </div>
-                <div class="FHtime">
-                    <span class="cf_leftTitle" >距&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;离 </span>
-                    <input type="text" id="distance" style="width: 178px;"><span style="font-size: 14px;color: #282828;margin-left: 5px;">千米</span>
-                </div>
+
             </div>
             <div class="container1Cen Lf">
                 <div class="BZtype">
                     <span class="cf_leftTitle">包装类型 </span>
-                    <div class="select" data-selectedindex="-1">
-                        <span>请选择</span>
+                    <div id="packageType" class="select" data-selectedindex="1">
+                        <span>大包</span>
                         <img src="../img/prl-select.jpg" alt="">
                         <ul>
                             <li data-index="1">大包</li>
@@ -88,7 +87,8 @@
 
                 <div class="daohuo">
                     <span class="cf_leftTitle">预计到货 </span>
-                    <input type="text" style="width: 177px;">
+                    <!--<input type="text" style="width: 177px;" id="planEndDate">-->
+                    <input type="text" class="date-input laydate-icon publishTime input planEndDate" placeholder="请选择日期" id="test2" style="width: 158px;height: 34px;">
                 </div>
             </div>
             <div class="container1Right Lf">
@@ -105,7 +105,7 @@
                 </div>
                 <div class="ZFtype">
                     <span class="cf_leftTitle">支付方式 </span>
-                    <div class="select" data-selectedindex="1">
+                    <div id="paymentType" class="select" data-selectedindex="1">
                         <span>现汇</span>
                         <img src="../img/prl-select.jpg" alt="">
                         <ul>
@@ -137,11 +137,15 @@
                         </ul>
                     </div>
                 </div>
+                <div class="FHtime">
+                    <span class="cf_leftTitle" >距&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;离 </span>
+                    <input type="text" id="distance" style="width: 145px;"><span style="font-size: 14px;color: #282828;margin-left: 5px;">千米</span>
+                </div>
             </div>
         </div>
         <div class="BH">
-            <span class="cf_leftTitle">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;货</span>
-            <input type="text">
+            <span class="cf_leftTitle">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注</span>
+            <input type="text" id="goodsRemark">
         </div>
     </div>
     <div class="container2 clearFloat">
@@ -171,11 +175,11 @@
         <div class="Lf" style="margin-left: 38px;">
             <div class="fahuo">
                 <span class="cf_leftTitle">发货企业 </span>
-                <input type="text" style="margin-left: 2px;width: 213px;">
+                <input type="text" id="sendCompanyname" style="margin-left: 2px;width: 213px;">
             </div>
             <div class="linkMan" style="margin-top: 22px;">
                 <span class="cf_leftTitle">联&nbsp;&nbsp;系&nbsp; 人 </span>
-                <input type="text" style="width: 213px;">
+                <input type="text" style="width: 213px;" id="sendUser">
             </div>
         </div>
         <div class="Lf" style="margin-left: 44px;">
@@ -211,11 +215,11 @@
                         <li data-index="3">30</li>
                     </ul>
                 </div>
-                <input type="text" placeholder="详细地址">
+                <input type="text" placeholder="详细地址" id="sendAddress">
             </div>
             <div class="phone" style="margin-top: 22px;">
                 <span class="cf_leftTitle">联系电话 </span>
-                <input type="text" style="width: 179px;">
+                <input type="text" style="width: 179px;" id="sendPhone" maxlength="11">
             </div>
         </div>
 
@@ -227,11 +231,11 @@
         <div class="Lf" style="margin-left: 38px;">
             <div class="fahuo">
                 <span class="cf_leftTitle">收货企业 </span>
-                <input type="text" style="margin-left: 2px;width: 213px;">
+                <input type="text" style="margin-left: 2px;width: 213px;" id="receiveCompanyname">
             </div>
             <div class="linkMan" style="margin-top: 22px;">
                 <span class="cf_leftTitle">联&nbsp;&nbsp;系&nbsp; 人 </span>
-                <input type="text" style="width: 213px;">
+                <input type="text" style="width: 213px;" id="receiveUser">
             </div>
         </div>
         <div class="Lf" style="margin-left: 44px;">
@@ -267,21 +271,22 @@
                         <li data-index="3">30</li>
                     </ul>
                 </div>
-                <input type="text" placeholder="详细地址">
+                <input type="text" placeholder="详细地址" id="receiveAddress">
             </div>
             <div class="phone" style="margin-top: 22px;">
                 <span class="cf_leftTitle">联系电话 </span>
-                <input type="text" style="width: 179px;">
+                <input type="text" style="width: 179px;" id="receivePhone" maxlength="11">
             </div>
         </div>
     </div>
 
     <div class="containerBot clearFloat">
+        <div class="error" style="text-align: center;color: red;height: 20px;margin: 10px 0;"></div>
         <div style="">
             <span class="cf_sel"></span>
             <span style="font-size: 14px;color: #282828;">同意平台协议</span>
         </div>
-        <div class="sub">提交需求</div>
+        <div class="sub" onclick="sub()">提交需求</div>
     </div>
 
 </div>
@@ -292,7 +297,7 @@
 <script src="../js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/pager.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
-
+<script src="../laydate/laydate.js"></script> <!-- 改成你的路径 -->
 
 <script type="text/javascript" >
 
@@ -308,6 +313,29 @@
             console.log(n);
         }
     });
+    //        时间初始化
+    var startTime = '';
+    var endTime = '';
+    laydate({
+        elem: '#test1',
+        format: 'YYYY-MM-DD',
+        istime: true,
+        choose: function(dates){ //选择好日期的回调
+            startTime = dates;
+        }
+    });
+    laydate({
+        elem: '#test2',
+        format: 'YYYY-MM-DD',
+        istime: true,
+        choose: function(dates){ //选择好日期的回调
+            endTime = dates;
+        }
+    });
+    laydate.skin('yahui');  //加载皮肤，参数lib为皮肤名
+
+
+
 $(".cf_sel").eq(0).click(function () {
     $(this).toggleClass("on");
 })
@@ -319,83 +347,132 @@ $(".cf_sel").eq(0).click(function () {
 
     //提交  先做前台验证
     function sub(){
-        if($("#load").val()==""){
-            $(".error").text("载重/体积不能为空");
+
+
+
+        if($("#goodsName").val()==""){
+            $(".error").text("货物名称不能为空");
+            return;
+        }else{
+            $(".error").text("");
+        }
+        if($("#goodsNum").val()==""){
+            $(".error").text("货物数量不能为空");
             return;
         }else{
             $(".error").text("");
         }
 
-        if($("#price").val()==""){
-            $(".error").text("单价不能为空");
+        if($("#wishUnitPrice").val()==""){
+            $(".error").text("期望单价不能为空");
             return;
         }else{
             $(".error").text("");
         }
 
-        if($("#longs").val()==""){
+        if($("#carLength").val()==""){
             $(".error").text("车辆长度不能为空");
             return;
         }else{
             $(".error").text("");
         }
-
-        if($("#wide").val()==""){
+        if($("#carWeight").val()==""){
             $(".error").text("车辆宽度不能为空");
             return;
         }else{
             $(".error").text("");
         }
-        if($("#heights").val()==""){
+
+        if($("#carHeight").val()==""){
             $(".error").text("车辆高度不能为空");
             return;
         }else{
             $(".error").text("");
         }
 
-
-
-
-        if($("#cargotype").val()==""){
-            $(".error").text("载货类型不能为空");
+        if($("#startDate").val()==""){
+            $(".error").text("发货时间不能为空");
             return;
         }else{
             $(".error").text("");
         }
 
-        if($("#send_address").val()==""){
+        if($("#planEndDate").val()==""){
+            $(".error").text("预计到货不能为空");
+            return;
+        }else{
+            $(".error").text("");
+        }
+        if($("#distance").val()==""){
+            $(".error").text("距离不能为空");
+            return;
+        }else{
+            $(".error").text("");
+        }
+        if($("#goodsRemark").val()==""){
+            $(".error").text("备注不能为空");
+            return;
+        }else{
+            $(".error").text("");
+        }
+        if($("#demandEndTime").val()==""){
+            $(".error").text("需求有效期不能为空");
+            return;
+        }else{
+            $(".error").text("");
+        }
+        if($("#sendCompanyname").val()==""){
+            $(".error").text("发货企业不能为空");
+            return;
+        }else{
+            $(".error").text("");
+        }
+        if($("#sendAddress").val()==""){
             $(".error").text("发货详细地址不能为空");
             return;
         }else{
             $(".error").text("");
         }
-
-        if($("#aging").val()==""){
-            $(".error").text("需求时效不能为空");
+        if($("#sendUser").val()==""){
+            $(".error").text("发货联系人不能为空");
+            return;
+        }else{
+            $(".error").text("");
+        }
+        if($("#sendPhone").val()==""){
+            $(".error").text("发货联系人电话不能为空");
+            return;
+        }else if(!$("#sendPhone").val().match(/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/)){
+            $(".error").text("发货联系人电话格式不正确");
             return;
         }else{
             $(".error").text("");
         }
 
-        if($("#receive_address").val()==""){
+
+        if($("#receiveCompanyname").val()==""){
+            $(".error").text("收货企业不能为空");
+            return;
+        }else{
+            $(".error").text("");
+        }
+        if($("#receiveAddress").val()==""){
             $(".error").text("收货详细地址不能为空");
             return;
         }else{
             $(".error").text("");
         }
-
-        if($("#username").val()==""){
-            $(".error").text("联系人不能为空");
+        if($("#receiveUser").val()==""){
+            $(".error").text("收货联系人不能为空");
             return;
         }else{
             $(".error").text("");
         }
-
-        if($("#phone").val()==""){
-            $(".error").text("联系人电话不能为空");
+        if($("#receivePhone").val()==""){
+            $(".error").text("收货联系人电话不能为空");
             return;
-        }else if(!$("#phone").val().match(/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/)){
-            $(".error").text("联系人电话格式不正确");
+        }else if(!$("#receivePhone").val().match(/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/)){
+            $(".error").text("收货联系人电话格式不正确");
             return;
         }else{
             $(".error").text("");
@@ -454,7 +531,7 @@ $(".cf_sel").eq(0).click(function () {
     function insertLogisticsVehicleEmpty() {
         $.ajax({
             url: pubIP + 'wlLogisticsDemand/insert', /*v1.0*/
-            type: 'post',
+            type: 'get',
             headers: {
                 Accept: "application/json; charset=utf-8",
                 //token: token
@@ -463,7 +540,6 @@ $(".cf_sel").eq(0).click(function () {
             ansyc: true,
             dataType: 'json',
             data:{
-                companyId:companyId,
 //                           demandNo:  //	是	String(50)	需求编号   不存在
                 demandType:$("#demandType").find("span").text(),  //是	String(8)	发单类型：（1 普通发单）（2 转包订单）
                 demandEndTime: $("#demandEndTime").val(), //	是	datetime	需求有效期
@@ -479,83 +555,48 @@ $(".cf_sel").eq(0).click(function () {
                 distance:$("#distance").val(),  //	是	String(50)	距离
 //                amount:  //	是	String(50)	金额：自动计算(货物单位数值单价距离)
 //                settlementAmount:  //	是	String(50)	结算金额：实际的结算金额
-                carType:  //	是	String(50)	车辆类型
-                carLength:  //	是	String(50)	车辆长度
-                carWeight:  //	是	String(50)	车辆宽度
-                carHeight:  //	是	String(50)	车辆高度
-                invoiceType:  //	是	String(8)	发票类型：（普通发票）（增值发票）
-                paymentMode:  //	是	String(8)	结算方式(付款方式)：（到付）（预付）
-                paymentType:  //	是	String(8)	支付方式：（现汇）（承兑）（现汇+承兑）
-                receipt:  //	是	String(8)	是否需要回执单：0 不需要；1 需要
-                planStartDate:  //	是	datetime	计划发货时间
-                planEndDate:  //	是	datetime	计划到货时间
-                startDate:  //	否	datetime	发货时间
-                endDate:  //	否	datetime	到货时间
-                orderType:  //	是	String(8)	订单类型：单次运输订单 多次运输订单
-                goodsRemark:  //	是	String(500)	货物备注
-                sendCompanyid:  //	否	String(50)	发货公司Id - 可能为空
-                sendCompanyname:  //	是	String(100)	发货公司名称
-                sendProvince:  //	是	String(50)	发货省份
-                sendProvinceid:  //	是	String(50)	发货省份Id
-                sendCity:  //	是	String(50)	发货城市
-                sendCityid:  //	是	String(50)	发货城市Id
-                sendArea:  //	是	String(50)	发货区镇
-                sendAreaid:  //	是	String(50)	发货区镇Id
-                sendAddress:  //	是	String(200)	发货详细地址
-                sendUser:  //	是	String(50)	发货联系人
-                sendPhone:  //	是	String(50)	发货联系人手机号
-                receiveCompanyid:  //	否	String(50)	收货公司Id - 可能为空
-                receiveCompanyname:  //	是	String(100)	收货公司名称
-                receiveProvince:  //	是	String(50)	收货省份
-                receiveProvinceid:  //	是	String(50)	收货省份Id
-                receiveCity:  //	是	String(50)	收货城市
-                receiveCityid:  //	是	String(50)	收货城市Id
-                receiveArea:  //	是	String(50)	收货区镇
-                receiveAreaid:  //	是	String(50)	收货区镇Id
-                receiveAddress:  //	是	String(200)	收货详细地址
-                receiveUser:  //	是	String(50)	收货联系人
-                receivePhone:  //	是	String(50)	收货联系人手机号
-                serviceChargePercent:  //	是	String(50)	服务费 - 比例（%）
-                serviceChargeQuota:  //	是	String(50)	服务费 - 定额（元）
-
-
-
-
-
-
-
-
-
-                type:$("#carType").attr("data-id"),
-                load:$("#load").val(),
-                units:$("#units span").text(),//单位&
-                price:$("#price").val(),       //单价&
-                cargotype: $("#cargotype").val(),           //载货类型&
-                longs:$("#longs").val(),                 //=长&
-                wide:$("#wide").val(),                       //=宽&
-                heights:$("#heights").val(),                     //=高&
-                taketype:$("#taketype span").text(),//=接单类型&
-                send_province:$("#province span").text(),//=发货省&
-                send_provinceid:$("#province").attr("data-proviceid"),//&
-                send_city:$("#city span").text(),//=发货市&
-                send_cityid:$("#city").attr("data-cityid"),//&
-                send_area:$("#area span").text(),//=发货区&
-                send_areaid:$("#area").attr("data-areaid"),//&
-                send_address:$("#send_address").val(),    //=详细地址&
-                receive_province:$("#province1 span").text(),//=收货省&
-                receive_provinceid:$("#province1").attr("data-proviceid"),//&
-                receive_city:$("#city1 span").text(),//=收货市&
-                receive_cityid:$("#city1").attr("data-cityid"),//&
-                receive_area:$("#area1 span").text(),//=收货区&
-                receive_areaid:$("#area1").attr("data-areaid"),//&
-                receive_address:$("#receive_address").val(),    //=收货详细地址&
-                aging:$("#aging").val(),    //=时效&
-                username:$("#username").val(),    //=联系人&
-                phone:$("#phone").val(),    //=联系电话`
+                carType:$("#carType").find("span").text(),  //	是	String(50)	车辆类型
+                carLength:$("#carLength").val(),   //	是	String(50)	车辆长度
+                carWeight:$("#carWeight").val(),   //	是	String(50)	车辆宽度
+                carHeight:$("#carHeight").val(),   //	是	String(50)	车辆高度
+                invoiceType:$("#invoiceType").find("span").text(),  //	是	String(8)	发票类型：（普通发票）（增值发票）
+//                paymentMode:$("#paymentMode").find("span").text(),  //	是	String(8)	结算方式(付款方式)：（到付）（预付）
+                paymentType:$("#paymentType").find("span").text(),  //	是	String(8)	支付方式：（现汇）（承兑）（现汇+承兑）
+//                receipt:  //	是	String(8)	是否需要回执单：0 不需要；1 需要
+//                planStartDate:$("#planStartDate").val(),  //	是	datetime	计划发货时间
+                planEndDate:$(".planEndDate").val(), //	是	datetime	计划到货时间
+                startDate:$(".startDate").val(),  //	否	datetime	发货时间
+//                endDate:  //	否	datetime	到货时间
+                orderType:$("#invoiceType").find("span").text(),  //	是	String(8)	订单类型：单次运输订单 多次运输订单
+                goodsRemark:$("#goodsRemark").val(),  //	是	String(500)	货物备注
+//                sendCompanyid: "", //	否	String(50)	发货公司Id - 可能为空
+                sendCompanyname:$("#sendCompanyname").val(),   //	是	String(100)	发货公司名称
+                sendProvince:$("#province span").text(),  //	是	String(50)	发货省份
+                sendProvinceid:$("#province").attr("data-proviceid"),  //	是	String(50)	发货省份Id
+                sendCity:$("#city span").text(),  //	是	String(50)	发货城市
+                sendCityid:$("#city").attr("data-cityid"),  //	是	String(50)	发货城市Id
+                sendArea:$("#area span").text(),  //	是	String(50)	发货区镇
+                sendAreaid:$("#area").attr("data-areaid"),  //	是	String(50)	发货区镇Id
+                sendAddress: $("#sendAddress").val(),   //	是	String(200)	发货详细地址
+                sendUser:$("#sendUser").val(),  //	是	String(50)	发货联系人
+                sendPhone:$("#sendPhone").val(),  //	是	String(50)	发货联系人手机号
+//                receiveCompanyid:  //	否	String(50)	收货公司Id - 可能为空
+                receiveCompanyname:$("#receiveCompanyname").val(),  //	是	String(100)	收货公司名称
+                receiveProvince:$("#province1 span").text(),  //	是	String(50)	收货省份
+                receiveProvinceid:$("#province1").attr("data-proviceid"),  //	是	String(50)	收货省份Id
+                receiveCity: $("#city1 span").text(), //	是	String(50)	收货城市
+                receiveCityid:$("#city1").attr("data-cityid"),   //	是	String(50)	收货城市Id
+                receiveArea:$("#area1 span").text(),  //	是	String(50)	收货区镇
+                receiveAreaid:$("#area1").attr("data-areaid"),  //	是	String(50)	收货区镇Id
+                receiveAddress:$("#receiveAddress").val(),   //	是	String(200)	收货详细地址
+                receiveUser:$("#receiveUser").val(),  //	是	String(50)	收货联系人
+                receivePhone:$("#receivePhone").val(),  //	是	String(50)	收货联系人手机号
+//                serviceChargePercent:  //	是	String(50)	服务费 - 比例（%）
+//                serviceChargeQuota:  //	是	String(50)	服务费 - 定额（元）
             },
             success: function (res) {
                 if(res.code===1){
-                    alert("发布空车成功");
+                    alert("发布需求成功");
                 }else{
                     alert(res.msg);
                 }
