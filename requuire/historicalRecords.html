@@ -68,34 +68,36 @@
             line-height: 76px;
             box-sizing: border-box;
         }
+
     </style>
 </head>
 <body>
     <div class="contbox">
         <div class="topTitle">历史记录<div class="fr cfRefresh"><img src="../img/prl-refresh.png" alt="" width="27" height="34">刷新</div></div>
         <div class="inputBox">
-            <label for="">输入搜索</label><input class="orderNo input" type="text" placeholder="订单编号／商品货号">
+            <label for="">输入搜索</label><input class="orderNo input" type="text" placeholder="需求编号">
+            <label for="">输入搜索</label><input id="goodsName" class=" input" type="text" placeholder="商品名称">
             <label for="">发布时间</label><input type="text" class="date-input laydate-icon publishTime input" placeholder="请选择日期" id="test1">
-            <label for="">需求状态</label>
-            <div class="goodsType input select" data-selectedindex="0"><span>全部</span><img src="../img/prl-select.jpg" >
-                <ul>
-                    <li data-index="1">类型1</li>
-                    <li data-index="2">类型2</li>
-                    <li data-index="3">类型3</li>
-                </ul>
-            </div>
-            <input class="advancedRetrievalBtn btn input" type="button" value="查询结果" style="margin-left: 100px;">
+            <!--<label for="">需求状态</label>-->
+            <!--<div class="goodsType input select" data-selectedindex="0"><span>全部</span><img src="../img/prl-select.jpg" >-->
+                <!--<ul>-->
+                    <!--<li data-index="1">类型1</li>-->
+                    <!--<li data-index="2">类型2</li>-->
+                    <!--<li data-index="3">类型3</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+            <input class="searchResultBtn btn input" type="button" value="查询结果" style="margin-left: 100px;">
             <!--<input class="searchResultBtn btn input" type="button" value="查询结果">-->
             <!--<input class="advancedRetrievalBtn btn input" type="button" value="高级检索">-->
         </div>
         <div class="opciationBox">
-            <div class="select displayNum" data-selectedindex="0"><span>显示条数</span><img src="../img/prl-select.jpg" alt="">
-                <ul>
-                    <li data-index="1">10</li>
-                    <li data-index="2">20</li>
-                    <li data-index="3">30</li>
-                </ul>
-            </div>
+            <!--<div class="select displayNum" data-selectedindex="0"><span>显示条数</span><img src="../img/prl-select.jpg" alt="">-->
+                <!--<ul>-->
+                    <!--<li data-index="1">10</li>-->
+                    <!--<li data-index="2">20</li>-->
+                    <!--<li data-index="3">30</li>-->
+                <!--</ul>-->
+            <!--</div>-->
             <input class="exportDemandBtn" type="button" value="导出需求">
         </div>
         <div class="listBox" >
@@ -109,7 +111,7 @@
                         <td>货物名称</td>
                         <td>始发地</td>
                         <td>目的地</td>
-                        <td>保证金</td>
+                        <!--<td>保证金</td>-->
                         <td>状态</td>
                         <td>操作</td>
                     </tr>
@@ -228,11 +230,11 @@
         function getData(currentPage) {
             $(".listBox tbody").html("");//所有条件查询列表 必须先置空
             $.ajax({
-                url: pubIP + 'wlLogisticsDemand/queryPageForConfirmedBySupplier', /*v1.0*/
+                url: pubIP + 'wlLogisticsDemand/queryPageForHistory', /*v1.0*/
                 type: 'get',
                 headers: {
                     Accept: "application/json; charset=utf-8",
-                    //token: token
+                    token: token
                 },
                 cache: false,
                 ansyc: true,
@@ -242,12 +244,13 @@
                     pageSize:pageSize,
                     demandNo:$("input.orderNo.input").val(),
                     startDate:$(".startDate").val(),
-                    pageIdx:currentPage
+                    pageIdx:currentPage,
+                    goodsName:$("#goodsName").val()
                 },
                 success: function (res) {
                     if(res.code===1){
                         //首次请求时 改变分页数据
-                        if(res.data.length==0){ $(".listBox tbody").html("");$(".pagination").parent().css("display","none"); return;}
+                        if(res.data.data.length==0){ $(".listBox tbody").html("");$(".pagination").parent().css("display","none"); return;}
                         $(".pagination").parent().css("display","block");
                         if(currentPage===1){
                             //修改底部分页
@@ -282,15 +285,16 @@
         function cf_dataRender(data) {
             var str='';
             $.each(data,function (idx,item) {
-                str+='<tr data-id="'+item.demandNo+'">';
+                str+='<tr data-id="'+item.id+'">';
                 str+="<td>"+item.demandNo+"</td>"
-                str+="<td>"+item.createDate+"</td>"
+                str+="<td>"+item.createTime+"</td>"
                 str+="<td>"+item.var9+"</td>"
                 str+="<td>"+item.goodsType+"</td>"
                 str+="<td>"+item.goodsName+"</td>"
                 str+="<td>"+item.sendProvince+"-"+item.sendCity+"</td>"
                 str+="<td>"+item.receiveProvince+"-"+item.receiveCity+"</td>"
-                str+="<td><span class=\"seeDetail ll\">查看详情</span><span class=\"del ll\">选择公司</span></td>"
+                str+="<td>"+item.status+"</td>"
+                str+="<td><span class=\"seeDetail ll\">查看详情</span></td>"
                 str+='</tr>';
             })
             $(".listBox tbody").html(str);
@@ -301,8 +305,9 @@
             //详情
             $(".seeDetail").click(function () {
                 sessionStorage.setItem("detailId",$(this).parents("tr").attr("data-id"));
-                window.location.href="./toConfirmRequire-detail.html";
+                window.location.href="./historyRecord-detail.html";
             })
+
         }
         //选择排序方式
         $(".select ul li").click(function () {
@@ -322,7 +327,7 @@
                 type: 'post',
                 headers: {
                     Accept: "application/json; charset=utf-8",
-                    //token: token
+                    token: token
                 },
                 cache: false,
                 ansyc: true,
@@ -352,6 +357,7 @@
                 }
             })
         }
+
 
     </script>
 </body>

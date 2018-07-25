@@ -14,6 +14,49 @@
     <link rel="stylesheet" type="text/css" href="../css/addRequireMent.css"/>
     <style>
         .containerBot{padding-top: 0;}
+        .modelBox0{
+            z-index: 9999;
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modelCont{
+            position: absolute;
+            width: 450px;
+            min-height: 276px;
+            left: 50%;
+            top: 50%;
+            /*margin-left: -225px;
+            margin-top: -200px;*/
+            margin-left: 0 !important;
+            margin-top: 0 !important;
+            transform: translate(-50%,-50%);-webkit-transform: translate(-50%,-50%);-ms-transform: translate(-50%,-50%);-moz-transform: translate(-50%,-50%);-o-transform: translate(-50%,-50%);
+            font-family: 'microsoft yahei';
+            /* background-color: red; */
+
+        }
+        .modeltitle{
+            width: 450px;
+            height: 50px;
+            background-image: url(../img/gsxq.gif);
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            font-size: 16px;
+            color: #5690f6;
+            line-height: 50px;
+        }
+        .modelcontent{
+            width: 450px;
+            background-image: url('../img/gsxq_cont.gif');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            font-size: 18px;
+        }
+        tr>td{text-align: center;line-height: 30px;}
      </style>
 
 
@@ -165,7 +208,8 @@
         </div>
         <div class="youxiaoqi Lf" style="margin-left: 30px;">
             <span class="cf_leftTitle">需求有效期 </span>
-            <input id="demandEndTime" type="text" style="width: 177px;">
+            <!--<input id="demandEndTime" type="text" style="width: 177px;">-->
+            <input type="text" class="date-input laydate-icon publishTime input demandEndTime" placeholder="请选择日期" id="test3" style="width: 158px;height: 34px;">
         </div>
     </div>
     <div class="container3 clearFloat" style="margin-top: 30px;">
@@ -188,7 +232,7 @@
                 <div class="Lf" style="margin-right: 5px;">
                     <span class="cf_leftTitle " >出发地址 </span>
                 </div>
-                <div id="province" class="select" data-selectedindex="-1">
+                <div id="province" data-isSelect="0" class="select" data-selectedindex="-1">
                     <span>请选择</span>
                     <img src="../img/prl-select.jpg" alt="">
                     <ul>
@@ -197,7 +241,7 @@
                         <li data-index="3">30</li>
                     </ul>
                 </div>
-                <div id="city" class="select" data-selectedindex="-1">
+                <div id="city" data-isSelect="0" class="select" data-selectedindex="-1">
                     <span>请选择</span>
                     <img src="../img/prl-select.jpg" alt="">
                     <ul>
@@ -206,7 +250,7 @@
                         <li data-index="3">30</li>
                     </ul>
                 </div>
-                <div id="area" class="select" data-selectedindex="-1">
+                <div id="area" data-isSelect="0" class="select" data-selectedindex="-1">
                     <span>请选择</span>
                     <img src="../img/prl-select.jpg" alt="">
                     <ul>
@@ -244,7 +288,7 @@
                 <div class="Lf" style="margin-right: 5px;">
                     <span class="cf_leftTitle " >收货地址 </span>
                 </div>
-                <div id="province1"  class="select" data-selectedindex="-1">
+                <div id="province1" data-isSelect="0"  class="select" data-selectedindex="-1">
                     <span>请选择</span>
                     <img src="../img/prl-select.jpg" alt="">
                     <ul>
@@ -253,7 +297,7 @@
                         <li data-index="3">30</li>
                     </ul>
                 </div>
-                <div id="city1" class="select" data-selectedindex="-1">
+                <div id="city1" data-isSelect="0" class="select" data-selectedindex="-1">
                     <span>请选择</span>
                     <img src="../img/prl-select.jpg" alt="">
                     <ul>
@@ -262,7 +306,7 @@
                         <li data-index="3">30</li>
                     </ul>
                 </div>
-                <div id="area1"  class="select" data-selectedindex="-1">
+                <div id="area1"  data-isSelect="0" class="select" data-selectedindex="-1">
                     <span>请选择</span>
                     <img src="../img/prl-select.jpg" alt="">
                     <ul>
@@ -290,7 +334,72 @@
     </div>
 
 </div>
-
+<!-- 历史需求类表  -->
+<div class="modelBox0">
+    <div class="modelCont" style="width: 800px;height: 600px;">
+        <div class="modeltitle" style="width: 780px;padding-left: 20px;">
+            <span>历史需求</span>
+            <img class="close" style="float: right;cursor: pointer;" height="50" src="../img/gsxq_del.png" alt="">
+        </div>
+        <div class="modelcontent"  style="width: 800px;height: 550px">
+            <div class="listBox1" style="width: 100%;height: 550px;overflow-y: auto;">
+                <table style="width: 100%;">
+                    <thead style="font-size: 14px;">
+                    <tr>
+                        <th>需求编号</th>
+                        <th>发布时间</th>
+                        <th>报价公司</th>
+                        <th>货物类型</th>
+                        <th>货物名称</th>
+                        <th>始发地</th>
+                        <th>目的地</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody style="font-size: 13px;">
+                    <tr>
+                        <td>3001804091631062137</td>
+                        <td>2017-07-19 14:48</td>
+                        <td>危化-罐装</td>
+                        <td>氢氧化钠</td>
+                        <td>氢氧化钠</td>
+                        <td>新疆-乌鲁木齐</td>
+                        <td>北京-朝阳区</td>
+                        <td>已确认</td>
+                        <td><span class="see update" style="color:#6ba1ff;">选择</span></td>
+                    </tr>
+                    <tr>
+                        <td>3001804091631062137</td>
+                        <td>2017-07-19 14:48</td>
+                        <td>危化-罐装</td>
+                        <td>氢氧化钠</td>
+                        <td>氢氧化钠</td>
+                        <td>新疆-乌鲁木齐</td>
+                        <td>北京-朝阳区</td>
+                        <td >已过期</td>
+                        <td><span class="see update" style="color:#6ba1ff;">选择</span></td>
+                    </tr>
+                    <tr>
+                        <td>3001804091631062137</td>
+                        <td>2017-07-19 14:48</td>
+                        <td>危化-罐装</td>
+                        <td>氢氧化钠</td>
+                        <td>氢氧化钠</td>
+                        <td>新疆-乌鲁木齐</td>
+                        <td>北京-朝阳区</td>
+                        <td>已驳回</td>
+                        <td><span class="see update" style="color:#6ba1ff;">选择</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--<div >-->
+                <!--<div style="background:#568ff6;color: white; border: 1px solid #568ff6; margin:0 auto;margin-top: 35px;" class="cf_btn ">确定</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
 
 
 <script src="../js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
@@ -313,6 +422,11 @@
             console.log(n);
         }
     });
+    //发布历史
+    $(".addLiShi").click(function () {
+        $(".modelBox0").show();
+    })
+
     //        时间初始化
     var startTime = '';
     var endTime = '';
@@ -332,6 +446,14 @@
             endTime = dates;
         }
     });
+    laydate({
+        elem: '#test3',
+        format: 'YYYY-MM-DD',
+        istime: true,
+        choose: function(dates){ //选择好日期的回调
+            endTime = dates;
+        }
+    });
     laydate.skin('yahui');  //加载皮肤，参数lib为皮肤名
 
 
@@ -339,7 +461,6 @@
 $(".cf_sel").eq(0).click(function () {
     $(this).toggleClass("on");
 })
-
     getProvence(0,true);//获取发货省市县
     getProvence(1,true);//获取收货省市县
     getCarType();//获取车辆类型
@@ -347,9 +468,6 @@ $(".cf_sel").eq(0).click(function () {
 
     //提交  先做前台验证
     function sub(){
-
-
-
         if($("#goodsName").val()==""){
             $(".error").text("货物名称不能为空");
             return;
@@ -527,14 +645,14 @@ $(".cf_sel").eq(0).click(function () {
         });
 
     }
-    //发布空车
+    //发布需求
     function insertLogisticsVehicleEmpty() {
         $.ajax({
             url: pubIP + 'wlLogisticsDemand/insert', /*v1.0*/
             type: 'get',
             headers: {
                 Accept: "application/json; charset=utf-8",
-                //token: token
+                token: token
             },
             cache: false,
             ansyc: true,
@@ -542,7 +660,7 @@ $(".cf_sel").eq(0).click(function () {
             data:{
 //                           demandNo:  //	是	String(50)	需求编号   不存在
                 demandType:$("#demandType").find("span").text(),  //是	String(8)	发单类型：（1 普通发单）（2 转包订单）
-                demandEndTime: $("#demandEndTime").val(), //	是	datetime	需求有效期
+                demandEndTime: $(".demandEndTime").val(), //	是	datetime	需求有效期
                 companyid:companyId,  //	是	String(50)	发需求公司Id - 可能为空
 //                companyname:  //	是	String(100)	发需求公司名称
                 goodsName: $("#goodsName").val(), //	是	String(50)	货物名称
@@ -597,6 +715,7 @@ $(".cf_sel").eq(0).click(function () {
             success: function (res) {
                 if(res.code===1){
                     alert("发布需求成功");
+                    window.location.href="../requuire/publishRequireList.html";
                 }else{
                     alert(res.msg);
                 }
@@ -628,6 +747,7 @@ $(".cf_sel").eq(0).click(function () {
                 }
                 if(type==0){
                     $('#province ul').html(str);
+                    //li注册点击事件
                     $('#province ul li').click(function(){
                         event.stopPropagation();
                         $(this).parent().parent().attr('data-selectedindex', $(this).attr('data-index'));
@@ -640,14 +760,26 @@ $(".cf_sel").eq(0).click(function () {
                         $('#area span').html('请选择区');
                         $('#area ul').html("");
                         selectCity(type,provinceID);
-//                        $('#city').removeClass('id_id1');
                     });
 
-                    //选中第一个
-                    $("#province").attr('data-selectedindex',0);
-                    $("#province").attr('data-proviceid', data.data[0].provinceid);
-                    $("#province").find('span').text(data.data[0].province);
-                    selectCity(type, data.data[0].provinceid);
+
+                    if($("#province").attr('data-isSelect')==0){
+                        //选中第一个
+                        $("#province").attr('data-selectedindex',0);
+                        $("#province").attr('data-proviceid', data.data[0].provinceid);
+                        $("#province").find('span').text(data.data[0].province);
+
+                    }else{
+                        $("#province").attr('data-isSelect')
+                        $("#province li").each(function (idx,item) {
+                            if($(item).attr("data-proviceid")==$("#province").attr('data-isSelect')){
+                                $("#province").attr('data-selectedindex',$(item).attr("data-index"))
+                                $("#province span").text($(item).attr("data-province"));
+                            }
+                        })
+                        $("#province").attr('data-isSelect',0);
+                    }
+                    selectCity(type,$("#province").attr('data-proviceid'));
 
                 }else if(type==1){
                     $('#province1 ul').html(str);
@@ -666,11 +798,28 @@ $(".cf_sel").eq(0).click(function () {
 //                        $('#city1').removeClass('id_id1');
                     });
 
+                    if($("#province1").attr('data-isSelect')==0){
+                        //选中第一个
+                        $("#province1").attr('data-selectedindex',0);
+                        $("#province1").attr('data-proviceid', data.data[0].provinceid);
+                        $("#province1").find('span').text(data.data[0].province);
+
+                    }else{
+                        $("#province1").attr('data-isSelect')
+                        $("#province1 li").each(function (idx,item) {
+                            if($(item).attr("data-proviceid")==$("#province1").attr('data-isSelect')){
+                                $("#province1").attr('data-selectedindex',$(item).attr("data-index"))
+                                $("#province1 span").text($(item).attr("data-province"));
+                            }
+                        })
+                        $("#province1").attr('data-isSelect',0);
+                    }
+                    selectCity(type,$("#province1").attr('data-proviceid'));
                     //选中第一个
-                    $("#province1").attr('data-selectedindex',0);
-                    $("#province1").attr('data-proviceid', data.data[0].provinceid);
-                    $("#province1").find('span').text(data.data[0].province);
-                    selectCity(type, data.data[0].provinceid);
+//                    $("#province1").attr('data-selectedindex',0);
+//                    $("#province1").attr('data-proviceid', data.data[0].provinceid);
+//                    $("#province1").find('span').text(data.data[0].province);
+//                    selectCity(type, data.data[0].provinceid);
 
                 }
 
@@ -714,11 +863,30 @@ $(".cf_sel").eq(0).click(function () {
                         selectArea(type,cityID);
                     })
 
+
+                    if($("#city").attr('data-isSelect')==0){
+                        //选中第一个
+                        $("#city").attr('data-selectedindex',0);
+                        $("#city").attr('data-cityid', data.data[0].cityid);
+                        $("#city").find('span').text(data.data[0].city);
+
+                    }else{
+                        $("#city").attr('data-isSelect')
+                        $("#city li").each(function (idx,item) {
+                            if($(item).attr("data-cityid")==$("#city").attr('data-isSelect')){
+                                $("#city").attr('data-selectedindex',$(item).attr("data-index"))
+                                $("#city span").text($(item).attr("data-city"));
+                            }
+                        })
+                        $("#city").attr('data-isSelect',0);
+                    }
+                    selectArea(type,$("#city").attr('data-cityid'));
+
                     //选中第一个
-                    $("#city").attr('data-selectedindex',0);
-                    $("#city").attr('data-cityid', data.data[0].cityid);
-                    $("#city").find('span').text(data.data[0].city);
-                    selectArea(type, data.data[0].cityid);
+//                    $("#city").attr('data-selectedindex',0);
+//                    $("#city").attr('data-cityid', data.data[0].cityid);
+//                    $("#city").find('span').text(data.data[0].city);
+//                    selectArea(type, data.data[0].cityid);
                 }else if(type==1) {
                     $('#city1 ul').html(str);
                     $('#city1 ul li').click(function () {
@@ -732,11 +900,29 @@ $(".cf_sel").eq(0).click(function () {
                         $('#area1 span').text('请选择区');
                         selectArea(type,cityID);
                     })
+
+                    if($("#city1").attr('data-isSelect')==0){
+                        //选中第一个
+                        $("#city1").attr('data-selectedindex',0);
+                        $("#city1").attr('data-cityid', data.data[0].cityid);
+                        $("#city1").find('span').text(data.data[0].city);
+
+                    }else{
+                        $("#city1").attr('data-isSelect')
+                        $("#city1 li").each(function (idx,item) {
+                            if($(item).attr("data-cityid")==$("#city1").attr('data-isSelect')){
+                                $("#city1").attr('data-selectedindex',$(item).attr("data-index"))
+                                $("#city1 span").text($(item).attr("data-city"));
+                            }
+                        })
+                        $("#city1").attr('data-isSelect',0);
+                    }
+                    selectArea(type,$("#city1").attr('data-cityid'));
                     //选中第一个
-                    $("#city1").attr('data-selectedindex',0);
-                    $("#city1").attr('data-cityid', data.data[0].cityid);
-                    $("#city1").find('span').text(data.data[0].city);
-                    selectArea(type, data.data[0].cityid);
+//                    $("#city1").attr('data-selectedindex',0);
+//                    $("#city1").attr('data-cityid', data.data[0].cityid);
+//                    $("#city1").find('span').text(data.data[0].city);
+//                    selectArea(type, data.data[0].cityid);
                 }
 
 //                // 编辑回显城市
@@ -793,10 +979,26 @@ $(".cf_sel").eq(0).click(function () {
                         $(this).parent().css('display','none');
                         var areaID =$("#area").attr('data-areaId');
                     });
+                    if($("#area").attr('data-isSelect')==0){
+                        //选中第一个
+                        $("#area").attr('data-selectedindex',0);
+                        $("#area").attr('data-areaid', data.data[0].areaid);
+                        $("#area").find('span').text(data.data[0].area);
+
+                    }else{
+                        $("#area").attr('data-isSelect')
+                        $("#area li").each(function (idx,item) {
+                            if($(item).attr("data-cityid")==$("#area").attr('data-isSelect')){
+                                $("#area").attr('data-selectedindex',$(item).attr("data-index"))
+                                $("#area span").text($(item).attr("data-area"));
+                            }
+                        })
+                        $("#area").attr('data-isSelect',0);
+                    }
                     //选中第一个
-                    $("#area").attr('data-selectedindex',0);
-                    $("#area").attr('data-areaId', data.data[0].areaid);
-                    $("#area").find('span').text(data.data[0].area);
+//                    $("#area").attr('data-selectedindex',0);
+//                    $("#area").attr('data-areaId', data.data[0].areaid);
+//                    $("#area").find('span').text(data.data[0].area);
                 }else if(type==1){
                     $('#area1 ul').html(str);
                     $('#area1 ul li').click(function(){
@@ -808,11 +1010,26 @@ $(".cf_sel").eq(0).click(function () {
                         $(this).parent().css('display','none');
                         var areaID =$("#area1").attr('data-cityid');
                     });
+                    if($("#area1").attr('data-isSelect')==0){
+                        //选中第一个
+                        $("#area1").attr('data-selectedindex',0);
+                        $("#area1").attr('data-areaid', data.data[0].areaid);
+                        $("#area1").find('span').text(data.data[0].area);
 
+                    }else{
+                        $("#area1").attr('data-isSelect')
+                        $("#area1 li").each(function (idx,item) {
+                            if($(item).attr("data-cityid")==$("#area1").attr('data-isSelect')){
+                                $("#area1").attr('data-selectedindex',$(item).attr("data-index"))
+                                $("#area1 span").text($(item).attr("data-area"));
+                            }
+                        })
+                        $("#area1").attr('data-isSelect',0);
+                    }
                     //选中第一个
-                    $("#area1").attr('data-selectedindex',0);
-                    $("#area1").attr('data-areaId', data.data[0].areaid);
-                    $("#area1").find('span').text(data.data[0].area);
+//                    $("#area1").attr('data-selectedindex',0);
+//                    $("#area1").attr('data-areaId', data.data[0].areaid);
+//                    $("#area1").find('span').text(data.data[0].area);
                 }
 
 //                //回显
@@ -832,6 +1049,173 @@ $(".cf_sel").eq(0).click(function () {
                 console.log(err);
             }
         });
+    }
+
+
+    //-------------------------------编辑相关的
+    getDataLishi()
+    //获取历史数据类表
+    function getDataLishi() {
+        $(".listBox tbody").html("");//所有条件查询列表 必须先置空
+        $.ajax({
+            url: pubIP + 'wlLogisticsDemand/queryPageForHistory', /*v1.0*/
+            type: 'get',
+            headers: {
+                Accept: "application/json; charset=utf-8",
+                token: token
+            },
+            cache: false,
+            ansyc: true,
+            dataType: 'json',
+            data:{
+                companyId:companyId,
+                pageSize:99999,
+                demandNo:"",
+                startDate:"",
+                pageIdx:1,
+                goodsName:""
+            },
+            success: function (res) {
+                if(res.code===1){
+                    //首次请求时 改变分页数据
+                    if(res.data.data.length==0){ $(".listBox1 tbody").html("");$(".pagination").parent().css("display","none"); return;}
+//                    $(".pagination").parent().css("display","block");
+//                    if(currentPage===1){
+//                        //修改底部分页
+//                        //debugger
+//                        var pageNum=Math.ceil(res.data.total/pageSize);
+//                        $(".allPageN").attr("pageTotal",pageNum);
+//                        $(".pageJump i").text("共"+pageNum+"页");
+//                        $('.objListBox>div:nth-child(5n)').css('margin-right','0');
+//                        Page({
+//                            num: pageNum,
+//                            elem: $('#page1'),
+//                            callback: function(n) {
+//                                // console.log(n);
+//                                currentPage=n;
+//                                getData(n);//加载n页数据
+//                            }
+//                        });
+//                    }
+                    //修改底部页数
+//                    $(".allPageN").text((currentPage)+"/"+ $(".allPageN").attr("pageTotal"));
+                    cf_dataRenderLishi(res.data.data)
+                }else{
+                    alert(res.msg);
+                }
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    }
+    //渲染历史数据列表
+    function cf_dataRenderLishi(data) {
+        var str='';
+        $.each(data,function (idx,item) {
+            str+='<tr data-id="'+item.id+'">';
+            str+="<td>"+item.demandNo+"</td>"
+            str+="<td>"+item.createTime+"</td>"
+            str+="<td>"+item.var9+"</td>"
+            str+="<td>"+item.goodsType+"</td>"
+            str+="<td>"+item.goodsName+"</td>"
+            str+="<td>"+item.sendProvince+"-"+item.sendCity+"</td>"
+            str+="<td>"+item.receiveProvince+"-"+item.receiveCity+"</td>"
+            str+="<td>"+item.status+"</td>"
+            str+="<td><span class=\"selectThis ll\" style='color: #6ea3f4;'>选择</span></td>"
+            str+='</tr>';
+        })
+        $(".listBox1 tbody").html(str);
+        //选择
+        $(".selectThis").click(function () {
+            sessionStorage.setItem("detailId",$(this).parents("tr").attr("data-id"));
+            $(this).parents(".modelCont").parent().hide();
+            getDataDetail();
+        })
+    }
+    $("img.close").click(function () {
+        $(this).parents(".modelCont").parent().hide();
+    })
+
+    //获取数据 详情部分
+    function getDataDetail() {
+        $.ajax({
+            url: pubIP + 'wlLogisticsDemand/query', /*v1.0*/
+            type: 'get',
+            headers: {
+                Accept: "application/json; charset=utf-8",
+                token: token
+            },
+            cache: false,
+            ansyc: true,
+            dataType: 'json',
+            data:{
+                id:sessionStorage.getItem("detailId")
+            },
+            success: function (res) {
+                if(res.code===1){
+                    cf_dataRenderDetail(res.data)
+                }else{
+                    alert(res.msg);
+                }
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    }
+
+    //渲染数据详情部分
+    function cf_dataRenderDetail(data) {
+        $("#goodsName").val(data.goodsName);
+        $("#wishUnitPrice").val(data.wishUnitPrice);
+        $("#carLength").val(data.carLength);
+        $("#carWeight").val(data.carWeight);
+        $("#carHeight").val(data.carHeight);
+        $(".startDate").val(data.startDate);
+        $(".planEndDate").val(data.planEndDate);
+        $("#distance").val(data.distance);
+        $("#goodsRemark").val(data.goodsRemark);
+        $(".demandEndTime").val(data.demandEndTime)
+        $("#sendCompanyname").val(data.sendCompanyname);
+        $("#sendAddress").val(data.sendAddress);
+        $("#sendUser").val(data.sendUser);
+        $("#sendPhone").val(data.sendPhone);
+        $("#receiveCompanyname").val(data.receiveCompanyname);
+        $("#receiveAddress").val(data.receiveAddress);
+        $("#receiveUser").val(data.receiveUser);
+        $("#receivePhone").val(data.receivePhone);
+        $("#goodsNum").val(data.goodsNum);
+
+        cf_selectRender("#packageType",data.packageType);
+        cf_selectRender("#carType",data.carType);
+        cf_selectRender("#goodsUnit",data.goodsUnit);
+        cf_selectRender("#paymentType",data.paymentType);
+        cf_selectRender("#orderType",data.orderType);
+        cf_selectRender("#invoiceType",data.invoiceType);
+        cf_selectRender("#demandType",data.demandType);
+
+        $("#province").attr("isSelect",data.sendProvinceid);
+        $("#city").attr("isSelect",data.sendCityid);
+        $("#area").attr("isSelect",data.sendAreaid);
+
+        $("#province1").attr("data-isSelect",data.receiveProvinceid);
+        $("#city1").attr("data-isSelect",data.receiveCityid);
+        $("#area1").attr("data-isSelect",data.receiveAreaid);
+//        cf_selectRender("#province",data.sendProvince);
+//        cf_selectRender("#province1",data.receiveProvince);
+
+        $(".cf_sel").addClass("on");
+
+    }
+    //渲染seolect框
+    function cf_selectRender(id,val) {
+        $(id+" li").each(function (idx,item) {
+            if($(item).text()==val){
+                $(item).parents(".select").attr("data-selectedindex",$(item).attr("data-index"));
+                $(item).parents(".select").find("span").text($(item).text());
+            }
+        })
     }
 </script>
 </body>
