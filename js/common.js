@@ -1,6 +1,9 @@
 //var pubIP = 'http://172.17.210.187:7777/service/';
-var pubIP = 'http://192.168.1.80:7777/service/';
+var pubIP = 'http://192.168.1.199:7777/service/';
+// var pubIP = 'https://xj.wl.api.hg.jergavin.com/service/';
+
 var ip = 'http://192.168.1.199:7777/service/';
+// var ip = 'https://xj.wl.api.hg.jergavin.com/service/';
 //var token = 'ceshi123456';
 var token=localStorage.getItem("token");
 
@@ -13,7 +16,22 @@ var pageSize=1;//分页的每页个数
 
 var companyId = null, userId = null ;
 
+//时间戳转时间
+function timestampToTime(timestamp) {
+    if(timestamp/100000000000>0){
+        var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    }else{
+        var date = new Date(timestamp );//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    }
 
+    Y = date.getFullYear() + '-';
+    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+    D = date.getDate() + ' ';
+    h = date.getHours() + ':';
+    m = date.getMinutes() + ':';
+    s = date.getSeconds();
+    return Y+M+D;
+}
 // 对Date的扩展，将 Date 转化为指定格式的String
 // 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符， 
 // 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) 
@@ -40,17 +58,20 @@ Date.prototype.Format = function (fmt) { //author: meizz
 
 var adct = document.getElementsByTagName('title')[0].getAttribute('adct');
 //登录状态失效的弹框
-document.writeln("<div class=\"pop\" id=\"effect\">\n" +
-    "\t<div class=\"cont\" >\n" +
-    "\t\t<div class=\"cance2\" >\n" +
-    "\t\t\t<span class=\"popTitle Lf\" >提示</span>\n" +
-    "\t\t\t<div class=\"close Rt\" onclick=\"cf_popEffectClose1(this)\"></div>\n" +
-    "\t\t</div>\n" +
-    "\t\t<div class=\"deanger\"></div>\n" +
-    "\t\t<div class=\"contTitle\">您好，<span>您的登陆已经过期</span>,请先<i onclick=\"popEffectLogin()\" style=\"color: #00a0e9;\">登陆</i>，以便使用更多功能。</div>\n" +
-    "\t\t<div class=\"popLogin\" id=\"popLogin\" onclick=\"popEffectLogin()\">登录</div>\n" +
-    "\t</div>\n" +
-    "</div>");
+if(adct=="account"){
+    document.writeln("<div class=\"pop\" id=\"effect\">\n" +
+        "\t<div class=\"cont\" >\n" +
+        "\t\t<div class=\"cance2\" >\n" +
+        "\t\t\t<span class=\"popTitle Lf\" >提示</span>\n" +
+        "\t\t\t<div class=\"close Rt\" onclick=\"cf_popEffectClose1(this)\"></div>\n" +
+        "\t\t</div>\n" +
+        "\t\t<div class=\"deanger\"></div>\n" +
+        "\t\t<div class=\"contTitle\">您好，<span>您的登陆已经过期</span>,请先<i onclick=\"popEffectLogin()\" style=\"color: #00a0e9;\">登陆</i>，以便使用更多功能。</div>\n" +
+        "\t\t<div class=\"popLogin\" id=\"popLogin\" onclick=\"popEffectLogin()\">登录</div>\n" +
+        "\t</div>\n" +
+        "</div>");
+}
+
 //当返回code为401时需要调用此方法
 function missedLogin() {
     $("#effect").css("display","block");
@@ -59,15 +80,15 @@ function missedLogin() {
 function popEffectLogin() {
 	var isOld = localStorage.getItem('isOld');
 	if(isOld == '0' || isOld == '1'){
-		if(adct=="首页"){
-	        window.location.href='./login/login.html';
-		}else{
-			if(location.href.indexOf('account') != -1){
-				parent.location.href = '../login/login.html';
-			}else{	
-				window.location.href='../login/login.html';
-			}
-		}
+		//if(adct=="首页"){
+	        window.location.href='login.html';
+		// }else{
+		// 	if(location.href.indexOf('account') != -1){
+		// 		parent.location.href = '../login/login.html';
+		// 	}else{
+		// 		window.location.href='../login/login.html';
+		// 	}
+		// }
 	}else if(isOld == '-1'){
 		if(adct=="首页"){
 	        window.location.href='account/account.html';
@@ -79,27 +100,58 @@ function popEffectLogin() {
 
 function cf_popEffectClose1(that) {
 	$(that).parent().parent().parent().css("display","none");
+    window.location.href='login.html';
 }
 
-if(token) {
-    //底部信息ajax
+//退出 按钮
+$(document).on('click', '.exit', function() {
     $.ajax({
-        type: "post",
-        url: pubIP + "platform/getPlatformInfo",//v1.0
+        type: "get",
+        url: pubIP + "userSupplier/logoutByToken",//v1.0
         cache: false,
         dataType: "json",
         headers: {
-            token: token
+            token: localStorage.getItem("token")
         },
-        success: function (json) {
-            //console.log(json.code);
-            $('.kfPhone').text(json.data.customerMobile);
-            $('.kfEm').text(json.data.customerEmail);
-        },
-        error: function (xhr, statues, error) {
+        success: function (data) {
+            console.log(data);
+            if (data.code == 1) {
+                window.localStorage.removeItem('token');
+                console.log(window.localStorage.getItem('isOld'));
+                // window.localStorage.setItem('data-logout', 'true');
+                $('.exit').hide();
+                $("#loginPub").show();
+                $('#userNamePub').html('你好，游客');
+                location.href = 'login.html';
+            }
 
+        },
+        error: function (err) {
+            console.log(err);
         }
     });
+})
+
+
+if(token) {
+    //底部信息ajax
+    // $.ajax({
+    //     type: "post",
+    //     url: pubIP + "platform/getPlatformInfo",//v1.0
+    //     cache: false,
+    //     dataType: "json",
+    //     headers: {
+    //         token: token
+    //     },
+    //     success: function (json) {
+    //         //console.log(json.code);
+    //         $('.kfPhone').text(json.data.customerMobile);
+    //         $('.kfEm').text(json.data.customerEmail);
+    //     },
+    //     error: function (xhr, statues, error) {
+    //
+    //     }
+    // });
 
     //isOld token
     //2 ok 已认证
@@ -109,7 +161,7 @@ if(token) {
     //-2 审核中
     $.ajax({ 
           type:"post",
-          url:pubIP+"user/getUserInfoByToken",//v1.0
+          url:pubIP+"userSupplier/getUserInfoByToken",//v1.0
           cache:false,
           dataType: "json",
           async:false,
@@ -172,8 +224,6 @@ if(token) {
                         }
                         localStorage.setItem('isOld',rzType);
 
-                        
-
                       },
                       error:function(xhr,statues,error){
                           
@@ -191,13 +241,28 @@ if(token) {
     });
 }else{
     localStorage.setItem('isOld','1');
+    if(adct=="acount"){
+        missedLogin() ;
+    }
 }
 
 
 
 
-
-
+//模拟点击 框
+$(".cf_select").click(function () {
+    $(this).toggleClass("on");
+})
+//全选
+$('.cf_selsectAll').click(function(){
+    if($(this).hasClass("on")){
+        $(this).parent().prev().find("table").find(".cf_select").addClass("on");
+    }else{
+        $(this).parent().prev().find(".cf_select").removeClass("on");
+    }
+});
+//查询按钮 统一设置样式
+$(".searchResultBtn.btn.input").css({"float":"right","margin-top":"11px","margin-left":"0","margin-right":"8px"});
 // 模拟下拉框
 $('.select').click(function(event){
     if($(this).attr("disabled")=="disabled"){return;}//不可选

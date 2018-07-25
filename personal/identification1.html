@@ -276,10 +276,10 @@
 <script src="../laydate/laydate.js"></script> <!-- 改成你的路径 -->
 
 <script>
-    //Iframe 的高度
-    // $(function () {
-    //     window.parent.$("#Iframe").css("height","1722");
-    // })
+   // Iframe 的高度
+     $(function () {
+         window.parent.$("#Iframe").css("height","1605");
+     })
 
         $(document).on('change','#yingye_zhizhao_pic,#saomiaojian_pic,#chajian_pic,#zhengjian_pic1,#zhengjian_pic2',function(){
             xmTanUploadImg11(this);
@@ -651,8 +651,6 @@
         /*修改*/
 
         if (companyId) {
-
-            
             //v1.0
             $.ajax({
                 url: pubIP + 'companyCertification/getCompanyWriteStateByUserToken',
