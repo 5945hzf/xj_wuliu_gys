@@ -232,7 +232,7 @@
             <td><%=list[i].companyName%></td>
             <td><%=list[i].goodsNum%><%=list[i].goodsUnit%></td>
             <td><%=list[i].unitPrice%></td>
-            <td><span class="see seeDetail ll" data-tloId="<%=list[i].tloId%>" data-orderNo="<%=list[i].orderNo%>" data-companyId="<%=list[i].companyId%>"><a href="##">查看订单</a></span><span class="btn ll diaoling">发起调令</span><span class="btn cancel_order" data-tloId="<%=list[i].tloId%>">取消订单</span></td>
+            <td><span class="see seeDetail ll" data-tloId="<%=list[i].tloId%>" data-orderNo="<%=list[i].orderNo%>" data-companyId="<%=list[i].companyId%>"><a href="##">查看订单</a></span><span class="btn ll diaoling" data-tloContractAmount="<%=list[i].tloContractAmount%>" data-orderId="<%=list[i].orderId%>">发起调令</span><span class="btn cancel_order" data-tloId="<%=list[i].tloId%>">取消订单</span></td>
         </tr>
         <%}%>
     </script>
@@ -287,7 +287,48 @@
         // 发起调令
         $(document).on('click', '.diaoling', function() {
 
+            $(window.parent.document).find('.ok_shenqing').attr('data-orderid', $(this).attr('data-orderId'));
+            $(window.parent.document).find('.hetongyuanjia').text($(this).attr('data-tloContractAmount'));
+
             window.parent.showModelBox('.modelBox37');
+            
+
+        });
+
+        $(window.parent.document).on('click', '.modelBox37 .ok_shenqing', function() {
+
+            var orderid = $(this).attr('data-orderid');
+
+            $.ajax({
+                url: ip + 'OrderPricesChanged/addPricesChanged',
+                type: 'post',
+                headers: {
+                    Accept: "application/json; charset=utf-8",
+                    token: token
+                },
+                data: {
+                    orderid: orderid,
+                    companyid: companyId,
+                    page: num,
+                    size: size,
+                    status: 0,
+                    orderNo: orderNo,
+                    time: publishTime,
+                    goodType: goodsType
+                },
+                cache: false,
+                dataType: 'json',
+                success: function (json) {
+                    console.log(json);
+
+
+
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+
+            });
 
         });
 
