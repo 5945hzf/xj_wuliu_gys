@@ -1,9 +1,9 @@
 //var pubIP = 'http://172.17.210.187:7777/service/';
 var pubIP = 'http://192.168.1.199:7777/service/';
-// var pubIP = 'https://xj.wl.api.hg.jergavin.com/service/';
+var pubIP = 'http://wl.api.xjv56.com/service/';
 
 var ip = 'http://192.168.1.199:7777/service/';
-// var ip = 'https://xj.wl.api.hg.jergavin.com/service/';
+ var ip = 'http://wl.api.xjv56.com/service/';
 //var token = 'ceshi123456';
 var token=localStorage.getItem("token");
 
@@ -171,18 +171,19 @@ if(token) {
             console.log(json.data);
             //是否超时
             if(json.code == 401){
-                    localStorage.setItem('isOld','0');
-                if(location.href.indexOf('login') == -1){
-                      
-                     if(!(location.href.indexOf('index') != -1 || location.href.indexOf('aboutUs') != -1)){
-                    //if(location.href.indexOf('index') == -1){
-                        if(location.href.indexOf('account') != -1 || location.href.indexOf('shopManage') != -1){
-                            $("#effect" , parent.document).show();
-                        }else{
-                            missedLogin() ;
-                        }
-                    }
-                }
+                missedLogin() ;
+                //     localStorage.setItem('isOld','0');
+                // if(location.href.indexOf('login') == -1){
+                //
+                //      if(!(location.href.indexOf('index') != -1 || location.href.indexOf('aboutUs') != -1)){
+                //     //if(location.href.indexOf('index') == -1){
+                //         if(location.href.indexOf('account') != -1 || location.href.indexOf('shopManage') != -1){
+                //             $("#effect" , parent.document).show();
+                //         }else{
+                //             missedLogin() ;
+                //         }
+                //     }
+                // }
             }else{
                 //是否认证
                 $.ajax({ 
