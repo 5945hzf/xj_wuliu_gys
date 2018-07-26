@@ -329,8 +329,11 @@
                 dataType: 'json',
                 success: function (json) {
                     console.log(json);
-
-                    $(window.parent.document).showModelBox('.modelBoxdiaoling');
+                    if (json.code == 1) {
+                        $(window.parent.document).find('.modelBox37').css('display', 'none');
+                        window.parent.showModelBox('.modelBoxdiaoling');
+                    }
+                    
 
                 },
                 error: function(err) {
