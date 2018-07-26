@@ -430,7 +430,10 @@
 
 
         ////////////////////////////////选择公司弹框
-
+        //选择公司  弹框 关闭
+        $("img.close").click(function () {
+            $(this).parents(".modelCont").parent().hide();
+        })
         //获取选择公司弹框数据
         function getDataSelect() {
             $.ajax({
@@ -520,8 +523,8 @@
                             var demandid= $(this).parent().attr("data-demandid")
                             var companyid=$(this).parent().attr("data-companyid")
                             $.ajax({
-                                url: pubIP + 'wlDemandQuoted/queryList', /*v1.0*/
-                                type: 'get',
+                                url: pubIP + 'wlDemandQuoted/updateForChooseCompany', /*v1.0*/
+                                type: 'post',
                                 headers: {
                                     Accept: "application/json; charset=utf-8",
                                     token: token
@@ -536,6 +539,7 @@
                                 success: function (res) {
                                     if(res.code==1){
                                         alert("选择公司成功");
+                                        window.location.reload()
                                     }else{
                                         alert(res.msg);
                                     }
