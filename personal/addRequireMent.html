@@ -104,26 +104,29 @@
                 <div class="BZtype">
                     <span class="cf_leftTitle">包装类型 </span>
                     <div id="packageType" class="select" data-selectedindex="1">
-                        <span>大包</span>
+                        <span>袋装</span>
                         <img src="../img/prl-select.jpg" alt="">
                         <ul>
-                            <li data-index="1">大包</li>
-                            <li data-index="2">小包</li>
+                            <li data-index="1">袋装</li>
+                            <li data-index="2">桶装</li>
+                            <li data-index="3">罐装</li>
+                            <li data-index="4">瓶装</li>
+                            <li data-index="5">箱装</li>
                         </ul>
                     </div>
                 </div>
                 <div class="danPrice">
                     <span class="cf_leftTitle">期望单价 </span>
-                    <input style="width: 155px;" id="wishUnitPrice" type="text"><span style="font-size: 14px;margin-left: 5px;">元</span>
+                    <input style="width: 130px;" id="wishUnitPrice" type="text"><span style="font-size: 14px;margin-left: 5px;">元/吨</span>
                 </div>
                 <div class="KPtype">
                     <span class="cf_leftTitle">开&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;票 </span>
                     <div class="select" id="invoiceType" data-selectedindex="1">
-                        <span>普通发票</span>
+                        <span>增值税专用发票</span>
                         <img src="../img/prl-select.jpg" alt="">
                         <ul>
-                            <li data-index="1">普通发票</li>
-                            <li data-index="2">增值发票</li>
+                            <li data-index="1">增值税专用发票</li>
+                            <li data-index="2">增值税普通发票</li>
                         </ul>
                     </div>
                 </div>
@@ -137,12 +140,15 @@
             <div class="container1Right Lf">
                 <div class="Chetype">
                     <span  class="cf_leftTitle">车辆类型 </span>
-                    <div id="carType" class="select" data-selectedindex="-1">
-                        <span>请选择</span>
+                    <div id="carType" class="select" data-selectedindex="1">
+                        <span>槽车</span>
                         <img src="../img/prl-select.jpg" alt="">
                         <ul>
-                            <li data-index="1">大车</li>
-                            <li data-index="2">小车</li>
+                            <li data-index="1">槽车</li>
+                            <li data-index="2">罐车</li>
+                            <li data-index="3">高栏车</li>
+                            <li data-index="4">平板车</li>
+                            <li data-index="5">厢货车</li>
                         </ul>
                     </div>
                 </div>
@@ -198,11 +204,11 @@
         <div class="fadantype Lf" style="margin-left: 38px;">
             <span class="cf_leftTitle">发单类型 </span>
             <div id="demandType" class="select" data-selectedindex="1" style="margin-left: 5px;">
-                <span>普通发布</span>
+                <span>普通需求</span>
                 <img src="../img/prl-select.jpg" alt="">
                 <ul>
-                    <li data-index="1">普通发布</li>
-                    <li data-index="2">特殊发布</li>
+                    <li data-index="1">普通需求</li>
+                    <li data-index="2">转包需求</li>
                 </ul>
             </div>
         </div>
