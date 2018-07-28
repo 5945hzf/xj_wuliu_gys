@@ -368,7 +368,7 @@
             $.each(data,function (idx,item) {
                 str+='<tr data-id="'+item.id+'">';
                 str+="<td>"+item.demandNo+"</td>"
-                str+="<td>"+item.createTime+"</td>"
+                str+="<td>"+timestampToTime(item.createTime)+"</td>"
                 str+="<td>"+item.var9+"</td>"
                 str+="<td>"+item.goodsType+"</td>"
                 str+="<td>"+item.goodsName+"</td>"
@@ -389,6 +389,7 @@
             })
             //选择公司
             $(".selectCompany").click(function () {
+                sessionStorage.setItem("detailId",$(this).parents("tr").attr("data-id"));
                 getDataCompanyList()
                 getDataSelect()
                 $(".modelBox0").show();
