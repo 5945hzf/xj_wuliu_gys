@@ -330,7 +330,7 @@
         $('.bottomOperiat .selsectAll').click(function(){
             $('.bottomOperiat .squre').toggleClass('active');
         });
-        
+//        同意驳回调价申请
         function upPricesChanged(type,id,orderId) {
             $.ajax({
                 url: pubIP + 'OrderPricesChanged/upPricesChanged', /*v1.0*/
@@ -352,6 +352,7 @@
                     console.log(res)
                     if (res.code === 1) {
                         alert(res.msg);
+                        window.location.reload()
                     } else {
                         alert(res.msg);
                     }

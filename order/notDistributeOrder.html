@@ -286,7 +286,7 @@
 
         // 发起调令
         $(document).on('click', '.diaoling', function() {
-
+            console.log($(this).attr('data-tloContractAmount'));
             $(window.parent.document).find('.ok_shenqing').attr('data-orderid', $(this).attr('data-orderId'));
             $(window.parent.document).find('.hetongyuanjia').text($(this).attr('data-tloContractAmount'));
             $(window.parent.document).find('.ok_shenqing').attr('data-companyname', $(this).attr('data-companyname'));
@@ -310,7 +310,7 @@
             var remark = $(window.parent.document).find('.tiaojia_yuanyin').val();
 
             $.ajax({
-                url: ip + 'OrderPricesChanged/addPricesChanged',
+                url: pubIP + 'OrderPricesChanged/addPricesChanged',
                 type: 'post',
                 headers: {
                     Accept: "application/json; charset=utf-8",

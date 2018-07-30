@@ -224,11 +224,46 @@
             <td><%=list[i].sendAddress%></td>
             <td><%=list[i].receiveAddress%></td>
             <td><%=list[i].carType%></td>
+            <%=if(list[i].tLogisticsOrderstatus==6){%>
+            <td><span class="btn seeDetail" data-tloId="<%=list[i].tloId%>" data-orderNo="<%=list[i].orderNo%>" data-companyId="<%=list[i].companyId%>"><a href="##">查看详情</a></span><span onclick="updateStates(this)">修改状态</span></td>
+            <%=}else{%>
             <td><span class="btn seeDetail" data-tloId="<%=list[i].tloId%>" data-orderNo="<%=list[i].orderNo%>" data-companyId="<%=list[i].companyId%>"><a href="##">查看详情</a></span></td>
+            <%=}%>
         </tr>
         <%}%>
     </script>
     <script type="text/javascript">
+        //修改订单状态  暂时
+        function updateStates(that){
+            $.ajax({
+                url: pubIP + 'order/upOrderStatus',
+                type: 'post',
+                headers: {
+                    Accept: "application/json; charset=utf-8",
+                    token: token
+                },
+                data: {
+                    status:8,
+                    tLogisticsOrderId:$(that).parents("tr").attr("data-id"),
+                    tLogisticsOrderstatus:6,
+                },
+                cache: false,
+                dataType: 'json',
+                success: function (json) {
+                    console.log(json);
+
+                    if (json.code == 1) {
+                        alert(json.msg)
+                        window.location.reload();
+                    }
+
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+        }
+
         $(function () {
             window.parent.$("#Iframe").css("height","917");
         })
