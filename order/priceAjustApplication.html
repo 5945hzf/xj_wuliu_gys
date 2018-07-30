@@ -90,12 +90,12 @@
         <div class="topTitle">调价列表<div class="fr cfRefresh"><img src="../img/prl-refresh.png" alt="" width="27" height="34">刷新</div></div>
         <div class="inputBox">
             <label for="">输入搜索</label><input class="orderNo input" type="text" placeholder="订单编号">
-            <label for="" style="margin-left: 25px;">调令类型</label>
-            <div class="goodsType input select" data-selectedindex="0" style="box-sizing:border-box;"><span>全部</span><img src="../img/prl-select.jpg" >
-                <ul >
-                    <li data-index="1">单价</li>
-                </ul>
-            </div>
+            <!--<label for="" style="margin-left: 25px;">调令类型</label>-->
+            <!--<div class="goodsType input select" data-selectedindex="0" style="box-sizing:border-box;"><span>全部</span><img src="../img/prl-select.jpg" >-->
+                <!--<ul >-->
+                    <!--<li data-index="1">单价</li>-->
+                <!--</ul>-->
+            <!--</div>-->
             <label for="" style="margin-left: 10px;">提交时间</label>
             <input type="text" class="date-input laydate-icon publishTime input" placeholder="请选择日期" id="test1">
             <input class="searchResultBtn btn input" type="button" value="查询结果" style="margin-left: 80px;">
@@ -122,7 +122,7 @@
                         <td>操作</td>
                     </tr>
                 </thead>
-                <tbody id="orderListInfo">
+                <tbody  class="myTbody">
                     <!-- <tr>
                         <td>3001804091631062137</td>
                         <td>化动力有限公司</td>
@@ -190,19 +190,6 @@
     <script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
     <script src="../laydate/laydate.js"></script> <!-- 改成你的路径 -->
     <script src="../js/template.js"></script>
-    <script type="text/html" id="orderListTpl">
-        <%for(i in list) {%>
-        <tr>
-            <td><%=list[i].orderNo%></td>
-            <td><%=list[i].companyname%></td>
-            <td><%=list[i].tloUpdateTime%></td>
-            <td><%=list[i].oldPrice%></td>
-            <td><%=list[i].quotedPrice%></td>
-            <td><%=list[i].quotesSatus%></td>
-            <td><span class="see seeDetail ll" data-tloId="<%=list[i].id%>" data-orderNo="<%=list[i].orderNo%>" data-companyId="<%=list[i].companyid%>"><a href="##">查看详情</a></span></td>
-        </tr>
-        <%}%>
-    </script>
     <script type="text/javascript">
         //Iframe 的高度
         $(function () {
@@ -237,136 +224,105 @@
         //     }
         // });
 
-        var isFirst = true;
-
-        var isSearch = 0;
-
-        // 点击进入订单详情
-        $(document).on('click', '.seeDetail', function() {
-            window.localStorage.setItem('data-companyId', $(this).attr('data-companyId'));
-            window.localStorage.setItem('data-tloId', $(this).attr('data-tloId'));
-            window.localStorage.setItem('data-orderNo', $(this).attr('data-orderNo'));
-            //window.location.href = "notDistributeOrder-detail.html";
-
-        });
-
-
-
-        //显示条数
-        $('.displayNum ul li').click(function(){
-            isSearch=1;
-            order_list(1 , '', '', '', $('.displayNum span').text());
-        });
-        
-
-        //点击查询
-        $(document).on('click', '.searchResultBtn', function() {
-            
-            var orderNo = $('.orderNo').val();
-            var goodsType = $('.goodsType span').text();
-            var publishTime = $('.publishTime').val();
-            if (goodsType == '全部' ) {
-                console.log(goodsType);
-                goodsType = '';
-            }
-            
-            isSearch=1;
-            order_list(1, orderNo, goodsType, publishTime, 10);
-
-        });
-
-        
-
-        order_list(1 , '', '', '', 10);
-
-        //待分配订单列表
-        function order_list(num, orderNo, goodsType, publishTime, size) {
-            $('#orderListInfo').html('');
+        //列表
+        getData(1);
+        //获取数据
+        function getData(currentPage) {
+            $(".listBox tbody").html("");//必须先置空
             $.ajax({
-                url: ip + 'order/getAllocatedList',
+                url: pubIP + 'OrderPricesChanged/getPricesChangedList', /*v1.0*/
                 type: 'post',
                 headers: {
                     Accept: "application/json; charset=utf-8",
                     token: token
                 },
-                data: {
-                    companyId: companyId,
-                    page: num,
-                    size: size,
-                    status: 0,
-                    orderNo: orderNo,
-                    time: publishTime,
-                    goodType: goodsType
-                },
                 cache: false,
+                ansyc: true,
                 dataType: 'json',
-                success: function (json) {
-                    console.log(json);
-
-                    if (json.code == 1) {
-                        if (json.data.length != 0) {
-                            for (var i = 0; i < json.data.length; i++) {
-                            
-                                json.data[i].tloCreateTime = new Date(json.data[i].tloCreateTime).Format("yyyy-MM-dd hh:mm");
-                            }
-                            
-
-                            var result = template('orderListTpl', {list: json.data});
-                            $('#orderListInfo').html(result);
-
-                           
-                            if (isSearch == 1) {
-                                // if (isFirst) {
-                                    Page({
-                                        num: json.totalPage,
-                                        elem: $('#page1'),
-                                        callback: function(n) {
-                                            order_list(n, orderNo, goodsType, publishTime, size);
-                                        }
-                                    });
-                                    
-                                    $('.total').text(json.totalPage);
-                                    isFirst = false;
-
-                                // }
-
-                                $('.allPageN').text(num+1+'/'+json.totalPage);
-                            }
-
-                            isSearch = 0;
-
-                            if (isFirst) {
-
-                                Page({
-                                    num: json.totalPage,
-                                    elem: $('#page1'),
-                                    callback: function(n) {
-                                        order_list(n, orderNo, goodsType, publishTime, size);
-                                    }
-                                });
-                                
-                                $('.total').text(json.totalPage);
-
-                                isFirst = false;
-                            }
-
-                            $('.allPageN').text(num+'/'+json.totalPage);
-                        } else {
-                            $('.pageJump').css('display', 'none');    
-                        }
-                    } else {
-                        $('.pageJump').css('display', 'none');
-                    }
-
+                data:{
+                    companyId:companyId,
+                    orderId: $(".orderNo").val(),
+                    time: $(".time_inp").val(),
+                    size:pageSize,
+                    page:currentPage
                 },
-                error: function (err) {
+                success: function (res) {
+                    console.log(res)
+                    if(res.code===1){
+                        //首次请求时 改变分页数据
+                        if(res.data.length==0){ $(".listBox tbody").html("");$(".pagination").parent().css("display","none"); return;}
+                        $(".pagination").parent().css("display","block");
+                        if(currentPage===1 ){
+                            //修改底部分页
+                            //debugger
+                            var pageNum=Math.ceil(res.count/pageSize);
+                            $(".allPageN").attr("pageTotal",pageNum);
+                            $(".pageJump i").text("共"+pageNum+"页");
+                            $('.objListBox>div:nth-child(5n)').css('margin-right','0');
+                            Page({
+                                num: pageNum,
+                                elem: $('#page1'),
+                                callback: function(n) {
+                                    // console.log(n);
+                                    getData(n);//加载n页数据
+                                }
+                            });
+                        }
+                        //修改底部页数
+                        $(".allPageN").text((currentPage)+"/"+ $(".allPageN").attr("pageTotal"));
+                        cf_dataRender(res.data)
+                    }else{
+                        alert(res.msg);
+                    }
+                },
+                error: function(err){
                     console.log(err);
                 }
-
             });
         }
-
-
+        //渲染数据
+        function cf_dataRender(data) {
+//            debugger
+            var str='';
+            $.each(data,function (idx,item) {
+                str+='<tr data-id="'+item.id+'"  data-orderId="'+item.orderid+'">';
+                str+='<td>'+item.orderid+'</td>';
+                str+='<td>'+item.companyname+'</td>';
+                str+='<td>'+timestampToTime(item.createTime)+'</td>';
+                str+='<td>'+item.oldPrice+'</td>';
+                str+='<td>'+item.quotedPrice+'</td>';
+                str+='<td>'+item.quotesSatus+'</td>';
+                if(item.status==0&&item.type==1){
+                    str+='<td ><span class="btn agree" style="color: #6ba1ff;">同意</span> <span  class="btn bohui" style="color: #6ba1ff;">驳回</span> <span class="btn seeDetail" style="color: #6ba1ff;">查看详情</span></td>';
+                }else{
+                    str+='<td> <span class="btn seeDetail" style="color: #6ba1ff;">查看详情</span></td>';
+                }
+                str+='</tr>';
+            })
+            $(".myTbody").html(str);
+            //详情
+            $(".seeDetail").click(function () {
+                sessionStorage.setItem("detailId",$(this).parents("tr").attr("data-id"));
+                window.location.href="./priceAjustApplicationDetail.html";
+            })
+            //同意
+            $(".agree").click(function () {
+                upPricesChanged(1,$(this).parents("tr").attr("data-id"),$(this).parents("tr").attr("data-orderId"));
+            })
+//            驳回
+            $(".bohui").click(function () {
+                upPricesChanged(2,$(this).parents("tr").attr("data-id"),$(this).parents("tr").attr("data-orderId"));
+            })
+        }
+        //选择排序方式
+        $(".select ul li").click(function () {
+            getData(1);
+        })
+        // 点击go刷新数据
+        $('.pageCont').on('click', '.button',function(){
+            var currentPage = $('.pageCont li.active>a').text();
+            getData(currentPage);
+        })
         // 模拟单选按钮
         $('.bottomOperiat .squre').click(function(){
             $(this).toggleClass('active');
@@ -374,6 +330,34 @@
         $('.bottomOperiat .selsectAll').click(function(){
             $('.bottomOperiat .squre').toggleClass('active');
         });
+        
+        function upPricesChanged(type,id,orderId) {
+            $.ajax({
+                url: pubIP + 'OrderPricesChanged/upPricesChanged', /*v1.0*/
+                type: 'post',
+                headers: {
+                    Accept: "application/json; charset=utf-8",
+                    token: token
+                },
+                cache: false,
+                ansyc: true,
+                dataType: 'json',
+                data:{
+                    companyId:companyId,
+                    status: type,
+                    orderId: orderId,
+                    id:id
+                },
+                success: function (res) {
+                    console.log(res)
+                    if (res.code === 1) {
+                        alert(res.msg);
+                    } else {
+                        alert(res.msg);
+                    }
+                }
+            })
+        }
     </script>
 </body>
 </html>
