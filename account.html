@@ -49,7 +49,13 @@
         .contlisttwo .rr{
             width: 285px;
         }
-
+        
+        .jujue_liyou {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 7px;
+        }
 
     </style>
 </head>
@@ -61,11 +67,11 @@
             <div class="logo Lf" onclick="goIndex()" style="width: 167px;height: 44px;margin: 0;margin-right: 44px;margin-left: 25px;"></div>
             <div class="navList Lf">
                 <div class="cfnav cfnav1 on" onclick="showMangeList('.cfidx1')"><a href="##">首页</a></div>
-                <div class="cfnav cfnav2" onclick="showMangeList('.cfidx2')"><a href="##">需求</a></div>
-                <div class="cfnav cfnav3" onclick="showMangeList('.cfidx3')"><a href="##">订单</a></div>
-                <div class="cfnav cfnav4" onclick="showMangeList('.cfidx4')"><a href="##">多单</a></div>
-                <div class="cfnav cfnav5" onclick="showMangeList('.cfidx5')"><a href="##">财务</a></div>
-                <div class="cfnav cfnav6" onclick="showMangeList('.cfidx6')"><a href="##">设置</a></div>
+                <div class="cfnav cfnav2 yrz" onclick="showMangeList('.cfidx2')"><a href="##">需求</a></div>
+                <div class="cfnav cfnav3 yrz" onclick="showMangeList('.cfidx3')"><a href="##">订单</a></div>
+                <div class="cfnav cfnav4 yrz" onclick="showMangeList('.cfidx4')"><a href="##">多单</a></div>
+                <div class="cfnav cfnav5 yrz" onclick="showMangeList('.cfidx5')"><a href="##">财务</a></div>
+                <div class="cfnav cfnav6 yrz" onclick="showMangeList('.cfidx6')"><a href="##">设置</a></div>
             </div>
         </div>
     </div>
@@ -77,7 +83,7 @@
     <!--首页-->
     <div class="manageList Lf cfidx1" data-idx=".cfnav1">
         <ul>
-            <li>
+            <li class="yrz">
                 <a href="##" class="manage"><strong>个人中心</strong> <div style="float: right;vertical-align: middle;margin-right: 15px;"><img  src="./img/cf_close.png" alt=""></div></a>
                 <ul>
                     <li><a href="##" class="manageItem" data-src="./personal/mine.html" data-height="860">企业基本信息</a></li>
@@ -2064,16 +2070,19 @@
                 temp+=str.charAt(i)
         return temp
     }
-    var state=1;//未认证
+    //var state=1;//未认证
     $(function () {
-        if(state===0){
+        if(localStorage.getItem('isOld') == -1 || localStorage.getItem('isOld') == -2){
+
             $(".yiRenZheng").addClass('xiaoshi');
+            $('.yrz').css('display', 'none');
             $(".weiRenZheng .manage").each(function (index) {
                 if(index!=0){
                     $(this).find('img').eq(0).attr('src',"./img/cf_close.png");
                 }
             })
         }else{
+            $('.yrz').css('display', 'block');
             $(".weiRenZheng").addClass('xiaoshi');
             $(".yiRenZheng .manage").each(function (index) {
                 if(index!=0){
