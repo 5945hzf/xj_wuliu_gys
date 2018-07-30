@@ -558,6 +558,7 @@
     })
     //立即下单
     function getOrder() {
+        sessionStorage.setItem("isAddRequireMent",1);
         sessionStorage.setItem("cfsrc","./requuire/publishRequireList.html");
         sessionStorage.setItem("isAdd","1");
         window.location.href="./account.html";

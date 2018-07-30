@@ -12,7 +12,7 @@ var token=localStorage.getItem("token");
 // var uplodImgPath = 'http://172.17.210.188:8081/bfile/fileUpload.htm';
 var uplodImgPath = 'http://file.xjv56.com/bfile/fileUpload.htm';
 
-var pageSize=1;//分页的每页个数
+var pageSize=10;//分页的每页个数
 
 var companyId = null, userId = null ;
 

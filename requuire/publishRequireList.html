@@ -120,7 +120,7 @@
             <!--</div>-->
             <label for="">发布时间</label><input type="text" class="date-input laydate-icon publishTime input" placeholder="请选择日期" id="test1">
             <input class="searchResultBtn btn input" type="button" value="查询结果">
-            <input class="advancedRetrievalBtn btn input" onclick="window.location.href='../personal/addRequireMent.html'" type="button" value="发布需求">
+            <input class="advancedRetrievalBtn btn input" onclick="sessionStorage.setItem('isAddRequireMent',1);window.location.href='../personal/addRequireMent.html'" type="button" value="发布需求">
         </div>
         <div class="opciationBox">
             <!--<div class="selectPub displayNum" data-selectedindex="0"><span>显示条数</span><img src="../img/prl-select.jpg" alt="">-->
@@ -313,7 +313,7 @@
         $(".seeDetail").click(function () {
             window.location.href="./publishRequireList-detail.html";
         })
-
+//        从首页点过来时自动到发布需求
         if(sessionStorage.getItem("isAdd")==1){
             sessionStorage.setItem("isAdd",0);
             window.location.href="../personal/addRequireMent.html";
@@ -323,7 +323,7 @@
             getData(1);
         })
 
-        var currentPage=1;
+        var currentPageAll=1;
         //进入页面加载数据
         getData(1);
         //获取数据
@@ -364,7 +364,7 @@
                                 elem: $('#page1'),
                                 callback: function(n) {
                                     // console.log(n);
-                                    currentPage=n;
+                                    currentPageAll=n;
                                     getData(n);//加载n页数据
                                 }
                             });
@@ -385,7 +385,7 @@
         function cf_dataRender(data) {
             var str='';
             $.each(data,function (idx,item) {
-                str+='<tr data-id="'+item.id+'">';
+                str+='<tr data-id="'+item.id+'"  data-demandNo="'+item.demandNo+'">';
                 str+="<td>"+item.demandNo+"</td>"
                 str+="<td>"+timestampToTime(item.createTime)+"</td>"
                 str+="<td>"+item.var9+"</td>"
@@ -394,7 +394,8 @@
                 str+="<td>"+item.sendProvince+"-"+item.sendCity+"</td>"
                 str+="<td>"+item.receiveProvince+"-"+item.receiveCity+"</td>"
                 str+="<td>倒计时</td>"
-                str+="<td><span class=\"seeDetail ll\">查看详情</span><span class=\"selectCompany ll\">选择公司</span><span class='ll editThis'>编辑</span><span class='ll deletThis'>删除</span></td>"
+                str+="<td><span class=\"seeDetail ll\">查看详情</span><span class='ll editThis'>编辑</span><span class='ll deletThis'>删除</span></td>"
+//                    <span class="selectCompany ll">选择公司</span>
                 str+='</tr>';
             })
             $(".listBox tbody").html(str);
@@ -418,23 +419,50 @@
             //编辑
             $(".editThis").click(function () {
                 sessionStorage.setItem("detailId",$(this).parents("tr").attr("data-id"));
-                window.location.href="./toConfirmRequire-detail.html";
+                sessionStorage.setItem("demandNo",$(this).parents("tr").attr("data-demandNo"));
+                sessionStorage.setItem("isRequireMent",1);
+                sessionStorage.setItem("isAddRequireMent",0);
+                window.location.href="../personal/addRequireMent.html";
             })
             //删除
             $(".deletThis").click(function () {
-
+                $.ajax({
+                    url: pubIP + 'wlLogisticsDemand/delete', /*v1.0*/
+                    type: 'get',
+                    headers: {
+                        Accept: "application/json; charset=utf-8",
+                        token: token
+                    },
+                    cache: false,
+                    ansyc: true,
+                    dataType: 'json',
+                    data:{
+                        id:$(this).parents("tr").attr("data-id")
+                    },
+                    success: function (res) {
+                        if(res.code===1){
+                            alert("删除成功")
+                            getData(currentPageAll);
+                        }else{
+                            alert(res.msg);
+                        }
+                    },
+                    error: function(err){
+                        console.log(err);
+                    }
+                });
             })
         }
         //选择排序方式
         $(".select ul li").click(function () {
-            currentPage=1;
+            currentPageAll=1;
             getData(1);
         })
         // 点击go刷新数据
         $('.pageCont').on('click', '.button',function(){
             var currentPage1 = $('.pageCont li.active>a').text();
-            currentPage=currentPage1;
-            getData(currentPage1);
+            currentPageAll=currentPage1;
+            getData(currentPageAll);
         })
 
 
