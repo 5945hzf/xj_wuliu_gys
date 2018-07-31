@@ -14,7 +14,7 @@
 
 
     <style>
-        .modelBox11 p, .modelBox1 p, .modelBox12 p, .modelBoxdiaoling p {
+        .modelBox11 p, .modelBox1 p, .modelBox12 p, .modelBoxdiaoling p, .no_zizhi p {
             text-align: center;
         }
 
@@ -90,7 +90,7 @@
                     <li><a href="##" class="manageItem " data-src="./personal/information.html" data-height="576">企业信息设置</a></li>
                 </ul>
             </li>
-            <li>
+            <li class="yrz">
                 <a href="##" class="manage"><strong>用户中心</strong> <div style="float: right;vertical-align: middle;margin-right: 15px;"><img  src="./img/cf_close.png" alt=""></div></a>
                 <ul>
                     <li><a href="##" class="manageItem"  data-src="./personal/grow.html"  data-height="1600">个人资料</a></li>
@@ -102,7 +102,7 @@
                 <a href="##" class="manage"><strong>企业资质</strong> <div style="float: right;vertical-align: middle;margin-right: 15px;"><img  src="./img/cf_close.png" alt=""></div></a>
                 <ul>
                     <li><a href="##" class="manageItem qiye_renzheng" data-src="./personal/identification1.html" data-height="1715">企业认证</a></li>
-                    <li><a href="##" class="manageItem" data-src="./personal/Special1.html" data-height="1715">资质认证</a></li>
+                    <li><a href="##" class="manageItem zizhi" data-src="./personal/Special1.html" data-height="1715">资质认证</a></li>
                     <!--<li><a href="##" class="manageItem" data-src="./personal/identification2.html" data-height="1715">运营者信息</a></li>-->
                     <!--<li><a href="##" class="manageItem" data-src="./personal/identification4.html" data-height="1715">出金账户绑定</a></li>-->
                     <!--<li><a href="##" class="manageItem" data-src="./personal/identification3.html" data-height="1715">发票信息</a></li>-->
@@ -1863,6 +1863,25 @@
         </div>
     </div>
 
+    <!-- 未通过企业认证 -->
+    <div class="no_zizhi">
+        <div class="modelCont">
+            <div class="modeltitle">
+                <span>消息提示</span>
+                <img class="close" style="float: right;cursor: pointer;" height="50" src="./img/gsxq_del.png" alt="">
+            </div>
+            <div class="modelcontent">
+                <div class="info">
+                    <div class="img_div"><span class="clearfix"><img style="float: none;" src="./img/cf_denger1.png" alt=""></span></div>
+                    <p><span>未通过企业认证！</span></p>
+                </div>
+                <div class="modelBtnBox">
+                    <div style="background:#5690f6;" class="modelbtn cfClose">返回</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- 添加客户关系 -->
     <div id="addCustomerRelationship">
@@ -1985,7 +2004,11 @@
     $(".manageList").css("display","none");
     function showMangeList(idx) {
         if(idx==".cfidx1"){
-            sessionStorage.setItem("cfsrc","./personal/mine.html");
+            if (localStorage.getItem('isOld') == 1 || localStorage.getItem('isOld') == -2) {
+                sessionStorage.setItem("cfsrc","./personal/identification1.html");
+            }else {
+                sessionStorage.setItem("cfsrc","./personal/mine.html");
+            }
         }else if(idx==".cfidx2"){
             sessionStorage.setItem("cfsrc","./requuire/publishRequireList.html");
         }else if(idx==".cfidx3"){
@@ -2070,6 +2093,18 @@
                 temp+=str.charAt(i)
         return temp
     }
+
+    //未认证，不能进入资质认证
+    $(document).on('click', '.zizhi', function() {
+        if(localStorage.getItem('isOld') == -1 || localStorage.getItem('isOld') == -2){
+            // $('#Iframe').attr('src', './personal/identification1.html');
+            $('.qiye_renzheng').click();
+            showModelBox('.no_zizhi');
+            sessionStorage.setItem('isfirstclickqiye', '1');
+
+        }
+    });
+
     //var state=1;//未认证
     $(function () {
         if(localStorage.getItem('isOld') == -1 || localStorage.getItem('isOld') == -2){
@@ -2081,6 +2116,8 @@
                     $(this).find('img').eq(0).attr('src',"./img/cf_close.png");
                 }
             })
+            $('.cfnav1').click();
+
         }else{
             $('.yrz').css('display', 'block');
             $(".weiRenZheng").addClass('xiaoshi');
